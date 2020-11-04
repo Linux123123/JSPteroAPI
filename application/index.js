@@ -1,6 +1,5 @@
 const fetch = require('node-fetch'); // import node-fetch
 const fs = require('fs'); // import fs
-const { get } = require('http');
 const moduleFiles = fs
     .readdirSync('./application/modules')
     .filter((file) => file.endsWith('.js'));
@@ -9,8 +8,8 @@ var moduleDict = {};
 
 /**
  *
- * @param {String} HOST Host to connect to
- * @param {String} KEY Key to use
+ * @param {String} HOST Panels address
+ * @param {String} KEY Api key to use
  * @param {Boolean, String} callback Returns true when login is successful and a error message if API failed
  */
 
@@ -20,35 +19,27 @@ for (const file of moduleFiles) {
 }
 
 moduleDict['login'] = async function login(HOST, KEY, callback) {
-    function handleErr(err) {
-        console.warn(err);
-        let resp = new Response(
-            JSON.stringify({
-                code: 400,
-                message: 'Stupid network Error',
-            })
-        );
-        return resp;
-    }
     HOST = HOST.trim();
     if (HOST.endsWith('/')) HOST = HOST.slice(0, -1);
     process.env.APPLICATION_NODEACTYL_HOST = HOST;
     process.env.APPLICATION_NODEACTYL_KEY = KEY;
-    let response = await (
-        await fetch(HOST + '/api/application/users', {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + KEY,
-            },
-        }).catch(handleErr)
-    ).json();
-    if (response.code && response.code == 400) {
-        //problem
-        return;
+    let data = await await fetch(HOST + '/api/application/users', {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + KEY,
+        },
+    }).catch((err) => console.error(err));
+    if (data.status == 404)
+        callback(false, 'API Key is not valid! (Application)!');
+    else if (data.status != 200) {
+        callback(false, 'There has been an error while trying to access host!');
+    } else {
+        response = await data.json();
+        console.log(response.data);
     }
-    console.log(response.data);
+
     return;
 };
 
