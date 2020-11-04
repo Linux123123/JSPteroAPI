@@ -1,0 +1,33 @@
+{
+  "name": "jspteroapi",
+  "version": "1.0.0",
+  "description": "A pterodactyl v1 api using node-fetch",
+  "main": "JSPteroAPI.js",
+  "scripts": {
+    "test": "./node_modules/nodemon/bin/nodemon.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Linux123123/JSPteroAPI.git"
+  },
+  "keywords": [
+    "Pterodactyl",
+    "API",
+    "node-fetch",
+    "node-js",
+    "js",
+    "ptero-api"
+  ],
+  "author": "Linux123123",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Linux123123/JSPteroAPI/issues"
+  },
+  "homepage": "https://github.com/Linux123123/JSPteroAPI#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
