@@ -1,10 +1,15 @@
 const fetch = require('node-fetch'); // import node-fetch
 const fs = require('fs'); // import fs
-const moduleFiles = fs
-    .readdirSync('./application/modules')
+const methodFiles = fs
+    .readdirSync('./application/methods')
     .filter((file) => file.endsWith('.js'));
 
-var moduleDict = {};
+var methodDict = {};
+
+for (const file of methodFiles) {
+    console.log('(JSPteroAPI) Loading module ' + file);
+    methodDict[file] = require('./methods/' + file);
+}
 
 /**
  *
@@ -13,34 +18,28 @@ var moduleDict = {};
  * @param {Boolean, String} callback Returns true when login is successful and a error message if API failed
  */
 
-for (const file of moduleFiles) {
-    console.log('(JSPteroAPI) Loading module ' + file);
-    moduleDict[file] = require(`./modules/${file}`);
-}
-
-moduleDict['login'] = async function login(HOST, KEY, callback) {
+methodDict['login'] = async function login(HOST, KEY, callback) {
     HOST = HOST.trim();
     if (HOST.endsWith('/')) HOST = HOST.slice(0, -1);
     process.env.APPLICATION_NODEACTYL_HOST = HOST;
     process.env.APPLICATION_NODEACTYL_KEY = KEY;
-    let data = await await fetch(HOST + '/api/application/users', {
+    let data = await fetch(HOST + '/api/application/users', {
         method: 'GET',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + KEY,
         },
-    }).catch((err) => console.error(err));
-    if (data.status == 404)
-        callback(false, 'API Key is not valid! (Application)!');
+    }).catch((err) => console.warn(err));
+    if (typeof data == 'undefined') {
+        return callback(false, 'There is an error trying to access host!');
+    } else if (data.status == 404)
+        return callback(false, 'API Key is not valid! (Application)!');
     else if (data.status != 200) {
-        callback(false, 'There has been an error while trying to access host!');
+        return callback(false, 'There is an error trying to access host!');
     } else {
-        response = await data.json();
-        console.log(response.data);
+        return callback(true);
     }
-
-    return;
 };
 
-module.exports = moduleDict;
+module.exports = methodDict;
