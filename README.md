@@ -4,7 +4,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/pulls)
 
-As of right now it is under heavy development. Don't use.
+<h2>As of right now it is under heavy development. Don't use.</h2>
 
 **A simple Pterodactyl API library using nodefetch**
 
@@ -67,4 +67,5 @@ I am not responsible for any damages that you cause to your servers/nodes by usi
 # Contributors
 
 Created and maintained by [Linux123123](https://github.com/linux123123).
+
 Code snippets used from [Nodeactyl](https://github.com/Burchard36/Nodeactyl)
