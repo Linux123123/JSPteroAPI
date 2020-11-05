@@ -1,6 +1,6 @@
 {
   "name": "jspteroapi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A pterodactyl v1 api using node-fetch",
   "main": "JSPteroAPI.js",
   "scripts": {
