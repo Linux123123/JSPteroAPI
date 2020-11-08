@@ -4,7 +4,8 @@
   "description": "A pterodactyl v1 api using node-fetch",
   "main": "JSPteroAPI.js",
   "scripts": {
-    "test": "./node_modules/nodemon/bin/nodemon.js test.js"
+    "test": "node JSPteroAPI.js"
+    "nodemon": "./node_modules/nodemon/bin/nodemon.js test.js"
   },
   "repository": {
     "type": "git",
