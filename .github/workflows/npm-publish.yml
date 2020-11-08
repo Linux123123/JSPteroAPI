@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
-      - run: npm test
+      - run: node JSPteroAPI.js
 
   publish-npm:
     needs: build
