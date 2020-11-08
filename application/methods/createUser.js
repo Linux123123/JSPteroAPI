@@ -35,7 +35,7 @@ function createUser(
         'createUser',
         'POST',
         data,
-        'attributes',
+        'data',
         '/api/application/users',
         true
     );
@@ -51,8 +51,8 @@ function createData(
     Language
 ) {
     return {
-        username: Username,
         email: Email,
+        username: Username,
         first_name: FirstName,
         last_name: LastName,
         password: Password,

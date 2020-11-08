@@ -9,7 +9,7 @@ function getAllNodes() {
         'getAllNodes',
         'GET',
         null,
-        'data.attributes',
+        'data',
         '/api/application/nodes',
         false
     );

@@ -48,16 +48,24 @@ class Request {
                         return 'Server suspended succesfully!';
                     case 'unSuspServer':
                         return 'Server unsuspended succesfully!';
+                    case 'delServer':
+                        return 'Server deleted succesfully!';
+                    case 'delUser':
+                        return 'User deleted succesfully!';
+                    case 'delNode':
+                        return 'Node deleted succesfully!';
+                    default:
+                        return res;
                 }
             })
-            .catch((err) => {
-                throw new myError(err);
+            .catch((error) => {
+                throw new myError(error, null, data, request);
             });
     }
 }
 
 function myError(err, rawData, data, request) {
-    if (err == null) {
+    if (err == null || err == '') {
         let error;
         if (rawData.status == 521) {
             error = new Error('Gateway unawailable!');
@@ -83,9 +91,9 @@ function myError(err, rawData, data, request) {
                 error = new Error('User does not exist!');
                 error.status = 404;
                 return error;
-            } else return `Html error code: ${rawData.status}`;
-        } else return `Html error code: ${rawData.status}`;
-    } else return err;
+            } else return new Error(`Html error code: ${rawData.status}`);
+        } else return new Error(`Html error code: ${rawData.status}`);
+    } else return new Error(err);
 }
 
 module.exports = Request;

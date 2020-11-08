@@ -4,6 +4,7 @@ const fetch = require('node-fetch'); // import node-fetch
 const createuser = require('./methods/createUser.js');
 const createserver = require('./methods/createServer.js');
 const createnode = require('./methods/createNode.js');
+const createdatabase = require('./methods/createDatabase.js');
 const suspendserver = require('./methods/suspendServer.js');
 const unsuspendserver = require('./methods/unSuspendServer.js');
 
@@ -88,6 +89,7 @@ module.exports = {
     createUser: createuser,
     createServer: createserver,
     createNode: createnode,
+    createDatabase: createdatabase,
     suspendServer: suspendserver,
     unSuspendServer: unsuspendserver,
 
