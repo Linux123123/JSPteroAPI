@@ -1,4 +1,5 @@
 # JSPteroAPI
+
 [![GitHub](https://img.shields.io/github/license/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/blob/main/LICENSE)
 [![npm](https://img.shields.io/npm/v/jspteroapi)](https://www.npmjs.com/package/jspteroapi)
 [![GitHub issues](https://img.shields.io/github/issues/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/issues)
@@ -6,18 +7,19 @@
 
 <h2>As of right now it is under heavy development. Don't use.</h2>
 
-**A simple Pterodactyl API library using nodefetch**
+**A simple Pterodactyl API library using node-fetch**
 
 # To install:
 
 Install using npm:
+
 ```
 npm install jspteroapo
 ```
 
 Then include it in your application:
 
-``` javascript
+```javascript
 const node = require('jspteroapi');
 const application = node.Application; // for application API
 const client = node.Client; // for Client API
@@ -27,7 +29,7 @@ const client = node.Client; // for Client API
 
 To login use:
 
-``` javascript
+```javascript
 application.login(HOST, API_KEY, (loggedIn, msg) => {
         if (loggedIn == true) {
             console.log('Pterodactyl has logged in!');
@@ -41,10 +43,10 @@ application.login(HOST, API_KEY, (loggedIn, msg) => {
 
 And then you can use any funtion you want:
 
-``` javascript
+```javascript
 application.function(parameters).then((response) => {
-	// response
-})
+    // response
+});
 ```
 
 # Documentation
@@ -54,9 +56,10 @@ All the functions in https://docs.nodeactyl.xyz/ should work.
 # Versions
 
 **How versions work:**
-* The first number is the release.
-* The second number is the function release.
-* The third number is the bug fix release.
+
+-   The first number is the release.
+-   The second number is the function release.
+-   The third number is the bug fix release.
 
 # Disclaimer
 

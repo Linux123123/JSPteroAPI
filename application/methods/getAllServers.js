@@ -5,7 +5,14 @@ function getAllServers() {
         process.env.APPLICATION_NODEACTYL_HOST,
         process.env.APPLICATION_NODEACTYL_KEY
     );
-    return Req.getRequest('GetAllServers', null);
+    return Req.request(
+        'getAllServers',
+        'GET',
+        null,
+        'data',
+        '/api/application/servers',
+        false
+    );
 }
 
 module.exports = getAllServers;

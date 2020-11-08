@@ -8,7 +8,7 @@ const fetch = require('node-fetch'); // import node-fetch
 // const unsuspendserver = require('./methods/unSuspendServer.js');
 
 // GET
-//const getallservers = require('./methods/getAllServers.js');
+const getallservers = require('./methods/getAllServers.js');
 const getallusers = require('./methods/getAllUsers.js');
 // const getuserinfo = require('./methods/getUserInfo.js');
 // const getnode = require('./methods/getNodeInfo.js');
@@ -29,32 +29,40 @@ const getallusers = require('./methods/getAllUsers.js');
  * @param {Boolean, String} callback Returns true when login is successful and a error message if API failed
  */
 
-async function login(HOST, KEY, callback) {
+function login(HOST, KEY, callback) {
     HOST = HOST.trim();
     if (HOST.endsWith('/')) HOST = HOST.slice(0, -1);
     process.env.APPLICATION_NODEACTYL_HOST = HOST;
     process.env.APPLICATION_NODEACTYL_KEY = KEY;
 
-    const response = await fetch(HOST + '/api/application/users', {
+    fetch(HOST + '/api/application/users', {
         method: 'GET',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + KEY,
         },
-    }).catch((err) => {
-        console.error({ message: 'Fetch failed', error: err });
-    });
-
-    if (typeof response == 'undefined') {
-        return callback(false, 'There is an error trying to access host!');
-    } else if (response.status == 404)
-        return callback(false, 'API Key is not valid! (Application)!');
-    else if (response.status != 200) {
-        return callback(false, 'There is an error trying to access host!');
-    } else {
-        return callback(true);
-    }
+    })
+        .then((res) => {
+            if (typeof res == 'undefined') {
+                return callback(
+                    false,
+                    'There is an error trying to access host!'
+                );
+            } else if (res.status == 404)
+                return callback(false, 'API Key is not valid! (Application)!');
+            else if (res.status != 200) {
+                return callback(
+                    false,
+                    'There is an error trying to access host!'
+                );
+            } else {
+                return callback(true);
+            }
+        })
+        .catch((err) => {
+            console.error({ message: 'Fetch failed', error: err });
+        });
 }
 
 module.exports = {
@@ -68,7 +76,7 @@ module.exports = {
     // unSuspendServer: unsuspendserver,
 
     // GET
-    // getAllServers: getallservers,
+    getAllServers: getallservers,
     getAllUsers: getallusers,
     // getUserInfo: getuserinfo,
     // getNodeInfo: getnode,
