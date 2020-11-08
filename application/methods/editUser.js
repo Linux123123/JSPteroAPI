@@ -10,7 +10,7 @@ const req = require('../ApplicationRequest.js');
  * @param {Boolean} IsAdmin New (or old) value for admin
  * @param {String} Language New (or old) language
  */
-function updateUser(
+function editUser(
     UserID,
     Username,
     Password,
@@ -63,4 +63,4 @@ function createData(
     };
 }
 
-module.exports = updateUser;
+module.exports = editUser;

@@ -1,21 +1,21 @@
 const req = require('../ApplicationRequest.js');
 
 /**
- * @param {String} NodeID The node ID to get the details of.
+ * @param {String} ServerID The server ID to get the details of.
  */
-function getNode(NodeID) {
+function getServerInfo(ServerID) {
     const Req = new req(
         process.env.APPLICATION_NODEACTYL_HOST,
         process.env.APPLICATION_NODEACTYL_KEY
     );
     return Req.request(
-        'getNodeInfo',
+        'getServerInfo',
         'GET',
         null,
         'attributes',
-        '/api/application/nodes/' + NodeID,
+        '/api/application/servers/' + ServerID,
         false
     );
 }
 
-module.exports = getNode;
+module.exports = getServerInfo;

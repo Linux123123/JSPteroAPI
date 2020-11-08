@@ -33,8 +33,10 @@ class Request {
                 } else return rawData;
             })
             .then((rawData) => {
-                let res = rawData.json();
-                return res;
+                if (rawData.status != 204) {
+                    let res = rawData.json();
+                    return res;
+                }
             })
             .then((res) => {
                 switch (dataObj) {
@@ -42,6 +44,10 @@ class Request {
                         return res.data;
                     case 'attributes':
                         return res.attributes;
+                    case 'suspServer':
+                        return 'Server suspended succesfully!';
+                    case 'unSuspServer':
+                        return 'Server unsuspended succesfully!';
                 }
             })
             .catch((err) => {

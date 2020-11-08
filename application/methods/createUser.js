@@ -33,7 +33,7 @@ function createUser(
     );
     return Req.request(
         'createUser',
-        'PATCH',
+        'POST',
         data,
         'attributes',
         '/api/application/users',

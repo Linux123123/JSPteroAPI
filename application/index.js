@@ -1,26 +1,27 @@
 const fetch = require('node-fetch'); // import node-fetch
 
-// // POST
-// const createuser = require('./methods/createUser.js');
-// const createserver = require('./methods/createServer.js');
-// const createnode = require('./methods/createNode.js');
-// const suspendserver = require('./methods/suspendServer.js');
-// const unsuspendserver = require('./methods/unSuspendServer.js');
+// POST
+const createuser = require('./methods/createUser.js');
+const createserver = require('./methods/createServer.js');
+const createnode = require('./methods/createNode.js');
+const suspendserver = require('./methods/suspendServer.js');
+const unsuspendserver = require('./methods/unSuspendServer.js');
 
 // GET
 const getallservers = require('./methods/getAllServers.js');
 const getallusers = require('./methods/getAllUsers.js');
-// const getuserinfo = require('./methods/getUserInfo.js');
-// const getnode = require('./methods/getNodeInfo.js');
-// const getallnodes = require('./methods/getAllNodes.js');
+const getallnodes = require('./methods/getAllNodes.js');
+const getuserinfo = require('./methods/getUserInfo.js');
+const getnodeinfo = require('./methods/getNodeInfo.js');
+const getserverinfo = require('./methods/getServerInfo.js');
 
-// // PATCH
-// const updateuser = require('./methods/updateUser.js');
+// PATCH
+const edituser = require('./methods/editUser.js');
 
-// // DELETE
-// const deleteuser = require('./methods/deleteUser.js');
-// const deletenode = require('./methods/deleteNode.js');
-// const deleteserver = require('./methods/deleteServer.js');
+// DELETE
+const deleteuser = require('./methods/deleteUser.js');
+const deletenode = require('./methods/deleteNode.js');
+const deleteserver = require('./methods/deleteServer.js');
 
 /**
  *
@@ -65,28 +66,44 @@ function login(HOST, KEY, callback) {
         });
 }
 
+/**
+ *
+ * @param {String} HOST The host to use
+ * @param {String} KEY The application key to use
+ * @Warning USE THIS ONLY IF YOU KNOW YOUR CREDENTIALS ARE 100% CORRECT, OR THEY NEVER CHANGE
+ */
+function fastLogin(HOST, KEY) {
+    HOST = HOST.trim();
+    if (HOST.endsWith('/')) HOST = HOST.slice(0, -1);
+
+    process.env.APPLICATION_NODEACTYL_HOST = HOST;
+    process.env.APPLICATION_NODEACTYL_KEY = KEY;
+}
+
 module.exports = {
     login: login,
+    fastLogin: fastLogin,
 
-    // // POST
-    // createUser: createuser,
-    // createServer: createserver,
-    // createNode: createnode,
-    // suspendServer: suspendserver,
-    // unSuspendServer: unsuspendserver,
+    // POST
+    createUser: createuser,
+    createServer: createserver,
+    createNode: createnode,
+    suspendServer: suspendserver,
+    unSuspendServer: unsuspendserver,
 
     // GET
     getAllServers: getallservers,
+    getAllNodes: getallnodes,
     getAllUsers: getallusers,
-    // getUserInfo: getuserinfo,
-    // getNodeInfo: getnode,
-    // getAllNodes: getallnodes,
+    getUserInfo: getuserinfo,
+    getNodeInfo: getnodeinfo,
+    getServerInfo: getserverinfo,
 
-    // // PATCH
-    // updateUser: updateuser,
+    // PATCH
+    editUser: edituser,
 
-    // // DELETE
-    // deleteUser: deleteuser,
-    // deleteNode: deletenode,
-    // deleteServer: deleteserver,
+    // DELETE
+    deleteUser: deleteuser,
+    deleteNode: deletenode,
+    deleteServer: deleteserver,
 };
