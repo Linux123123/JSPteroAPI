@@ -27,16 +27,21 @@ class Request {
         };
         if (bodyNeeded) options.body = data;
         return fetch(URL, options)
-            .then((res) => {
-                let data = res.json();
-                return data;
+            .then((rawData) => {
+                if (!rawData.ok) {
+                    throw new myError(null, rawData, data, request);
+                } else return rawData;
             })
-            .then((data) => {
+            .then((rawData) => {
+                let res = rawData.json();
+                return res;
+            })
+            .then((res) => {
                 switch (dataObj) {
                     case 'data':
-                        return data.data;
+                        return res.data;
                     case 'attributes':
-                        return data.attributes;
+                        return res.attributes;
                 }
             })
             .catch((err) => {
@@ -45,41 +50,35 @@ class Request {
     }
 }
 
-function checkResponse(res) {
-    if (!res.ok) {
-        throw new myError(null, res, data, request);
-    }
-}
-
-function myError(err, res, data, request) {
+function myError(err, rawData, data, request) {
     if (err == null) {
         let error;
-        if (res.status == 521) {
+        if (rawData.status == 521) {
             error = new Error('Gateway unawailable!');
             error.status = 521;
             return error;
         }
         if (
-            request == 'CreateUser' ||
-            request == 'EditUser' ||
-            request == 'GetUserInfo'
+            request == 'createUser' ||
+            request == 'editUser' ||
+            request == 'getUserInfo'
         ) {
             if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) == false) {
                 error = new Error('The provided email is not a valid.');
                 error.status = 422;
                 return error;
-            } else if (res.status == 422) {
+            } else if (rawData.status == 422) {
                 error = new Error(
                     'User already exists! (Or Email/Username is in use already)'
                 );
                 error.status = 422;
                 return error;
-            } else if (res.status == 404) {
+            } else if (rawData.status == 404) {
                 error = new Error('User does not exist!');
                 error.status = 404;
                 return error;
-            } else return `Html error code: ${res.status}`;
-        } else return `Html error code: ${res.status}`;
+            } else return `Html error code: ${rawData.status}`;
+        } else return `Html error code: ${rawData.status}`;
     } else return err;
 }
 

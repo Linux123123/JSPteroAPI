@@ -14,7 +14,7 @@
 Install using npm:
 
 ```
-npm install jspteroapo
+npm install jspteroapi
 ```
 
 Then include it in your application:
@@ -69,6 +69,6 @@ I am not responsible for any damages that you cause to your servers/nodes by usi
 
 # Contributors
 
-Created and maintained by [Linux123123](https://github.com/linux123123).
+Created and maintained by [Linux123123](https://github.com/linux123123)
 
 Code snippets used from [Nodeactyl](https://github.com/Burchard36/Nodeactyl)

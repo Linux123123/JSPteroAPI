@@ -63,7 +63,7 @@ function createNode(
         'createNode',
         'POST',
         data,
-        'data.attributes',
+        'attributes',
         '/api/application/nodes',
         true
     );
