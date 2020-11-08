@@ -5,8 +5,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/pulls)
 
-<h2>As of right now it is under heavy development. Don't use.</h2>
-
 **A simple Pterodactyl API library using node-fetch**
 
 # To install:
