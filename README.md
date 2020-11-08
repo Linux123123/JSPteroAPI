@@ -9,11 +9,11 @@
 
 # To install:
 
-Install using npm:
+Install from the command line:
+```npm install @linux123123/jspteroapi@1.3.0```
 
-```
-npm install jspteroapi
-```
+Install via package.json:
+```"@linux123123/jspteroapi": "1.3.0"```
 
 Then include it in your application:
 
