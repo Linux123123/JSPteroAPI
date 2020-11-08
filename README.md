@@ -22,7 +22,7 @@
 Then include it in your application:
 
 ```javascript
-const node = require('jspteroapi');
+const node = require('@linux123123/jspteroapi');
 const application = node.Application; // for application API
 const client = node.Client; // for Client API
 ```
