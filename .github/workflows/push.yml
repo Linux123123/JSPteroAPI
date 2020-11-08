@@ -23,8 +23,6 @@ jobs:
           node-version: 12
       - name: "Automated Version Bump"
         uses: "phips28/gh-action-bump-version@master"
-        with:
-          tag-prefix: ''
         env:
           GITHUB_TOKEN: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
       - name: "cat package.json"
