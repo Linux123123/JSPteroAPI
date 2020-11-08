@@ -15,11 +15,11 @@ class Request {
      * @param {Boolean} bodyNeeded Bool if body is needed
      */
 
-    request(request, requestType, data, dataObj, endpoint, bodyNeeded) {
+    request(requestType, data, dataObj, endpoint, bodyNeeded) {
         const URL = this.host + endpoint;
         const options = {
-            responseEncoding: 'utf8',
             method: requestType,
+            responseEncoding: 'utf8',
             headers: {
                 Authorization: 'Bearer ' + this.key,
                 'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ class Request {
         return fetch(URL, options)
             .then((rawData) => {
                 if (!rawData.ok) {
-                    throw new myError(null, rawData, data, request);
+                    throw new myError(null, rawData);
                 } else return rawData;
             })
             .then((rawData) => {
@@ -45,54 +45,33 @@ class Request {
                         return res.data;
                     case 'attributes':
                         return res.attributes;
-                    case 'suspServer':
-                        return 'Server suspended succesfully!';
-                    case 'unSuspServer':
-                        return 'Server unsuspended succesfully!';
-                    case 'delServer':
-                        return 'Server deleted succesfully!';
-                    case 'delUser':
-                        return 'User deleted succesfully!';
-                    case 'delNode':
-                        return 'Node deleted succesfully!';
+                    case 'attributes.current_state':
+                        return res.attributes.current_state;
+                    case 'attributes.server_owner':
+                        return res.attributes.server_owner;
+                    case 'cpu_absolute':
+                        return res.attributes.resources.cpu_absolute;
+                    case 'disk_bytes':
+                        return res.attributes.resources.disk_bytes;
+                    case 'memory_bytes':
+                        return res.attributes.resources.memory_bytes;
                     default:
                         return res;
                 }
             })
             .catch((error) => {
-                throw new myError(error, null, data, request);
+                throw new myError(error, null);
             });
     }
 }
 
-function myError(err, rawData, data, request) {
+function myError(err, rawData) {
     if (err == null || err == '') {
         let error;
         if (rawData.status == 521) {
             error = new Error('Gateway unawailable!');
             error.status = 521;
             return error;
-        }
-        if (
-            request == 'createUser' ||
-            request == 'editUser' ||
-            request == 'getUserInfo'
-        ) {
-            if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) == false) {
-                error = new Error('The provided email is not a valid.');
-                error.status = 422;
-                return error;
-            } else if (rawData.status == 422) {
-                error = new Error(
-                    'User already exists! (Or Email/Username is in use already)'
-                );
-                error.status = 422;
-                return error;
-            } else if (rawData.status == 404) {
-                error = new Error('User does not exist!');
-                error.status = 404;
-                return error;
-            } else return new Error(`Html error code: ${rawData.status}`);
         } else return new Error(`Html error code: ${rawData.status}`);
     } else return new Error(err);
 }

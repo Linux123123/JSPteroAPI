@@ -1,28 +1,20 @@
 const fetch = require('node-fetch'); // import node-fetch
 
-// POST
-const createuser = require('./methods/createUser.js');
-const createserver = require('./methods/createServer.js');
-const createnode = require('./methods/createNode.js');
-const createdatabase = require('./methods/createDatabase.js');
-const suspendserver = require('./methods/suspendServer.js');
-const unsuspendserver = require('./methods/unSuspendServer.js');
-
 // GET
 const getallservers = require('./methods/getAllServers.js');
-const getallusers = require('./methods/getAllUsers.js');
-const getallnodes = require('./methods/getAllNodes.js');
-const getuserinfo = require('./methods/getUserInfo.js');
-const getnodeinfo = require('./methods/getNodeInfo.js');
 const getserverinfo = require('./methods/getServerInfo.js');
+const getserverstatus = require('./methods/getServerStatus.js');
+const isowner = require('./methods/isOwner.js');
+const getcpuusage = require('./methods/getCPUUsage.js');
+const getramusage = require('./methods/getRAMUsage.js');
+const getdiskusage = require('./methods/getDiskUsage.js');
 
-// PATCH
-const edituser = require('./methods/editUser.js');
-
-// DELETE
-const deleteuser = require('./methods/deleteUser.js');
-const deletenode = require('./methods/deleteNode.js');
-const deleteserver = require('./methods/deleteServer.js');
+// POST
+const startserver = require('./methods/startServer.js');
+const stopserver = require('./methods/stopServer.js');
+const killserver = require('./methods/killServer.js');
+const restartserver = require('./methods/restartServer.js');
+const sendcommand = require('./methods/sendCommand.js');
 
 /**
  *
@@ -34,11 +26,12 @@ const deleteserver = require('./methods/deleteServer.js');
 function login(HOST, KEY, callback) {
     HOST = HOST.trim();
     if (HOST.endsWith('/')) HOST = HOST.slice(0, -1);
-    process.env.APPLICATION_NODEACTYL_HOST = HOST;
-    process.env.APPLICATION_NODEACTYL_KEY = KEY;
+    process.env.CLIENT_JSPTEROAPI_HOST = HOST;
+    process.env.CLIENT_JSPTEROAPI_KEY = KEY;
 
-    fetch(HOST + '/api/application/users', {
+    fetch(HOST + '/api/client', {
         method: 'GET',
+        responseEncoding: 'utf8',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
@@ -77,35 +70,27 @@ function fastLogin(HOST, KEY) {
     HOST = HOST.trim();
     if (HOST.endsWith('/')) HOST = HOST.slice(0, -1);
 
-    process.env.APPLICATION_NODEACTYL_HOST = HOST;
-    process.env.APPLICATION_NODEACTYL_KEY = KEY;
+    process.env.CLIENT_JSPTEROAPI_HOST = HOST;
+    process.env.CLIENT_JSPTEROAPI_KEY = KEY;
 }
 
 module.exports = {
     login: login,
     fastLogin: fastLogin,
 
-    // POST
-    createUser: createuser,
-    createServer: createserver,
-    createNode: createnode,
-    createDatabase: createdatabase,
-    suspendServer: suspendserver,
-    unSuspendServer: unsuspendserver,
-
     // GET
     getAllServers: getallservers,
-    getAllNodes: getallnodes,
-    getAllUsers: getallusers,
-    getUserInfo: getuserinfo,
-    getNodeInfo: getnodeinfo,
     getServerInfo: getserverinfo,
+    getServerStatus: getserverstatus,
+    isOwner: isowner,
+    getCPUUsage: getcpuusage,
+    getRAMUsage: getramusage,
+    getDiskUsage: getdiskusage,
 
-    // PATCH
-    editUser: edituser,
-
-    // DELETE
-    deleteUser: deleteuser,
-    deleteNode: deletenode,
-    deleteServer: deleteserver,
+    // POST
+    startServer: startserver,
+    stopServer: stopserver,
+    killServer: killserver,
+    restartServer: restartserver,
+    sendCommand: sendcommand,
 };
