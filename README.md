@@ -2,10 +2,11 @@
 
 [![GitHub](https://img.shields.io/github/license/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/blob/main/LICENSE)
 [![npm (scoped)](https://img.shields.io/npm/v/@linux123123/jspteroapi)](https://www.npmjs.com/package/@linux123123/jspteroapi)
+[![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/linux123123/jspteroapi/node-fetch)](https://www.npmjs.com/package/node-fetch)
 [![GitHub issues](https://img.shields.io/github/issues/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/pulls)
 
-**A simple Pterodactyl API library using node-fetch**
+<h3>A simple Pterodactyl API library using node-fetch</h3>
 
 # To install:
 
