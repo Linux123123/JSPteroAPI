@@ -12,12 +12,12 @@
 
 <h5>Install from the command line:</h5>
 
-```npm install @linux123123/jspteroapi```
+`npm install @linux123123/jspteroapi`
 
 <h5>Install via package.json:</h5>
 
-```"@linux123123/jspteroapi": "1.3.1"```
-           
+`"@linux123123/jspteroapi": "1.3.3"`
+
 Then include it in your application:
 
 ```javascript
