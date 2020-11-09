@@ -3,6 +3,7 @@
 [![GitHub](https://img.shields.io/github/license/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/blob/main/LICENSE)
 [![npm (scoped)](https://img.shields.io/npm/v/@linux123123/jspteroapi)](https://www.npmjs.com/package/@linux123123/jspteroapi)
 [![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/linux123123/jspteroapi/node-fetch)](https://www.npmjs.com/package/node-fetch)
+![Node.js Package](https://github.com/Linux123123/JSPteroAPI/workflows/Node.js%20Package/badge.svg)
 [![GitHub issues](https://img.shields.io/github/issues/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/pulls)
 
@@ -21,7 +22,7 @@
 Then include it in your application:
 
 ```javascript
-const node = require('jspteroapi');
+const node = require('@linux123123/jspteroapi');
 const application = node.Application; // for application API
 const client = node.Client; // for Client API
 ```
