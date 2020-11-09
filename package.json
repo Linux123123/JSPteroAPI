@@ -17,7 +17,10 @@
     "node-fetch",
     "node-js",
     "js",
-    "ptero-api"
+    "ptero-api",
+    "ptero",
+    "pterodactyl-api",
+    "API client"
   ],
   "author": "Linux123123",
   "license": "MIT",
