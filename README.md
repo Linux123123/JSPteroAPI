@@ -36,7 +36,7 @@ application.login(HOST, API_KEY, (loggedIn, msg) => {
         if (loggedIn == true) {
             console.log('Pterodactyl has logged in!');
         } else {
-            console.warn(msg);
+            console.log(msg);
         }
     }
 );
@@ -53,7 +53,7 @@ application.function(parameters).then((response) => {
 
 # Documentation
 
-All the functions in https://docs.nodeactyl.xyz/ should work.
+Most of the functions in https://docs.nodeactyl.xyz/ should work.
 
 # Versions
 
