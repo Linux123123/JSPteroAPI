@@ -1,9 +1,6 @@
 const req = require('../ApplicationRequest.js');
 
-/**
- * @param {String} NodeID The node ID to get the details of.
- */
-function getNode(NodeID) {
+function getEggInfo(nestID, eggId) {
     const Req = new req(
         process.env.APPLICATION_JSPTEROAPI_HOST,
         process.env.APPLICATION_JSPTEROAPI_KEY
@@ -13,9 +10,9 @@ function getNode(NodeID) {
         'GET',
         null,
         'attributes',
-        '/api/application/nodes/' + NodeID,
+        `/api/application/nests/${nestID}/eggs/${eggId}`,
         false
     );
 }
 
-module.exports = getNode;
+module.exports = getEggInfo;

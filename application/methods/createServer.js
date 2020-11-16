@@ -1,4 +1,6 @@
 const req = require('../ApplicationRequest.js');
+const getEggInfo = require('./getEggInfo');
+
 /**
  * @param {String} Version Version of the server to use
  * @param {String} NameOfServer Name of server to create
@@ -17,109 +19,53 @@ const req = require('../ApplicationRequest.js');
  *
  * @yields Object (refer to docs for schema);
  */
-function createServer(
-    Version,
-    NameOfServer,
-    OwnerID,
-    NestID,
-    EggID,
-    DockerImage,
-    StartupCmd,
-    RAM,
-    Swap,
-    Disk,
-    IO,
-    CPU,
-    AmountOfDatabases,
-    AmountOfAllocations
-) {
-    const data = makeData(
-        Version,
-        NameOfServer,
-        OwnerID,
-        NestID,
-        EggID,
-        DockerImage,
-        StartupCmd,
-        RAM,
-        Swap,
-        Disk,
-        IO,
-        CPU,
-        AmountOfDatabases,
-        AmountOfAllocations
-    );
-    const Req = new req(
-        process.env.APPLICATION_NODEACTYL_HOST,
-        process.env.APPLICATION_NODEACTYL_KEY
-    );
-    return Req.request(
-        'createServer',
-        'POST',
-        data,
-        'attributes',
-        '/api/application/servers',
-        true
-    );
+function createServer(nestID, eggID) {
+    return getEggInfo(nestID, eggID).then((egg) => {
+        const data = makeData();
+        const body = JSON.stringify(data);
+        const Req = new req(
+            process.env.APPLICATION_JSPTEROAPI_HOST,
+            process.env.APPLICATION_JSPTEROAPI_KEY
+        );
+        return Req.request(
+            'createServer',
+            'POST',
+            body,
+            'attributes',
+            '/api/application/servers',
+            true
+        );
+    });
 }
 
-function makeData(
-    Version,
-    NameOfServer,
-    OwnerID,
-    NestID,
-    EggID,
-    DockerImage,
-    StartupCmd,
-    RAM,
-    Swap,
-    Disk,
-    IO,
-    CPU,
-    AmountOfDatabases,
-    AmountOfAllocations
-) {
+function makeData(docker_image, startup) {
     return {
-        name: NameOfServer,
-        user: OwnerID,
-        description: 'A Nodeactyl server',
-        egg: EggID,
-        pack: NestID,
-        docker_image: DockerImage,
-        startup: StartupCmd,
+        name: 'Mc',
+        user: 2,
+        nest: 1,
+        egg: 1,
+        docker_image: 'quay.io/pterodactyl/core:java',
+        startup: 'java -Xms128M -Xmx128M -jar server.jar',
         limits: {
-            memory: RAM,
-            swap: Swap,
-            disk: Disk,
-            io: IO,
-            cpu: CPU,
-        },
-        feature_limits: {
-            databases: AmountOfDatabases,
-            allocations: AmountOfAllocations,
+            memory: 1024,
+            swap: 0,
+            disk: 512,
+            io: 500,
+            cpu: 100,
         },
         environment: {
-            DL_VERSION: Version,
+            BUNGEE_VERSION: 'latest',
             SERVER_JARFILE: 'server.jar',
-            VANILLA_VERSION: Version,
-            BUNGEE_VERSION: Version,
-            PAPER_VERSION: Version,
-            MC_VERSION: Version,
-            BUILD_NUMBER: Version,
-            INSTALL_REPO: Version,
         },
-        allocation: {
-            default: 1,
-            additional: [],
+        feature_limits: {
+            databases: 1,
+            allocations: 1,
+            backups: 1,
         },
         deploy: {
             locations: [1],
             dedicated_ip: false,
-            port_range: [],
         },
-        start_on_completion: true,
-        skip_scripts: false,
-        oom_disabled: true,
     };
 }
 module.exports = createServer;

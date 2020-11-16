@@ -9,8 +9,8 @@ const req = require('../ApplicationRequest');
 function createDatabase(InternalID, Name, AllowedIP, HostDBID) {
     const data = makeData(Name, AllowedIP, HostDBID);
     const Req = new req(
-        process.env.APPLICATION_NODEACTYL_HOST,
-        process.env.APPLICATION_NODEACTYL_KEY
+        process.env.APPLICATION_JSPTEROAPI_HOST,
+        process.env.APPLICATION_JSPTEROAPI_KEY
     );
     return Req.request(
         'createDatabase',

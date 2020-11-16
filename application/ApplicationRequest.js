@@ -92,8 +92,9 @@ function myError(err, rawData, data, request) {
                 error = new Error('User does not exist!');
                 error.status = 404;
                 return error;
-            } else return new Error(`Html error code: ${rawData.status}`);
-        } else return new Error(`Html error code: ${rawData.status}`);
+            }
+        } else
+            return new Error(`${rawData.statusText}. Code: ${rawData.status}`);
     } else return new Error(err);
 }
 

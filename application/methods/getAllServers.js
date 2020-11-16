@@ -2,8 +2,8 @@ const req = require('../ApplicationRequest.js');
 
 function getAllServers() {
     const Req = new req(
-        process.env.APPLICATION_NODEACTYL_HOST,
-        process.env.APPLICATION_NODEACTYL_KEY
+        process.env.APPLICATION_JSPTEROAPI_HOST,
+        process.env.APPLICATION_JSPTEROAPI_KEY
     );
     return Req.request(
         'getAllServers',

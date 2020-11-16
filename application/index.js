@@ -13,6 +13,7 @@ const getallservers = require('./methods/getAllServers.js');
 const getallusers = require('./methods/getAllUsers.js');
 const getallnodes = require('./methods/getAllNodes.js');
 const getuserinfo = require('./methods/getUserInfo.js');
+const getegginfo = require('./methods/getEggInfo.js');
 const getnodeinfo = require('./methods/getNodeInfo.js');
 const getserverinfo = require('./methods/getServerInfo.js');
 
@@ -34,8 +35,8 @@ const deleteserver = require('./methods/deleteServer.js');
 function login(HOST, KEY, callback) {
     HOST = HOST.trim();
     if (HOST.endsWith('/')) HOST = HOST.slice(0, -1);
-    process.env.APPLICATION_NODEACTYL_HOST = HOST;
-    process.env.APPLICATION_NODEACTYL_KEY = KEY;
+    process.env.APPLICATION_JSPTEROAPI_HOST = HOST;
+    process.env.APPLICATION_JSPTEROAPI_KEY = KEY;
 
     fetch(HOST + '/api/application/users', {
         method: 'GET',
@@ -77,8 +78,8 @@ function fastLogin(HOST, KEY) {
     HOST = HOST.trim();
     if (HOST.endsWith('/')) HOST = HOST.slice(0, -1);
 
-    process.env.APPLICATION_NODEACTYL_HOST = HOST;
-    process.env.APPLICATION_NODEACTYL_KEY = KEY;
+    process.env.APPLICATION_JSPTEROAPI_HOST = HOST;
+    process.env.APPLICATION_JSPTEROAPI_KEY = KEY;
 }
 
 module.exports = {
@@ -98,6 +99,7 @@ module.exports = {
     getAllNodes: getallnodes,
     getAllUsers: getallusers,
     getUserInfo: getuserinfo,
+    getEggInfo: getegginfo,
     getNodeInfo: getnodeinfo,
     getServerInfo: getserverinfo,
 
