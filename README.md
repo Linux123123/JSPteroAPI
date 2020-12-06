@@ -55,6 +55,11 @@ application.function(parameters).then((response) => {
 
 Most of the functions in https://docs.nodeactyl.xyz/ should work.
 
+# Example project
+
+I have created a discord bot using this library
+[Pterodactyl-Discord-Bot](https://github.com/Linux123123/Pterodactyl-Discord-Bot)
+
 # Versions
 
 **How versions work:**
