@@ -40,7 +40,6 @@ application.login(HOST, API_KEY, (loggedIn, msg) => {
         }
     }
 );
-})
 ```
 
 And then you can use any application funtion you want:
