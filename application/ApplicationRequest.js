@@ -10,7 +10,7 @@ class Request {
      * @param {String} request The request name
      * @param {String} requestType Thr type of request to use e. g. GET, POST
      * @param {Object} data Data to send
-     * @param {String} dataObj Data object to return
+     * @param {String} dataObj Data object to return / Text to give on success
      * @param {String} endpoint Endpoint for server to call
      * @param {Boolean} bodyNeeded Bool if body is needed
      */
@@ -95,7 +95,7 @@ function myError(err, rawData, data, request) {
             }
         } else
             return new Error(`${rawData.statusText}. Code: ${rawData.status}`);
-    } else return new Error(err);
+    } else return err;
 }
 
 module.exports = Request;

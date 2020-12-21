@@ -17,7 +17,6 @@ const restartserver = require('./methods/restartServer.js');
 const sendcommand = require('./methods/sendCommand.js');
 
 /**
- *
  * @param {String} HOST Panels address
  * @param {String} KEY Api key to use
  * @param {Boolean, String} callback Returns true when login is successful and a error message if API failed
@@ -61,11 +60,11 @@ function login(HOST, KEY, callback) {
 }
 
 /**
- *
  * @param {String} HOST The host to use
  * @param {String} KEY The application key to use
  * @Warning USE THIS ONLY IF YOU KNOW YOUR CREDENTIALS ARE 100% CORRECT, OR THEY NEVER CHANGE
  */
+
 function fastLogin(HOST, KEY) {
     HOST = HOST.trim();
     if (HOST.endsWith('/')) HOST = HOST.slice(0, -1);
