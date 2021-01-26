@@ -8,7 +8,7 @@ class Request {
 
     /**
      * @param {String} request The request name
-     * @param {String} requestType Thr type of request to use e. g. GET, POST
+     * @param {String} requestType The type of request to use e. g. GET, POST
      * @param {Object} data Data to send
      * @param {String} dataObj Data object to return / Text to give on success
      * @param {String} endpoint Endpoint for server to call
@@ -26,7 +26,7 @@ class Request {
                 Accept: 'application/json',
             },
         };
-        if (bodyNeeded) options.body = data;
+        if (bodyNeeded) options.body = JSON.stringify(data);
         return fetch(URL, options)
             .then((rawData) => {
                 if (!rawData.ok) {

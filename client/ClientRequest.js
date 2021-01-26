@@ -26,7 +26,8 @@ class Request {
                 Accept: 'application/json',
             },
         };
-        if (bodyNeeded) options.body = data;
+        if (bodyNeeded) options.body = JSON.stringify(data);
+
         return fetch(URL, options)
             .then((rawData) => {
                 if (!rawData.ok) {
