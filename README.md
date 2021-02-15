@@ -17,37 +17,30 @@
 
 <h5>Install via package.json:</h5>
 
-`"@linux123123/jspteroapi": "1.3.5"`
+`"@linux123123/jspteroapi": "2.0.0"`
 
 Then include it in your application:
 
 ```javascript
 const node = require('@linux123123/jspteroapi');
-const application = node.Application; // for application API
-const client = node.Client; // for Client API
+const application = new node.Application('HOST', 'TOKEN'); // for application API
+const client = new node.Client('HOST', 'TOKEN'); // for Client API
 ```
 
 # How to use
 
-To login with application api key use:
-
-```javascript
-application.login(HOST, API_KEY, (loggedIn, msg) => {
-        if (loggedIn == true) {
-            console.log('Pterodactyl has logged in!');
-        } else {
-            console.log(msg);
-        }
-    }
-);
-```
-
-And then you can use any application funtion you want:
+You can use any application funtion you want:
 
 ```javascript
 application.function(parameters).then((response) => {
     // response
 });
+```
+
+or using async / await
+
+```javascript
+const res = await application.function(parameters);
 ```
 
 # Documentation
