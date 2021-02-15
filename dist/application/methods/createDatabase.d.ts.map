@@ -1,0 +1,1 @@
+{"version":3,"file":"createDatabase.d.ts","sourceRoot":"","sources":["../../../src/application/methods/createDatabase.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,kBAAkB,EAAE,MAAM,wBAAwB,CAAC;AAE5D;;;;;GAKG;AAEH,wBAA8B,cAAc,CACxC,IAAI,EAAE,MAAM,EACZ,QAAQ,EAAE,MAAM,EAChB,UAAU,EAAE,MAAM,EAClB,SAAS,GAAE,MAAY,GACxB,OAAO,CAAC,kBAAkB,CAAC,CAW7B"}
