@@ -2,7 +2,7 @@
   "name": "@linux123123/jspteroapi",
   "version": "2.0.1",
   "description": "A pterodactyl v1 api using node-fetch",
-  "main": "JSPteroAPI.js",
+  "main": "dist/JSPteroAPI.js",
   "types": "types/JSPteroAPI.d.ts",
   "scripts": {
     "test": "tsc-watch --onCompilationComplete \"node dist/test.js\"",
