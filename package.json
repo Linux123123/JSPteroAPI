@@ -1,6 +1,6 @@
 {
   "name": "@linux123123/jspteroapi",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A pterodactyl v1 api using node-fetch",
   "main": "JSPteroAPI.js",
   "types": "types/JSPteroAPI.d.ts",
