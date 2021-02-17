@@ -18,7 +18,7 @@
 
 <h5>Install via package.json:</h5>
 
-`"@linux123123/jspteroapi": "2.0.3"`
+`"@linux123123/jspteroapi": "2.0.4"`
 
 Then include it in your application:
 
