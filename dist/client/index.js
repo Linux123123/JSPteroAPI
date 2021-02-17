@@ -4,60 +4,70 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_fetch_1 = __importDefault(require("node-fetch")); // import node-fetch
-// GET
-const getAllServers_1 = __importDefault(require("./methods/getAllServers"));
-const getServerInfo_1 = __importDefault(require("./methods/getServerInfo"));
-const getServerResources_1 = __importDefault(require("./methods/getServerResources"));
-const getWebsocketAuthData_1 = __importDefault(require("./methods/getWebsocketAuthData"));
-const getPermissions_1 = __importDefault(require("./methods/getPermissions"));
-const getAllDatabases_1 = __importDefault(require("./methods/getAllDatabases"));
-// POST
-const sendCommand_1 = __importDefault(require("./methods/sendCommand"));
-const setPowerState_1 = __importDefault(require("./methods/setPowerState"));
-const createDatabase_1 = __importDefault(require("./methods/createDatabase"));
-const rotateDatabasePass_1 = __importDefault(require("./methods/rotateDatabasePass"));
-// DELETE
-const deleteDatabase_1 = __importDefault(require("./methods/deleteDatabase"));
+const serverMethods_1 = __importDefault(require("./methods/serverMethods"));
+const consoleMethods_1 = __importDefault(require("./methods/consoleMethods"));
+const fileMethods_1 = __importDefault(require("./methods/fileMethods"));
+const databaseMethods_1 = __importDefault(require("./methods/databaseMethods"));
+const accountMethods_1 = __importDefault(require("./methods/accountMethods"));
 class client {
     /**
      * @param {String} Host Panels address
      * @param {String} Key Api key to use
      * @param {Boolean} Fast Fast login (No credential check)
      */
-    constructor(Host, Key, Fast = false) {
-        // Get
-        this.getAllServers = getAllServers_1.default;
-        this.getServerInfo = getServerInfo_1.default;
-        this.getServerResources = getServerResources_1.default;
-        this.getWebsocketAuthData = getWebsocketAuthData_1.default;
-        this.getPermissions = getPermissions_1.default;
-        this.getAllDatabases = getAllDatabases_1.default;
-        // POST
-        this.sendCommand = sendCommand_1.default;
-        this.setPowerState = setPowerState_1.default;
-        this.createDatabase = createDatabase_1.default;
-        this.rotateDatabasePass = rotateDatabasePass_1.default;
-        // Delete
-        this.deleteDatabase = deleteDatabase_1.default;
-        Host = Host.trim();
-        if (Host.endsWith('/'))
-            Host = Host.slice(0, -1);
-        if (!Fast)
-            this.testAPI(Host, Key);
-        process.env.ClientHost = Host;
-        process.env.ClientKey = Key;
+    constructor(host, key, fast = false) {
+        this.host = host;
+        this.key = key;
+        host = host.trim();
+        if (host.endsWith('/'))
+            host = host.slice(0, -1);
+        this.host = host;
+        if (!fast)
+            this.testAPI();
+        // Server
+        const servermethods = new serverMethods_1.default(host, key);
+        this.getAllServers = servermethods.getAllServers;
+        this.getServerInfo = servermethods.getServerInfo;
+        this.getServerResources = servermethods.getServerResources;
+        this.sendCommand = servermethods.sendCommand;
+        this.setPowerState = servermethods.setPowerState;
+        // Console
+        const consolemethods = new consoleMethods_1.default(host, key);
+        this.getWebsocketAuthData = consolemethods.getWebsocketAuthData;
+        // File
+        const filemethods = new fileMethods_1.default(host, key);
+        this.getAllFiles = filemethods.getAllFiles;
+        this.getFileContents = filemethods.getFileContents;
+        this.writeFile = filemethods.writeFile;
+        this.renameFile = filemethods.renameFile;
+        this.copyFile = filemethods.copyFile;
+        this.getFileDownloadLink = filemethods.getFileDownloadLink;
+        this.compressFile = filemethods.compressFile;
+        this.decompressFile = filemethods.decompressFile;
+        this.deleteFile = filemethods.deleteFile;
+        this.createFolder = filemethods.createFolder;
+        this.getFileUploadLink = filemethods.getFileUploadLink;
+        // Database
+        const databasemethods = new databaseMethods_1.default(host, key);
+        this.getAllDatabases = databasemethods.getAllDatabases;
+        this.createDatabase = databasemethods.createDatabase;
+        this.deleteDatabase = databasemethods.deleteDatabase;
+        this.rotateDatabasePass = databasemethods.rotateDatabasePass;
+        // Account
+        const accountmethods = new accountMethods_1.default(host, key);
+        this.getAllPermissions = accountmethods.getAllPermissions;
     }
-    async testAPI(Host, Key) {
+    async testAPI() {
         const options = {
             method: 'GET',
             headers: {
                 responseEncoding: 'utf8',
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + Key,
+                Authorization: 'Bearer ' + this.key,
             },
         };
-        let res = await node_fetch_1.default(Host + '/api/client', options);
+        let res = await node_fetch_1.default(this.host + '/api/client', options);
         if (res.status == 403) {
             throw new Error('API Key is not valid! (Client)!');
         }

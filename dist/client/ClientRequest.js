@@ -12,12 +12,12 @@ class Request {
     /**
      * @param {String} request The request name
      * @param {String} requestType The type of request to use e. g. GET, POST
-     * @param {(Object|null)} data Data to send
+     * @param {(Object|String|null)} data Data to send
      * @param {String} dataObj Data object to return / Text to give on success
      * @param {String} endpoint Endpoint for server to call
-     * @param {Boolean} bodyNeeded Bool if body is needed
+     * @param {Boolean} [text=false] Boolean if we want to return text of the response
      */
-    async request(request, requestType, data, dataObj, endpoint, bodyNeeded) {
+    async request(request, requestType, data, dataObj, endpoint, text = false) {
         let rawData;
         let res;
         const URL = this.host + endpoint;
@@ -30,24 +30,23 @@ class Request {
                 Accept: 'application/json',
             },
         };
-        if (bodyNeeded)
+        if (data)
             options.body = JSON.stringify(data);
         rawData = await node_fetch_1.default(URL, options);
         if (!rawData.ok)
             throw myError(rawData, data, request);
-        if (rawData.status != 204)
-            res = await rawData.json();
+        if (rawData.status == 204)
+            return dataObj;
+        if (text)
+            return await rawData.text();
+        res = await rawData.json();
         switch (dataObj) {
             case 'data':
                 return res.data;
             case 'attributes':
                 return res.attributes;
-            case 'sendCommand':
-                return 'Successfuly sent!';
-            case 'setPowState':
-                return 'Successfuly sent!';
-            case 'delDB':
-                return 'Successfuly deleted!';
+            case 'attributesUrl':
+                return res.attributes.url;
             default:
                 return res;
         }
@@ -57,6 +56,6 @@ function myError(rawData, data, request) {
     if (rawData.status == 521) {
         return new Error('Gateway unawailable! Status: 521');
     }
-    return new Error(`${rawData.statusText}. Status Code: ${rawData.status}`);
+    return new Error(`${rawData.statusText}  Status Code: ${rawData.status}`);
 }
 exports.default = Request;

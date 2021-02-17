@@ -1,46 +1,69 @@
 import fetch, { RequestInit } from 'node-fetch'; // import node-fetch
+import serverMethods from './methods/serverMethods';
+import consoleMethods from './methods/consoleMethods';
+import fileMethods from './methods/fileMethods';
+import databaseMethods from './methods/databaseMethods';
+import accountMethods from './methods/accountMethods';
 
-// GET
-import getallservers from './methods/getAllServers';
-import getserverinfo from './methods/getServerInfo';
-import getserverresources from './methods/getServerResources';
-import getwebsocketauthdata from './methods/getWebsocketAuthData';
-import getpermissions from './methods/getPermissions';
-import getalldatabases from './methods/getAllDatabases';
-
-// POST
-import sendcommand from './methods/sendCommand';
-import setpowerstate from './methods/setPowerState';
-import createdatabase from './methods/createDatabase';
-import rotatedatabasepass from './methods/rotateDatabasePass';
-
-// DELETE
-import deletedatabase from './methods/deleteDatabase';
-
-class client {
+export default class client {
     /**
      * @param {String} Host Panels address
      * @param {String} Key Api key to use
      * @param {Boolean} Fast Fast login (No credential check)
      */
-    public constructor(Host: string, Key: string, Fast: boolean = false) {
-        Host = Host.trim();
-        if (Host.endsWith('/')) Host = Host.slice(0, -1);
-        if (!Fast) this.testAPI(Host, Key);
-        process.env.ClientHost = Host;
-        process.env.ClientKey = Key;
+    public constructor(
+        private host: string,
+        private key: string,
+        fast: boolean = false
+    ) {
+        host = host.trim();
+        if (host.endsWith('/')) host = host.slice(0, -1);
+        this.host = host;
+        if (!fast) this.testAPI();
+        // Server
+        const servermethods = new serverMethods(host, key);
+        this.getAllServers = servermethods.getAllServers;
+        this.getServerInfo = servermethods.getServerInfo;
+        this.getServerResources = servermethods.getServerResources;
+        this.sendCommand = servermethods.sendCommand;
+        this.setPowerState = servermethods.setPowerState;
+        // Console
+        const consolemethods = new consoleMethods(host, key);
+        this.getWebsocketAuthData = consolemethods.getWebsocketAuthData;
+        // File
+        const filemethods = new fileMethods(host, key);
+        this.getAllFiles = filemethods.getAllFiles;
+        this.getFileContents = filemethods.getFileContents;
+        this.writeFile = filemethods.writeFile;
+        this.renameFile = filemethods.renameFile;
+        this.copyFile = filemethods.copyFile;
+        this.getFileDownloadLink = filemethods.getFileDownloadLink;
+        this.compressFile = filemethods.compressFile;
+        this.decompressFile = filemethods.decompressFile;
+        this.deleteFile = filemethods.deleteFile;
+        this.createFolder = filemethods.createFolder;
+        this.getFileUploadLink = filemethods.getFileUploadLink;
+        // Database
+        const databasemethods = new databaseMethods(host, key);
+        this.getAllDatabases = databasemethods.getAllDatabases;
+        this.createDatabase = databasemethods.createDatabase;
+        this.deleteDatabase = databasemethods.deleteDatabase;
+        this.rotateDatabasePass = databasemethods.rotateDatabasePass;
+        // Account
+        const accountmethods = new accountMethods(host, key);
+        this.getAllPermissions = accountmethods.getAllPermissions;
     }
-    private async testAPI(Host: string, Key: string): Promise<void> {
+    private async testAPI(): Promise<void> {
         const options: RequestInit = {
             method: 'GET',
             headers: {
                 responseEncoding: 'utf8',
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + Key,
+                Authorization: 'Bearer ' + this.key,
             },
         };
-        let res = await fetch(Host + '/api/client', options);
+        let res = await fetch(this.host + '/api/client', options);
         if (res.status == 403) {
             throw new Error('API Key is not valid! (Client)!');
         } else if (!res.ok) {
@@ -50,19 +73,29 @@ class client {
         }
     }
     // Get
-    public getAllServers = getallservers;
-    public getServerInfo = getserverinfo;
-    public getServerResources = getserverresources;
-    public getWebsocketAuthData = getwebsocketauthdata;
-    public getPermissions = getpermissions;
-    public getAllDatabases = getalldatabases;
+    public getAllServers;
+    public getServerInfo;
+    public getServerResources;
+    public getWebsocketAuthData;
+    public getAllPermissions;
+    public getAllDatabases;
+    public getAllFiles;
+    public getFileContents;
+    public getFileDownloadLink;
+    public getFileUploadLink;
     // POST
-    public sendCommand = sendcommand;
-    public setPowerState = setpowerstate;
-    public createDatabase = createdatabase;
-    public rotateDatabasePass = rotatedatabasepass;
+    public sendCommand;
+    public setPowerState;
+    public createDatabase;
+    public rotateDatabasePass;
+    public copyFile;
+    public writeFile;
+    public compressFile;
+    public decompressFile;
+    public deleteFile;
+    public createFolder;
     // Delete
-    public deleteDatabase = deletedatabase;
+    public deleteDatabase;
+    // PUT
+    public renameFile;
 }
-
-export default client;
