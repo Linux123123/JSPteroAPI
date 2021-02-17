@@ -1,9 +1,6 @@
 import App from './application/index';
 import Client from './client/index';
-
-export default {
+export = {
     Application: App,
     Client: Client,
 };
-export { App };
-export { Client };

@@ -25,7 +25,7 @@ import deleteuser from './methods/deleteUser';
 import deletenode from './methods/deleteNode';
 import deleteserver from './methods/deleteServer';
 
-class app {
+export default class app {
     /**
      * @param {String} Host Panels address
      * @param {String} Key Api key to use
@@ -42,10 +42,10 @@ class app {
         const options: RequestInit = {
             method: 'GET',
             headers: {
-                responseEncoding: 'utf8',
-                Accept: 'application/json',
+                'responseEncoding': 'utf8',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + Key,
+                'Authorization': 'Bearer ' + Key,
             },
         };
         let res = await fetch(Host + '/api/application/users', options);
@@ -53,7 +53,7 @@ class app {
             throw new Error('API Key is not valid! (Application)!');
         } else if (!res.ok) {
             throw new Error(
-                `There was an error while trying to access host! Status: ${res.status} StatusText: ${res.statusText}`
+                `There was an error while trying to access host! Status: ${res.status} StatusText: ${res.statusText}`,
             );
         }
     }
@@ -82,5 +82,3 @@ class app {
     public deleteNode = deletenode;
     public deleteServer = deleteserver;
 }
-
-export default app;

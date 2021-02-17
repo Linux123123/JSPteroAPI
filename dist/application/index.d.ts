@@ -15,7 +15,7 @@ import edituser from './methods/editUser';
 import deleteuser from './methods/deleteUser';
 import deletenode from './methods/deleteNode';
 import deleteserver from './methods/deleteServer';
-declare class app {
+export default class app {
     /**
      * @param {String} Host Panels address
      * @param {String} Key Api key to use
@@ -41,4 +41,3 @@ declare class app {
     deleteNode: typeof deletenode;
     deleteServer: typeof deleteserver;
 }
-export default app;

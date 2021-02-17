@@ -65,10 +65,10 @@ class app {
         const options = {
             method: 'GET',
             headers: {
-                responseEncoding: 'utf8',
-                Accept: 'application/json',
+                'responseEncoding': 'utf8',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + Key,
+                'Authorization': 'Bearer ' + Key,
             },
         };
         let res = await node_fetch_1.default(Host + '/api/application/users', options);

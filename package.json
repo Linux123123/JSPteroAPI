@@ -7,7 +7,8 @@
     "scripts": {
         "test": "tsc-watch --onCompilationComplete \"node dist/test.js\"",
         "start": "node dist/test.js",
-        "build": "rm -rf dist/* && tsc"
+        "build": "rm -rf dist/* && tsc",
+        "lint": "eslint --help"
     },
     "repository": {
         "type": "git",
@@ -31,10 +32,7 @@
     },
     "homepage": "https://github.com/Linux123123/JSPteroAPI#readme",
     "dependencies": {
-        "eslint-config-prettier": "^7.2.0",
-        "eslint-plugin-prettier": "^3.3.1",
-        "node-fetch": "^2.6.1",
-        "prettier": "^2.2.1"
+        "node-fetch": "^2.6.1"
     },
     "devDependencies": {
         "@types/node": "^14.14.28",
@@ -42,6 +40,9 @@
         "@typescript-eslint/eslint-plugin": "^4.15.1",
         "@typescript-eslint/parser": "^4.15.1",
         "eslint": "^7.20.0",
+        "eslint-config-prettier": "^7.2.0",
+        "eslint-plugin-prettier": "^3.3.1",
+        "prettier": "^2.2.1",
         "tsc-watch": "^4.2.9",
         "typescript": "^4.1.5"
     }
