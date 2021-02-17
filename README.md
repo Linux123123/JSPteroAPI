@@ -8,7 +8,8 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/pulls)
 
 <h3>A simple Pterodactyl API library using node-fetch</h3>
-
+<span>(written in typescript)</span>
+    
 # To install:
 
 <h5>Install from the command line:</h5>
