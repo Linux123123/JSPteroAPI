@@ -17,9 +17,9 @@ class Request {
      * @param {String} endpoint Endpoint for server to call
      * @param {Boolean} [text=false] Boolean if we want to return text of the response
      */
-    async request(request, requestType, data, dataObj, endpoint, text = false) {
-        let rawData;
-        let res;
+    async request(request, requestType, data, dataObj, endpoint, text = false
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ) {
         const URL = this.host + endpoint;
         const options = {
             method: requestType,
@@ -32,14 +32,14 @@ class Request {
         };
         if (data)
             options.body = JSON.stringify(data);
-        rawData = await node_fetch_1.default(URL, options);
+        const rawData = await node_fetch_1.default(URL, options);
         if (!rawData.ok)
             throw myError(rawData, data, request);
         if (rawData.status == 204)
             return dataObj;
         if (text)
             return await rawData.text();
-        res = await rawData.json();
+        const res = await rawData.json();
         switch (dataObj) {
             case 'data':
                 return res.data;
@@ -52,6 +52,7 @@ class Request {
         }
     }
 }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function myError(rawData, data, request) {
     if (rawData.status == 521) {
         return new Error('Gateway unawailable! Status: 521');

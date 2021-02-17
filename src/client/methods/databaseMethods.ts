@@ -24,7 +24,7 @@ export default class databaseMethods {
             'GET',
             null,
             'data',
-            `/api/client/servers/${serverId}/databases`
+            `/api/client/servers/${serverId}/databases`,
         );
     }
     /**
@@ -44,14 +44,14 @@ export default class databaseMethods {
     public async createDatabase(
         serverId: string,
         databaseName: string,
-        connectionsAllowedFrom = '%'
+        connectionsAllowedFrom = '%',
     ): Promise<DatabaseAttributes> {
         return new Request(this.host, this.key).request(
             'createDatabase',
             'POST',
             { database: databaseName, remote: connectionsAllowedFrom },
             'attributes',
-            `/api/client/servers/${serverId}/databases`
+            `/api/client/servers/${serverId}/databases`,
         );
     }
     /**
@@ -69,11 +69,11 @@ export default class databaseMethods {
      */
     public async deleteDatabase(
         serverId: string,
-        databaseName: string
+        databaseName: string,
     ): Promise<string> {
         const databases = await this.getAllDatabases(serverId);
         const database = databases.find(
-            (db) => db.attributes.name === databaseName
+            (db) => db.attributes.name === databaseName,
         );
         if (!database) throw new Error('Database not found');
         return new Request(this.host, this.key).request(
@@ -81,7 +81,7 @@ export default class databaseMethods {
             'DELETE',
             null,
             'Sucesfully deleted!',
-            `/api/client/servers/${serverId}/databases/${database.attributes.id}`
+            `/api/client/servers/${serverId}/databases/${database.attributes.id}`,
         );
     }
     /**
@@ -99,11 +99,11 @@ export default class databaseMethods {
      */
     public async rotateDatabasePass(
         serverId: string,
-        databaseName: string
+        databaseName: string,
     ): Promise<DatabaseAttributesRelationship> {
         const databases = await this.getAllDatabases(serverId);
         const database = databases.find(
-            (db) => db.attributes.name === databaseName
+            (db) => db.attributes.name === databaseName,
         );
         if (!database) throw new Error('Database not found');
         return new Request(this.host, this.key).request(
@@ -111,7 +111,7 @@ export default class databaseMethods {
             'POST',
             null,
             'attributes',
-            `/api/client/servers/${serverId}/databases/${database.attributes.id}/rotate-password`
+            `/api/client/servers/${serverId}/databases/${database.attributes.id}/rotate-password`,
         );
     }
 }

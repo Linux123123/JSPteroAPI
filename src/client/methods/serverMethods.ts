@@ -21,7 +21,7 @@ export default class serverMethods {
             'GET',
             null,
             'data',
-            '/api/client'
+            '/api/client',
         );
     }
     /**
@@ -42,7 +42,7 @@ export default class serverMethods {
             'GET',
             null,
             'attributes',
-            `/api/client/servers/${serverId}`
+            `/api/client/servers/${serverId}`,
         );
     }
     /**
@@ -58,14 +58,14 @@ export default class serverMethods {
      * ```
      */
     public async getServerResources(
-        serverId: string
+        serverId: string,
     ): Promise<ServerResources> {
         return new Request(this.host, this.key).request(
             'getServerResources',
             'GET',
             null,
             'attributes',
-            `/api/client/servers/${serverId}/resources`
+            `/api/client/servers/${serverId}/resources`,
         );
     }
     /**
@@ -83,14 +83,14 @@ export default class serverMethods {
      */
     public async sendCommand(
         serverId: string,
-        command: string
+        command: string,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
             'sendCommand',
             'POST',
             { command: command },
             'Successfuly sent the command!',
-            `/api/client/servers/${serverId}/command`
+            `/api/client/servers/${serverId}/command`,
         );
     }
     /**
@@ -108,14 +108,14 @@ export default class serverMethods {
      */
     public async setPowerState(
         serverId: string,
-        action: string
+        action: string,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
             'setPowerState',
             'POST',
             { signal: action },
             'Successfuly set power state!',
-            `/api/client/servers/${serverId}/power`
+            `/api/client/servers/${serverId}/power`,
         );
     }
 }

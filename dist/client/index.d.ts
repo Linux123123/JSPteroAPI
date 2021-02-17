@@ -17,17 +17,17 @@ export default class client {
     getAllFiles: (serverId: string, dir?: string) => Promise<import("./interfaces/ServerFile").default[]>;
     getFileContents: (serverId: string, file: string) => Promise<string>;
     getFileDownloadLink: (serverId: string, file: string) => Promise<string>;
-    getFileUploadLink: (serverId: string) => Promise<String>;
+    getFileUploadLink: (serverId: string) => Promise<string>;
     sendCommand: (serverId: string, command: string) => Promise<string>;
     setPowerState: (serverId: string, action: string) => Promise<string>;
     createDatabase: (serverId: string, databaseName: string, connectionsAllowedFrom?: string) => Promise<import("./interfaces/Database").DatabaseAttributes>;
     rotateDatabasePass: (serverId: string, databaseName: string) => Promise<import("./interfaces/Database").DatabaseAttributesRelationship>;
-    copyFile: (serverId: string, location: string) => Promise<String>;
-    writeFile: (serverId: string, file: string, contents: string) => Promise<String>;
+    copyFile: (serverId: string, location: string) => Promise<string>;
+    writeFile: (serverId: string, file: string, contents: string) => Promise<string>;
     compressFile: (serverId: string, data: import("./interfaces/ServerFile").ServerFileCompress) => Promise<import("./interfaces/ServerFile").ServerFileAttributes>;
-    decompressFile: (serverId: string, data: import("./interfaces/ServerFile").ServerFileDecompress) => Promise<String>;
-    deleteFile: (serverId: string, data: import("./interfaces/ServerFile").ServerFileDelete) => Promise<String>;
-    createFolder: (serverId: string, data: import("./interfaces/ServerFile").ServerFileCreateFolder) => Promise<String>;
+    decompressFile: (serverId: string, data: import("./interfaces/ServerFile").ServerFileDecompress) => Promise<string>;
+    deleteFile: (serverId: string, data: import("./interfaces/ServerFile").ServerFileCompress) => Promise<string>;
+    createFolder: (serverId: string, data: import("./interfaces/ServerFile").ServerFileCreateFolder) => Promise<string>;
     deleteDatabase: (serverId: string, databaseName: string) => Promise<string>;
-    renameFile: (serverId: string, data: import("./interfaces/ServerFile").SeverFileRename) => Promise<String>;
+    renameFile: (serverId: string, data: import("./interfaces/ServerFile").SeverFileRename) => Promise<string>;
 }

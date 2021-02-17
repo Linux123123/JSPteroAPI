@@ -10,6 +10,6 @@ declare class Request {
      * @param {String} endpoint Endpoint for server to call
      * @param {Boolean} [text=false] Boolean if we want to return text of the response
      */
-    request(request: string, requestType: string, data: object | string | null, dataObj: string, endpoint: string, text?: boolean): Promise<any>;
+    request(request: string, requestType: string, data: unknown, dataObj: string, endpoint: string, text?: boolean): Promise<any>;
 }
 export default Request;

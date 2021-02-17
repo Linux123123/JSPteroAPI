@@ -21,7 +21,7 @@ export default class accountMethods {
             'GET',
             null,
             'attributes',
-            `/api/client/permissions`
+            `/api/client/permissions`,
         );
     }
 }

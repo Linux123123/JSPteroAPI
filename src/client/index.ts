@@ -14,7 +14,7 @@ export default class client {
     public constructor(
         private host: string,
         private key: string,
-        fast = false
+        fast = false,
     ) {
         host = host.trim();
         if (host.endsWith('/')) host = host.slice(0, -1);
@@ -57,10 +57,10 @@ export default class client {
         const options: RequestInit = {
             method: 'GET',
             headers: {
-                responseEncoding: 'utf8',
-                Accept: 'application/json',
+                'responseEncoding': 'utf8',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + this.key,
+                'Authorization': 'Bearer ' + this.key,
             },
         };
         const res = await fetch(this.host + '/api/client', options);
@@ -68,7 +68,7 @@ export default class client {
             throw new Error('API Key is not valid! (Client)!');
         } else if (!res.ok) {
             throw new Error(
-                `There was an error while trying to access host! Status: ${res.status} StatusText: ${res.statusText}`
+                `There was an error while trying to access host! Status: ${res.status} StatusText: ${res.statusText}`,
             );
         }
     }

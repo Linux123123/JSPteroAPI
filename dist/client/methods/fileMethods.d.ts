@@ -45,7 +45,7 @@ export default class fileMethods {
      * client.writeFile('c2f5a3b6', 'dist/HW.txt', 'Hello world!').then((res) => console.log(res)) // res = Successfuly written the file!
      * ```
      */
-    writeFile(serverId: string, file: string, contents: string): Promise<String>;
+    writeFile(serverId: string, file: string, contents: string): Promise<string>;
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
      * @param {SeverFileRename} data An object composed of root of the file and array of objects for files to rename
@@ -59,7 +59,7 @@ export default class fileMethods {
      * client.renameFile('c2f5a3b6', { root: '/dist', files: [{ from: 'LICENSE', to: 'LIC' }] }).then((res) => console.log(res)) // res = Successfuly renamed!
      * ```
      */
-    renameFile(serverId: string, data: SeverFileRename): Promise<String>;
+    renameFile(serverId: string, data: SeverFileRename): Promise<string>;
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
      * @param {Object} location Location of file to copy (e. g. /LICENSE) (It will create a /LICENSE copy)
@@ -73,7 +73,7 @@ export default class fileMethods {
      * client.copyFile('c2f5a3b6', '/dist/LICENSE').then((res) => console.log(res)) // res = Successfuly copied!
      * ```
      */
-    copyFile(serverId: string, location: string): Promise<String>;
+    copyFile(serverId: string, location: string): Promise<string>;
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
      * @param {String} file File to get the contents of (full name like index.js or dist/index.js)
@@ -115,7 +115,7 @@ export default class fileMethods {
      * client.decompressFile('c2f5a3b6', { root: '/', file: 'archive.tar.gz' }).then((res) => console.log(res)) // res = Successfuly decompressed!
      * ```
      */
-    decompressFile(serverId: string, data: ServerFileDecompress): Promise<String>;
+    decompressFile(serverId: string, data: ServerFileDecompress): Promise<string>;
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
      * @param {ServerFileDelete} data An object composed of root of the file and array of string (file names) for files to rename
@@ -129,7 +129,7 @@ export default class fileMethods {
      * client.deleteFile('c2f5a3b6', { root: '/', files: ['LICENSE', 'README.md'] }).then((res) => console.log(res)) // res = Successfuly deleted!
      * ```
      */
-    deleteFile(serverId: string, data: ServerFileDelete): Promise<String>;
+    deleteFile(serverId: string, data: ServerFileDelete): Promise<string>;
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
      * @param {ServerFileCreateFolder} data An object composed of root of the file and file to remove
@@ -143,7 +143,7 @@ export default class fileMethods {
      * client.createFolder('c2f5a3b6', { root: '/', name: 'world' }).then((res) => console.log(res)) // res = Successfuly created!
      * ```
      */
-    createFolder(serverId: string, data: ServerFileCreateFolder): Promise<String>;
+    createFolder(serverId: string, data: ServerFileCreateFolder): Promise<string>;
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
      * @returns {Promise<String>} If successful returns upload url
@@ -156,5 +156,5 @@ export default class fileMethods {
      * client.getFileUploadLink('c2f5a3b6').then((res) => console.log(res)) // res = url (string)
      * ```
      */
-    getFileUploadLink(serverId: string): Promise<String>;
+    getFileUploadLink(serverId: string): Promise<string>;
 }

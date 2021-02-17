@@ -61,13 +61,13 @@ class client {
         const options = {
             method: 'GET',
             headers: {
-                responseEncoding: 'utf8',
-                Accept: 'application/json',
+                'responseEncoding': 'utf8',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + this.key,
+                'Authorization': 'Bearer ' + this.key,
             },
         };
-        let res = await node_fetch_1.default(this.host + '/api/client', options);
+        const res = await node_fetch_1.default(this.host + '/api/client', options);
         if (res.status == 403) {
             throw new Error('API Key is not valid! (Client)!');
         }

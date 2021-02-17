@@ -16,14 +16,14 @@ export default class consoleMethods {
      * ```
      */
     public async getWebsocketAuthData(
-        serverId: string
+        serverId: string,
     ): Promise<WebsocketAuthData> {
         return new Request(this.host, this.key).request(
             'getWebsocketAuthData',
             'GET',
             null,
             'data',
-            `/api/client/servers/${serverId}/websocket`
+            `/api/client/servers/${serverId}/websocket`,
         );
     }
 }

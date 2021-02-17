@@ -25,14 +25,14 @@ export default class fileMethods {
      */
     public async getAllFiles(
         serverId: string,
-        dir = ''
+        dir = '',
     ): Promise<ServerFile[]> {
         return new Request(this.host, this.key).request(
             'getAllFiles',
             'GET',
             null,
             'data',
-            `/api/client/servers/${serverId}/files/list?directory=%2F${dir}`
+            `/api/client/servers/${serverId}/files/list?directory=%2F${dir}`,
         );
     }
     /**
@@ -50,7 +50,7 @@ export default class fileMethods {
      */
     public async getFileContents(
         serverId: string,
-        file: string
+        file: string,
     ): Promise<string> {
         let filePath = '';
         if (file.includes('/')) {
@@ -62,7 +62,7 @@ export default class fileMethods {
             null,
             '',
             `/api/client/servers/${serverId}/files/contents?file=${filePath}`,
-            true
+            true,
         );
     }
     /**
@@ -82,7 +82,7 @@ export default class fileMethods {
     public async writeFile(
         serverId: string,
         file: string,
-        contents: string
+        contents: string,
     ): Promise<string> {
         let filePath = '';
         if (file.includes('/')) {
@@ -93,7 +93,7 @@ export default class fileMethods {
             'POST',
             contents,
             'Successfuly written the file!',
-            `/api/client/servers/${serverId}/files/write?file=${filePath}`
+            `/api/client/servers/${serverId}/files/write?file=${filePath}`,
         );
     }
     /**
@@ -111,14 +111,14 @@ export default class fileMethods {
      */
     public async renameFile(
         serverId: string,
-        data: SeverFileRename
+        data: SeverFileRename,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
             'renameFile',
             'PUT',
             data,
             'Successfuly renamed!',
-            `/api/client/servers/${serverId}/files/rename`
+            `/api/client/servers/${serverId}/files/rename`,
         );
     }
     /**
@@ -140,7 +140,7 @@ export default class fileMethods {
             'POST',
             { location: location },
             'Successfuly copied!',
-            `/api/client/servers/${serverId}/files/copy`
+            `/api/client/servers/${serverId}/files/copy`,
         );
     }
     /**
@@ -158,7 +158,7 @@ export default class fileMethods {
      */
     public async getFileDownloadLink(
         serverId: string,
-        file: string
+        file: string,
     ): Promise<string> {
         let filePath = '';
         if (file.includes('/')) {
@@ -169,7 +169,7 @@ export default class fileMethods {
             'GET',
             null,
             'attributesUrl',
-            `/api/client/servers/${serverId}/files/download?file=${filePath}`
+            `/api/client/servers/${serverId}/files/download?file=${filePath}`,
         );
     }
     /**
@@ -187,14 +187,14 @@ export default class fileMethods {
      */
     public async compressFile(
         serverId: string,
-        data: ServerFileCompress
+        data: ServerFileCompress,
     ): Promise<ServerFileAttributes> {
         return new Request(this.host, this.key).request(
             'compressFile',
             'POST',
             data,
             'attributes',
-            `/api/client/servers/${serverId}/files/compress`
+            `/api/client/servers/${serverId}/files/compress`,
         );
     }
     /**
@@ -212,14 +212,14 @@ export default class fileMethods {
      */
     public async decompressFile(
         serverId: string,
-        data: ServerFileDecompress
+        data: ServerFileDecompress,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
             'decompressFile',
             'POST',
             data,
             'Successfuly decompressed!',
-            `/api/client/servers/${serverId}/files/decompress`
+            `/api/client/servers/${serverId}/files/decompress`,
         );
     }
     /**
@@ -237,14 +237,14 @@ export default class fileMethods {
      */
     public async deleteFile(
         serverId: string,
-        data: ServerFileDelete
+        data: ServerFileDelete,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
             'deleteFile',
             'POST',
             data,
             'Successfuly deleted!',
-            `/api/client/servers/${serverId}/files/delete`
+            `/api/client/servers/${serverId}/files/delete`,
         );
     }
     /**
@@ -262,14 +262,14 @@ export default class fileMethods {
      */
     public async createFolder(
         serverId: string,
-        data: ServerFileCreateFolder
+        data: ServerFileCreateFolder,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
             'createFolder',
             'POST',
             data,
             'Successfuly created!',
-            `/api/client/servers/${serverId}/files/create-folder`
+            `/api/client/servers/${serverId}/files/create-folder`,
         );
     }
     /**
@@ -290,7 +290,7 @@ export default class fileMethods {
             'GET',
             null,
             'attributesUrl',
-            `/api/client/servers/${serverId}/files/upload`
+            `/api/client/servers/${serverId}/files/upload`,
         );
     }
 }

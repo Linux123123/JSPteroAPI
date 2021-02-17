@@ -13,7 +13,7 @@ export interface ServerFileCompress {
     files: string[];
 }
 
-export interface ServerFileDelete extends ServerFileCompress {}
+export type ServerFileDelete = ServerFileCompress;
 
 export interface ServerFileDecompress {
     root: string;

@@ -1,3 +1,3 @@
 export default interface Permissions {
-    permissions: any;
+    permissions: unknown;
 }
