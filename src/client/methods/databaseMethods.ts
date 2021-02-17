@@ -44,7 +44,7 @@ export default class databaseMethods {
     public async createDatabase(
         serverId: string,
         databaseName: string,
-        connectionsAllowedFrom: string = '%'
+        connectionsAllowedFrom = '%'
     ): Promise<DatabaseAttributes> {
         return new Request(this.host, this.key).request(
             'createDatabase',

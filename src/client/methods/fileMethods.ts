@@ -25,7 +25,7 @@ export default class fileMethods {
      */
     public async getAllFiles(
         serverId: string,
-        dir: string = ''
+        dir = ''
     ): Promise<ServerFile[]> {
         return new Request(this.host, this.key).request(
             'getAllFiles',
@@ -52,7 +52,7 @@ export default class fileMethods {
         serverId: string,
         file: string
     ): Promise<string> {
-        let filePath: string = '';
+        let filePath = '';
         if (file.includes('/')) {
             file.split('/').forEach((f) => (filePath += `%2F${f}`));
         } else filePath = `%2F${file}`;
@@ -83,8 +83,8 @@ export default class fileMethods {
         serverId: string,
         file: string,
         contents: string
-    ): Promise<String> {
-        let filePath: string = '';
+    ): Promise<string> {
+        let filePath = '';
         if (file.includes('/')) {
             file.split('/').forEach((f) => (filePath += `%2F${f}`));
         } else filePath = `%2F${file}`;
@@ -112,7 +112,7 @@ export default class fileMethods {
     public async renameFile(
         serverId: string,
         data: SeverFileRename
-    ): Promise<String> {
+    ): Promise<string> {
         return new Request(this.host, this.key).request(
             'renameFile',
             'PUT',
@@ -134,7 +134,7 @@ export default class fileMethods {
      * client.copyFile('c2f5a3b6', '/dist/LICENSE').then((res) => console.log(res)) // res = Successfuly copied!
      * ```
      */
-    public async copyFile(serverId: string, location: string): Promise<String> {
+    public async copyFile(serverId: string, location: string): Promise<string> {
         return new Request(this.host, this.key).request(
             'copyFile',
             'POST',
@@ -160,7 +160,7 @@ export default class fileMethods {
         serverId: string,
         file: string
     ): Promise<string> {
-        let filePath: string = '';
+        let filePath = '';
         if (file.includes('/')) {
             file.split('/').forEach((f) => (filePath += `%2F${f}`));
         } else filePath = `%2F${file}`;
@@ -213,7 +213,7 @@ export default class fileMethods {
     public async decompressFile(
         serverId: string,
         data: ServerFileDecompress
-    ): Promise<String> {
+    ): Promise<string> {
         return new Request(this.host, this.key).request(
             'decompressFile',
             'POST',
@@ -238,7 +238,7 @@ export default class fileMethods {
     public async deleteFile(
         serverId: string,
         data: ServerFileDelete
-    ): Promise<String> {
+    ): Promise<string> {
         return new Request(this.host, this.key).request(
             'deleteFile',
             'POST',
@@ -263,7 +263,7 @@ export default class fileMethods {
     public async createFolder(
         serverId: string,
         data: ServerFileCreateFolder
-    ): Promise<String> {
+    ): Promise<string> {
         return new Request(this.host, this.key).request(
             'createFolder',
             'POST',
@@ -284,7 +284,7 @@ export default class fileMethods {
      * client.getFileUploadLink('c2f5a3b6').then((res) => console.log(res)) // res = url (string)
      * ```
      */
-    public async getFileUploadLink(serverId: string): Promise<String> {
+    public async getFileUploadLink(serverId: string): Promise<string> {
         return new Request(this.host, this.key).request(
             'getFileUploadLink',
             'GET',

@@ -13,13 +13,12 @@ class Request {
     public async request(
         request: string,
         requestType: string,
-        data: object | string | null,
+        data: unknown,
         dataObj: string,
         endpoint: string,
-        text: boolean = false
+        text = false
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ): Promise<any> {
-        let rawData: Response;
-        let res: any;
         const URL = this.host + endpoint;
         const options: RequestInit = {
             method: requestType,
@@ -31,11 +30,11 @@ class Request {
             },
         };
         if (data) options.body = JSON.stringify(data);
-        rawData = await fetch(URL, options);
+        const rawData = await fetch(URL, options);
         if (!rawData.ok) throw myError(rawData, data, request);
         if (rawData.status == 204) return dataObj;
         if (text) return await rawData.text();
-        res = await rawData.json();
+        const res = await rawData.json();
         switch (dataObj) {
             case 'data':
                 return res.data;
@@ -49,7 +48,8 @@ class Request {
     }
 }
 
-function myError(rawData: Response, data: any, request: string) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function myError(rawData: Response, data: unknown, request: string) {
     if (rawData.status == 521) {
         return new Error('Gateway unawailable! Status: 521');
     }

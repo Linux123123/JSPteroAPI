@@ -14,7 +14,7 @@ export default class client {
     public constructor(
         private host: string,
         private key: string,
-        fast: boolean = false
+        fast = false
     ) {
         host = host.trim();
         if (host.endsWith('/')) host = host.slice(0, -1);
@@ -63,7 +63,7 @@ export default class client {
                 Authorization: 'Bearer ' + this.key,
             },
         };
-        let res = await fetch(this.host + '/api/client', options);
+        const res = await fetch(this.host + '/api/client', options);
         if (res.status == 403) {
             throw new Error('API Key is not valid! (Client)!');
         } else if (!res.ok) {

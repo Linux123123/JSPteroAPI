@@ -101,4 +101,5 @@ jspm_packages/
 .tern-port
 
 test.ts
+test.d.ts
 test.js
