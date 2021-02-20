@@ -44,10 +44,6 @@ or using async / await
 const res = await application.function(parameters);
 ```
 
-# Documentation
-
-Most of the functions in https://docs.nodeactyl.xyz/ should work.
-
 # Example project
 
 I have created a discord bot using this library
