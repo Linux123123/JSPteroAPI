@@ -22,7 +22,7 @@ class accountMethods {
      * ```
      */
     async getAllPermissions() {
-        return new ClientRequest_1.default(this.host, this.key).request('getAllPermissions', 'GET', null, 'attributes', `/api/client/permissions`);
+        return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/client/permissions`);
     }
 }
 exports.default = accountMethods;

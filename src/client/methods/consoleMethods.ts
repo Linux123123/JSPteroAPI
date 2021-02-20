@@ -19,7 +19,6 @@ export default class consoleMethods {
         serverId: string,
     ): Promise<WebsocketAuthData> {
         return new Request(this.host, this.key).request(
-            'getWebsocketAuthData',
             'GET',
             null,
             'data',

@@ -4,74 +4,79 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_fetch_1 = __importDefault(require("node-fetch")); // import node-fetch
-// GET
-const getAllServers_1 = __importDefault(require("./methods/getAllServers"));
-const getAllUsers_1 = __importDefault(require("./methods/getAllUsers"));
-const getAllNodes_1 = __importDefault(require("./methods/getAllNodes"));
-const getUserInfo_1 = __importDefault(require("./methods/getUserInfo"));
-const getEggInfo_1 = __importDefault(require("./methods/getEggInfo"));
-const getNodeInfo_1 = __importDefault(require("./methods/getNodeInfo"));
-const getServerInfo_1 = __importDefault(require("./methods/getServerInfo"));
-// POST
-const createUser_1 = __importDefault(require("./methods/createUser"));
-const createServer_1 = __importDefault(require("./methods/createServer"));
-const createNode_1 = __importDefault(require("./methods/createNode"));
-const createDatabase_1 = __importDefault(require("./methods/createDatabase"));
-const suspendServer_1 = __importDefault(require("./methods/suspendServer"));
-const unSuspendServer_1 = __importDefault(require("./methods/unSuspendServer"));
-// PATCH
-const editUser_1 = __importDefault(require("./methods/editUser"));
-// DELETE
-const deleteUser_1 = __importDefault(require("./methods/deleteUser"));
-const deleteNode_1 = __importDefault(require("./methods/deleteNode"));
-const deleteServer_1 = __importDefault(require("./methods/deleteServer"));
-class app {
+const allocationMethods_1 = __importDefault(require("./methods/allocationMethods"));
+const databaseMethods_1 = __importDefault(require("./methods/databaseMethods"));
+const nestMethods_1 = __importDefault(require("./methods/nestMethods"));
+const nodeMethods_1 = __importDefault(require("./methods/nodeMethods"));
+const serverMethods_1 = __importDefault(require("./methods/serverMethods"));
+const userMethods_1 = __importDefault(require("./methods/userMethods"));
+class Application {
     /**
-     * @param {String} Host Panels address
-     * @param {String} Key Api key to use
-     * @param {Boolean} Fast Fast login (No credential check)
+     * @param {string} host Panels address
+     * @param {string} key Api key to use
+     * @param {boolean} fast Fast login (No credential check)
      */
-    constructor(Host, Key, Fast = false) {
-        // GET
-        this.getAllServers = getAllServers_1.default;
-        this.getAllNodes = getAllNodes_1.default;
-        this.getAllUsers = getAllUsers_1.default;
-        this.getUserInfo = getUserInfo_1.default;
-        this.getEggInfo = getEggInfo_1.default;
-        this.getNodeInfo = getNodeInfo_1.default;
-        this.getServerInfo = getServerInfo_1.default;
-        // POST
-        this.createUser = createUser_1.default;
-        this.createServer = createServer_1.default;
-        this.createNode = createNode_1.default;
-        this.createDatabase = createDatabase_1.default;
-        this.suspendServer = suspendServer_1.default;
-        this.unSuspendServer = unSuspendServer_1.default;
-        // PATCH
-        this.editUser = editUser_1.default;
-        // // DELETE
-        this.deleteUser = deleteUser_1.default;
-        this.deleteNode = deleteNode_1.default;
-        this.deleteServer = deleteServer_1.default;
-        Host = Host.trim();
-        if (Host.endsWith('/'))
-            Host = Host.slice(0, -1);
-        if (!Fast)
-            this.testAPI(Host, Key);
-        process.env.AppHost = Host;
-        process.env.AppKey = Key;
+    constructor(host, key, fast = false) {
+        this.host = host;
+        this.key = key;
+        host = host.trim();
+        if (host.endsWith('/'))
+            host = host.slice(0, -1);
+        this.host = host;
+        if (!fast)
+            this.testAPI();
+        const servermethods = new serverMethods_1.default(host, key);
+        this.getAllServers = servermethods.getAllServers;
+        this.getServerInfo = servermethods.getServerInfo;
+        this.createServer = servermethods.createServer;
+        this.deleteServer = servermethods.deleteServer;
+        this.suspendServer = servermethods.suspendServer;
+        this.unSuspendServer = servermethods.unSuspendServer;
+        this.reinstallServer = servermethods.reinstallServer;
+        this.getServerInfoByExtId = servermethods.getServerInfoByExtId;
+        this.editServerDetails = servermethods.editServerDetails;
+        this.editServerBuild = servermethods.editServerBuild;
+        this.editServerStartup = servermethods.editServerStartup;
+        const nestmethods = new nestMethods_1.default(host, key);
+        this.getAllNests = nestmethods.getAllNests;
+        this.getNestInfo = nestmethods.getNestInfo;
+        this.getAllNestEggs = nestmethods.getAllNestEggs;
+        this.getEggInfo = nestmethods.getEggInfo;
+        const databasemethods = new databaseMethods_1.default(host, key);
+        this.getServersDatabases = databasemethods.getServersDatabases;
+        this.getServersDatabaseInfo = databasemethods.getServersDatabaseInfo;
+        this.createDatabase = databasemethods.createDatabase;
+        this.resetDatabasePassword = databasemethods.resetDatabasePassword;
+        this.deleteDatabase = databasemethods.deleteDatabase;
+        const usermethods = new userMethods_1.default(host, key);
+        this.getAllUsers = usermethods.getAllUsers;
+        this.getUserInfo = usermethods.getUserInfo;
+        this.createUser = usermethods.createUser;
+        this.editUser = usermethods.editUser;
+        this.deleteUser = usermethods.deleteUser;
+        const nodemethods = new nodeMethods_1.default(host, key);
+        this.getAllNodes = nodemethods.getAllNodes;
+        this.getNodeInfo = nodemethods.getNodeInfo;
+        this.getNodeConfig = nodemethods.getNodeConfig;
+        this.createNode = nodemethods.createNode;
+        this.editNode = nodemethods.editNode;
+        this.deleteNode = nodemethods.deleteNode;
+        const allocationmethods = new allocationMethods_1.default(host, key);
+        this.getAllAllocations = allocationmethods.getAllAllocations;
+        this.createAllocation = allocationmethods.createAllocation;
+        this.deleteAllocation = allocationmethods.deleteAllocation;
     }
-    async testAPI(Host, Key) {
+    async testAPI() {
         const options = {
             method: 'GET',
             headers: {
                 'responseEncoding': 'utf8',
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + Key,
+                'Authorization': 'Bearer ' + this.key,
             },
         };
-        let res = await node_fetch_1.default(Host + '/api/application/users', options);
+        const res = await node_fetch_1.default(this.host + '/api/application/users', options);
         if (res.status == 403) {
             throw new Error('API Key is not valid! (Application)!');
         }
@@ -80,4 +85,4 @@ class app {
         }
     }
 }
-exports.default = app;
+exports.default = Application;

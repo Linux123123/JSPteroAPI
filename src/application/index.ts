@@ -1,54 +1,78 @@
 import fetch, { RequestInit } from 'node-fetch'; // import node-fetch
+import allocationMethods from './methods/allocationMethods';
+import databaseMethods from './methods/databaseMethods';
+import nestMethods from './methods/nestMethods';
+import nodeMethods from './methods/nodeMethods';
+import serverMethods from './methods/serverMethods';
+import userMethods from './methods/userMethods';
 
-// GET
-import getAllServers from './methods/getAllServers';
-import getallusers from './methods/getAllUsers';
-import getallnodes from './methods/getAllNodes';
-import getuserinfo from './methods/getUserInfo';
-import getegginfo from './methods/getEggInfo';
-import getnodeinfo from './methods/getNodeInfo';
-import getserverinfo from './methods/getServerInfo';
-
-// POST
-import createuser from './methods/createUser';
-import createserver from './methods/createServer';
-import createnode from './methods/createNode';
-import createdatabase from './methods/createDatabase';
-import suspendserver from './methods/suspendServer';
-import unsuspendserver from './methods/unSuspendServer';
-
-// PATCH
-import edituser from './methods/editUser';
-
-// DELETE
-import deleteuser from './methods/deleteUser';
-import deletenode from './methods/deleteNode';
-import deleteserver from './methods/deleteServer';
-
-export default class app {
+export default class Application {
     /**
-     * @param {String} Host Panels address
-     * @param {String} Key Api key to use
-     * @param {Boolean} Fast Fast login (No credential check)
+     * @param {string} host Panels address
+     * @param {string} key Api key to use
+     * @param {boolean} fast Fast login (No credential check)
      */
-    public constructor(Host: string, Key: string, Fast: boolean = false) {
-        Host = Host.trim();
-        if (Host.endsWith('/')) Host = Host.slice(0, -1);
-        if (!Fast) this.testAPI(Host, Key);
-        process.env.AppHost = Host;
-        process.env.AppKey = Key;
+    public constructor(
+        private host: string,
+        private key: string,
+        fast = false,
+    ) {
+        host = host.trim();
+        if (host.endsWith('/')) host = host.slice(0, -1);
+        this.host = host;
+        if (!fast) this.testAPI();
+        const servermethods = new serverMethods(host, key);
+        this.getAllServers = servermethods.getAllServers;
+        this.getServerInfo = servermethods.getServerInfo;
+        this.createServer = servermethods.createServer;
+        this.deleteServer = servermethods.deleteServer;
+        this.suspendServer = servermethods.suspendServer;
+        this.unSuspendServer = servermethods.unSuspendServer;
+        this.reinstallServer = servermethods.reinstallServer;
+        this.getServerInfoByExtId = servermethods.getServerInfoByExtId;
+        this.editServerDetails = servermethods.editServerDetails;
+        this.editServerBuild = servermethods.editServerBuild;
+        this.editServerStartup = servermethods.editServerStartup;
+        const nestmethods = new nestMethods(host, key);
+        this.getAllNests = nestmethods.getAllNests;
+        this.getNestInfo = nestmethods.getNestInfo;
+        this.getAllNestEggs = nestmethods.getAllNestEggs;
+        this.getEggInfo = nestmethods.getEggInfo;
+        const databasemethods = new databaseMethods(host, key);
+        this.getServersDatabases = databasemethods.getServersDatabases;
+        this.getServersDatabaseInfo = databasemethods.getServersDatabaseInfo;
+        this.createDatabase = databasemethods.createDatabase;
+        this.resetDatabasePassword = databasemethods.resetDatabasePassword;
+        this.deleteDatabase = databasemethods.deleteDatabase;
+        const usermethods = new userMethods(host, key);
+        this.getAllUsers = usermethods.getAllUsers;
+        this.getUserInfo = usermethods.getUserInfo;
+        this.createUser = usermethods.createUser;
+        this.editUser = usermethods.editUser;
+        this.deleteUser = usermethods.deleteUser;
+        const nodemethods = new nodeMethods(host, key);
+        this.getAllNodes = nodemethods.getAllNodes;
+        this.getNodeInfo = nodemethods.getNodeInfo;
+        this.getNodeConfig = nodemethods.getNodeConfig;
+        this.createNode = nodemethods.createNode;
+        this.editNode = nodemethods.editNode;
+        this.deleteNode = nodemethods.deleteNode;
+        const allocationmethods = new allocationMethods(host, key);
+        this.getAllAllocations = allocationmethods.getAllAllocations;
+        this.createAllocation = allocationmethods.createAllocation;
+        this.deleteAllocation = allocationmethods.deleteAllocation;
     }
-    private async testAPI(Host: string, Key: string): Promise<void> {
+    private async testAPI(): Promise<void> {
         const options: RequestInit = {
             method: 'GET',
             headers: {
                 'responseEncoding': 'utf8',
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + Key,
+                'Authorization': 'Bearer ' + this.key,
             },
         };
-        let res = await fetch(Host + '/api/application/users', options);
+        const res = await fetch(this.host + '/api/application/users', options);
         if (res.status == 403) {
             throw new Error('API Key is not valid! (Application)!');
         } else if (!res.ok) {
@@ -58,27 +82,41 @@ export default class app {
         }
     }
     // GET
-    public getAllServers = getAllServers;
-    public getAllNodes = getallnodes;
-    public getAllUsers = getallusers;
-    public getUserInfo = getuserinfo;
-    public getEggInfo = getegginfo;
-    public getNodeInfo = getnodeinfo;
-    public getServerInfo = getserverinfo;
-
+    public getAllServers;
+    public getAllNodes;
+    public getAllUsers;
+    public getUserInfo;
+    public getNodeInfo;
+    public getServerInfo;
+    public getAllNests;
+    public getNestInfo;
+    public getAllNestEggs;
+    public getEggInfo;
+    public getServerInfoByExtId;
+    public getServersDatabases;
+    public getServersDatabaseInfo;
+    public getNodeConfig;
+    public getAllAllocations;
     // POST
-    public createUser = createuser;
-    public createServer = createserver;
-    public createNode = createnode;
-    public createDatabase = createdatabase;
-    public suspendServer = suspendserver;
-    public unSuspendServer = unsuspendserver;
-
+    public createUser;
+    public createServer;
+    public createNode;
+    public createDatabase;
+    public suspendServer;
+    public unSuspendServer;
+    public reinstallServer;
+    public resetDatabasePassword;
+    public createAllocation;
     // PATCH
-    public editUser = edituser;
-
+    public editUser;
+    public editServerDetails;
+    public editServerBuild;
+    public editServerStartup;
+    public editNode;
     // // DELETE
-    public deleteUser = deleteuser;
-    public deleteNode = deletenode;
-    public deleteServer = deleteserver;
+    public deleteUser;
+    public deleteNode;
+    public deleteServer;
+    public deleteDatabase;
+    public deleteAllocation;
 }

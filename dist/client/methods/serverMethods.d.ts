@@ -1,10 +1,11 @@
-import Server, { ServerAttributes } from '../interfaces/Server';
+import Server, { ServerAttributes, ServerIncludeInput } from '../interfaces/Server';
 import ServerResources from '../interfaces/ServerResources';
 export default class serverMethods {
     private host;
     private key;
     constructor(host: string, key: string);
     /**
+     * @param {ServerIncludeInput} [options] Include information about server relationships
      * @returns {Promise<Server[]} An Array of servers
      * @example
      * ```js
@@ -15,9 +16,10 @@ export default class serverMethods {
      * client.getAllServers().then((res) => console.log(res)) // res = Server[]
      * ```
      */
-    getAllServers(): Promise<Server[]>;
+    getAllServers(options?: ServerIncludeInput): Promise<Server[]>;
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
+     * @param {ServerIncludeInput} [options] Include information about server relationships
      * @returns {Promise<ServerAttributes>} Server information
      * @example
      * ```js
@@ -28,7 +30,7 @@ export default class serverMethods {
      * client.getServerInfo('c2f5a3b6').then((res) => console.log(res)) // res = ServerAttributes
      * ```
      */
-    getServerInfo(serverId: string): Promise<ServerAttributes>;
+    getServerInfo(serverId: string, options?: ServerIncludeInput): Promise<ServerAttributes>;
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
      * @returns {Promise<ServerResources>} Server resource usage object

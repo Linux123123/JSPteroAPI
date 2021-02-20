@@ -22,7 +22,7 @@ class consoleMethods {
      * ```
      */
     async getWebsocketAuthData(serverId) {
-        return new ClientRequest_1.default(this.host, this.key).request('getWebsocketAuthData', 'GET', null, 'data', `/api/client/servers/${serverId}/websocket`);
+        return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/client/servers/${serverId}/websocket`);
     }
 }
 exports.default = consoleMethods;

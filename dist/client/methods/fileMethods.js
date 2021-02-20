@@ -23,7 +23,7 @@ class fileMethods {
      * ```
      */
     async getAllFiles(serverId, dir = '') {
-        return new ClientRequest_1.default(this.host, this.key).request('getAllFiles', 'GET', null, 'data', `/api/client/servers/${serverId}/files/list?directory=%2F${dir}`);
+        return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/client/servers/${serverId}/files/list?directory=%2F${dir}`);
     }
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
@@ -45,7 +45,7 @@ class fileMethods {
         }
         else
             filePath = `%2F${file}`;
-        return new ClientRequest_1.default(this.host, this.key).request('getFileContents', 'GET', null, '', `/api/client/servers/${serverId}/files/contents?file=${filePath}`, true);
+        return new ClientRequest_1.default(this.host, this.key).request('GET', null, '', `/api/client/servers/${serverId}/files/contents?file=${filePath}`, true);
     }
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
@@ -68,7 +68,7 @@ class fileMethods {
         }
         else
             filePath = `%2F${file}`;
-        return new ClientRequest_1.default(this.host, this.key).request('writeFile', 'POST', contents, 'Successfuly written the file!', `/api/client/servers/${serverId}/files/write?file=${filePath}`);
+        return new ClientRequest_1.default(this.host, this.key).request('POST', contents, 'Successfuly written the file!', `/api/client/servers/${serverId}/files/write?file=${filePath}`);
     }
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
@@ -84,7 +84,7 @@ class fileMethods {
      * ```
      */
     async renameFile(serverId, data) {
-        return new ClientRequest_1.default(this.host, this.key).request('renameFile', 'PUT', data, 'Successfuly renamed!', `/api/client/servers/${serverId}/files/rename`);
+        return new ClientRequest_1.default(this.host, this.key).request('PUT', data, 'Successfuly renamed!', `/api/client/servers/${serverId}/files/rename`);
     }
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
@@ -100,7 +100,7 @@ class fileMethods {
      * ```
      */
     async copyFile(serverId, location) {
-        return new ClientRequest_1.default(this.host, this.key).request('copyFile', 'POST', { location: location }, 'Successfuly copied!', `/api/client/servers/${serverId}/files/copy`);
+        return new ClientRequest_1.default(this.host, this.key).request('POST', { location: location }, 'Successfuly copied!', `/api/client/servers/${serverId}/files/copy`);
     }
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
@@ -122,7 +122,7 @@ class fileMethods {
         }
         else
             filePath = `%2F${file}`;
-        return new ClientRequest_1.default(this.host, this.key).request('getFileDownloadLink', 'GET', null, 'attributesUrl', `/api/client/servers/${serverId}/files/download?file=${filePath}`);
+        return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'attributesUrl', `/api/client/servers/${serverId}/files/download?file=${filePath}`);
     }
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
@@ -138,7 +138,7 @@ class fileMethods {
      * ```
      */
     async compressFile(serverId, data) {
-        return new ClientRequest_1.default(this.host, this.key).request('compressFile', 'POST', data, 'attributes', `/api/client/servers/${serverId}/files/compress`);
+        return new ClientRequest_1.default(this.host, this.key).request('POST', data, 'attributes', `/api/client/servers/${serverId}/files/compress`);
     }
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
@@ -154,7 +154,7 @@ class fileMethods {
      * ```
      */
     async decompressFile(serverId, data) {
-        return new ClientRequest_1.default(this.host, this.key).request('decompressFile', 'POST', data, 'Successfuly decompressed!', `/api/client/servers/${serverId}/files/decompress`);
+        return new ClientRequest_1.default(this.host, this.key).request('POST', data, 'Successfuly decompressed!', `/api/client/servers/${serverId}/files/decompress`);
     }
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
@@ -170,7 +170,7 @@ class fileMethods {
      * ```
      */
     async deleteFile(serverId, data) {
-        return new ClientRequest_1.default(this.host, this.key).request('deleteFile', 'POST', data, 'Successfuly deleted!', `/api/client/servers/${serverId}/files/delete`);
+        return new ClientRequest_1.default(this.host, this.key).request('POST', data, 'Successfuly deleted!', `/api/client/servers/${serverId}/files/delete`);
     }
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
@@ -186,7 +186,7 @@ class fileMethods {
      * ```
      */
     async createFolder(serverId, data) {
-        return new ClientRequest_1.default(this.host, this.key).request('createFolder', 'POST', data, 'Successfuly created!', `/api/client/servers/${serverId}/files/create-folder`);
+        return new ClientRequest_1.default(this.host, this.key).request('POST', data, 'Successfuly created!', `/api/client/servers/${serverId}/files/create-folder`);
     }
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
@@ -201,7 +201,7 @@ class fileMethods {
      * ```
      */
     async getFileUploadLink(serverId) {
-        return new ClientRequest_1.default(this.host, this.key).request('getFileUploadLink', 'GET', null, 'attributesUrl', `/api/client/servers/${serverId}/files/upload`);
+        return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'attributesUrl', `/api/client/servers/${serverId}/files/upload`);
     }
 }
 exports.default = fileMethods;

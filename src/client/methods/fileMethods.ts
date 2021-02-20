@@ -28,7 +28,6 @@ export default class fileMethods {
         dir = '',
     ): Promise<ServerFile[]> {
         return new Request(this.host, this.key).request(
-            'getAllFiles',
             'GET',
             null,
             'data',
@@ -57,7 +56,6 @@ export default class fileMethods {
             file.split('/').forEach((f) => (filePath += `%2F${f}`));
         } else filePath = `%2F${file}`;
         return new Request(this.host, this.key).request(
-            'getFileContents',
             'GET',
             null,
             '',
@@ -89,7 +87,6 @@ export default class fileMethods {
             file.split('/').forEach((f) => (filePath += `%2F${f}`));
         } else filePath = `%2F${file}`;
         return new Request(this.host, this.key).request(
-            'writeFile',
             'POST',
             contents,
             'Successfuly written the file!',
@@ -114,7 +111,6 @@ export default class fileMethods {
         data: SeverFileRename,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
-            'renameFile',
             'PUT',
             data,
             'Successfuly renamed!',
@@ -136,7 +132,6 @@ export default class fileMethods {
      */
     public async copyFile(serverId: string, location: string): Promise<string> {
         return new Request(this.host, this.key).request(
-            'copyFile',
             'POST',
             { location: location },
             'Successfuly copied!',
@@ -165,7 +160,6 @@ export default class fileMethods {
             file.split('/').forEach((f) => (filePath += `%2F${f}`));
         } else filePath = `%2F${file}`;
         return new Request(this.host, this.key).request(
-            'getFileDownloadLink',
             'GET',
             null,
             'attributesUrl',
@@ -190,7 +184,6 @@ export default class fileMethods {
         data: ServerFileCompress,
     ): Promise<ServerFileAttributes> {
         return new Request(this.host, this.key).request(
-            'compressFile',
             'POST',
             data,
             'attributes',
@@ -215,7 +208,6 @@ export default class fileMethods {
         data: ServerFileDecompress,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
-            'decompressFile',
             'POST',
             data,
             'Successfuly decompressed!',
@@ -240,7 +232,6 @@ export default class fileMethods {
         data: ServerFileDelete,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
-            'deleteFile',
             'POST',
             data,
             'Successfuly deleted!',
@@ -265,7 +256,6 @@ export default class fileMethods {
         data: ServerFileCreateFolder,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
-            'createFolder',
             'POST',
             data,
             'Successfuly created!',
@@ -286,7 +276,6 @@ export default class fileMethods {
      */
     public async getFileUploadLink(serverId: string): Promise<string> {
         return new Request(this.host, this.key).request(
-            'getFileUploadLink',
             'GET',
             null,
             'attributesUrl',

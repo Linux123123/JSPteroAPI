@@ -17,7 +17,6 @@ export default class accountMethods {
      */
     public async getAllPermissions(): Promise<Permissions> {
         return new Request(this.host, this.key).request(
-            'getAllPermissions',
             'GET',
             null,
             'attributes',

@@ -1,3 +1,7 @@
+export interface DatabaseIncludeInput {
+    password?: boolean;
+}
+
 export interface DatabaseAttributesHost {
     address: string;
     port: number;
@@ -10,12 +14,8 @@ export interface DatabaseAttributes {
     username: string;
     connections_from: string;
     max_connections: number;
+    relationships?: DatabaseRelationships;
 }
-
-export interface DatabaseAttributesRelationship extends DatabaseAttributes {
-    relationships: DatabaseRelationships;
-}
-
 export interface DatabaseRelationships {
     password: DatabasePassword;
 }

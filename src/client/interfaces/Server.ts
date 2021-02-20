@@ -3,6 +3,11 @@ export interface ServerSftpDetails {
     port: number;
 }
 
+export interface ServerIncludeInput {
+    egg?: boolean;
+    subusers?: boolean;
+}
+
 export interface ServerLimits {
     memory: number;
     swap: number;
@@ -17,9 +22,41 @@ export interface ServerFeatureLimits {
     backups: number;
 }
 
+export interface ServerEggAttributes {
+    uuid: string;
+    name: string;
+}
+
+export interface ServerEgg {
+    object: string;
+    attributes: ServerEggAttributes;
+}
+
+export interface ServerSubuserAttributes {
+    'uuid': string;
+    'username': string;
+    'email': string;
+    'image': string;
+    '2fa_enabled': boolean;
+    'created_at': string;
+    'permissions': string[];
+}
+
+export interface ServerSubuser {
+    object: string;
+    attributes: ServerSubuserAttributes;
+}
+
+export interface ServerSubusers {
+    object: string;
+    data: ServerSubuser[];
+}
+
 export interface ServerRelationships {
-    allocations: ServerAllocations;
-    variables: ServerVariables;
+    allocations?: ServerAllocations;
+    variables?: ServerVariables;
+    egg?: ServerEgg;
+    subusers?: ServerSubusers;
 }
 
 export interface ServerAllocations {
@@ -78,7 +115,7 @@ export interface ServerAttributes {
     is_suspended: boolean;
     is_installing: boolean;
     is_transferring: boolean;
-    relationships: ServerRelationships;
+    relationships?: ServerRelationships;
 }
 
 export default interface Server {

@@ -1,10 +1,15 @@
+import makeIncludes from '../../modules/Functions';
 import Request from '../ClientRequest';
-import Server, { ServerAttributes } from '../interfaces/Server';
+import Server, {
+    ServerAttributes,
+    ServerIncludeInput,
+} from '../interfaces/Server';
 import ServerResources from '../interfaces/ServerResources';
 
 export default class serverMethods {
     public constructor(private host: string, private key: string) {}
     /**
+     * @param {ServerIncludeInput} [options] Include information about server relationships
      * @returns {Promise<Server[]} An Array of servers
      * @example
      * ```js
@@ -15,17 +20,19 @@ export default class serverMethods {
      * client.getAllServers().then((res) => console.log(res)) // res = Server[]
      * ```
      */
-    public async getAllServers(): Promise<Server[]> {
+    public async getAllServers(
+        options?: ServerIncludeInput,
+    ): Promise<Server[]> {
         return new Request(this.host, this.key).request(
-            'getAllServers',
             'GET',
             null,
             'data',
-            '/api/client',
+            `/api/client${makeIncludes(options)}`,
         );
     }
     /**
      * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
+     * @param {ServerIncludeInput} [options] Include information about server relationships
      * @returns {Promise<ServerAttributes>} Server information
      * @example
      * ```js
@@ -36,13 +43,15 @@ export default class serverMethods {
      * client.getServerInfo('c2f5a3b6').then((res) => console.log(res)) // res = ServerAttributes
      * ```
      */
-    public async getServerInfo(serverId: string): Promise<ServerAttributes> {
+    public async getServerInfo(
+        serverId: string,
+        options?: ServerIncludeInput,
+    ): Promise<ServerAttributes> {
         return new Request(this.host, this.key).request(
-            'getServerInfo',
             'GET',
             null,
             'attributes',
-            `/api/client/servers/${serverId}`,
+            `/api/client/servers/${serverId}${makeIncludes(options)}`,
         );
     }
     /**
@@ -61,7 +70,6 @@ export default class serverMethods {
         serverId: string,
     ): Promise<ServerResources> {
         return new Request(this.host, this.key).request(
-            'getServerResources',
             'GET',
             null,
             'attributes',
@@ -86,7 +94,6 @@ export default class serverMethods {
         command: string,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
-            'sendCommand',
             'POST',
             { command: command },
             'Successfuly sent the command!',
@@ -111,7 +118,6 @@ export default class serverMethods {
         action: string,
     ): Promise<string> {
         return new Request(this.host, this.key).request(
-            'setPowerState',
             'POST',
             { signal: action },
             'Successfuly set power state!',

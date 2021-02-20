@@ -1,6 +1,6 @@
-import App from './application/index';
+import Application from './application/index';
 import Client from './client/index';
 export = {
-    Application: App,
+    Application: Application,
     Client: Client,
 };
