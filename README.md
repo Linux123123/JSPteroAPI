@@ -45,6 +45,10 @@ or using async / await
 const res = await application.function(parameters);
 ```
 
+# Documentation
+
+<h3><a href="https://jspteroapi.linux123123.cf">https://jspteroapi.linux123123.cf</a></h3>
+
 # Example project
 
 I have created a discord bot using this library
