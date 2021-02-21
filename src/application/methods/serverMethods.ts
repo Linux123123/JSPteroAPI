@@ -6,20 +6,18 @@ import Server, {
     ServerIncludesInput,
 } from '../interfaces/Server';
 import nestMethods from './nestMethods';
-
 export default class serverMethods {
     public constructor(private host: string, private key: string) {}
     /**
-     * @param {ServerIncludesInput} [options] Include information about server relationships
+     * @example
+     *   const res = await app.getAllServers(); // res = Server[]
+     *
+     * @example
+     *   app.getAllServers().then((res) => console.log(res)); // res = Server[]
+     *
+     * @param {ServerIncludesInput} [options] Include information about server
+     *   relationships
      * @returns {Promise<Server[]>} Array of server
-     * @example
-     * ```js
-     * const res = await app.getAllServers() // res = Server[]
-     * ```
-     * @example
-     * ```js
-     * app.getAllServers().then((res) => console.log(res)) // res = Server[]
-     * ```
      */
     public getAllServers = async (
         options?: ServerIncludesInput,
@@ -32,17 +30,16 @@ export default class serverMethods {
         );
     };
     /**
-     * @param {number} serverId The server ID to get the details of.
-     * @param {ServerIncludesInput} [options] Include information about server relationships
+     * @example
+     *   const res = await app.getServerInfo(1); // res = ServerAttributes
+     *
+     * @example
+     *   app.getServerInfo(1).then((res) => console.log(res)); // res = ServerAttributes
+     *
+     * @param {Number} serverId The server ID to get the details of.
+     * @param {ServerIncludesInput} [options] Include information about server
+     *   relationships
      * @returns {Promise<ServerAttributes>} Server information
-     * @example
-     * ```js
-     * const res = await app.getServerInfo(1) // res = ServerAttributes
-     * ```
-     * @example
-     * ```js
-     * app.getServerInfo(1).then((res) => console.log(res)) // res = ServerAttributes
-     * ```
      */
     public getServerInfo = async (
         serverId: number,
@@ -56,17 +53,18 @@ export default class serverMethods {
         );
     };
     /**
-     * @param {string} serverId The external server ID to get the details of.
-     * @param {ServerIncludesInput} [options] Include information about server relationships
+     * @example
+     *   const res = await app.getServerInfoByExtId('MC_SERVER'); // res = ServerAttributes
+     *
+     * @example
+     *   app.getServerInfoByExtId('GAMER_SERVER').then((res) =>
+     *       console.log(res),
+     *   ); // res = ServerAttributes
+     *
+     * @param {String} serverId The external server ID to get the details of.
+     * @param {ServerIncludesInput} [options] Include information about server
+     *   relationships
      * @returns {Promise<ServerAttributes>} Server information
-     * @example
-     * ```js
-     * const res = await app.getServerInfoByExtId('MC_SERVER') // res = ServerAttributes
-     * ```
-     * @example
-     * ```js
-     * app.getServerInfoByExtId('GAMER_SERVER').then((res) => console.log(res)) // res = ServerAttributes
-     * ```
      */
     public getServerInfoByExtId = async (
         serverId: string,
@@ -82,21 +80,25 @@ export default class serverMethods {
         );
     };
     /**
-     * @param {number} serverId The server ID to get the details of.
-     * @param {string} [name] New server name
-     * @param {string} [userId] ID of the new server owner
-     * @param {string} [externalId] Set the new external ID
-     * @param {string} [description] Set new description
-     * @param {ServerIncludesInput} [options] Include information about server relationships
+     * @example
+     *   const res = await app.editServerDetails(1, 'Mc server'); // res = ServerAttributes
+     *
+     * @example
+     *   app.editServerDetails(
+     *       1,
+     *       undefined,
+     *       undefined,
+     *       'MC_SERVER',
+     *   ).then((res) => console.log(res)); // res = ServerAttributes
+     *
+     * @param {Number} serverId The server ID to get the details of.
+     * @param {String} [name] New server name
+     * @param {String} [userId] ID of the new server owner
+     * @param {String} [externalId] Set the new external ID
+     * @param {String} [description] Set new description
+     * @param {ServerIncludesInput} [options] Include information about server
+     *   relationships
      * @returns {Promise<ServerAttributes>} Server information
-     * @example
-     * ```js
-     * const res = await app.editServerDetails(1, 'Mc server') // res = ServerAttributes
-     * ```
-     * @example
-     * ```js
-     * app.editServerDetails(1, undefined, undefined, 'MC_SERVER').then((res) => console.log(res)) // res = ServerAttributes
-     * ```
      */
     public editServerDetails = async (
         serverId: number,
@@ -122,29 +124,32 @@ export default class serverMethods {
         );
     };
     /**
-     * @param {number} serverId The server ID to get the details of.
-     * @param {number} [allocationId] The new primary allocation id
-     * @param {number[]} [addAllocations] Array of new allocation ids to add
-     * @param {number[]} [removeAllocations] Array of allocation ids to remove from server
-     * @param {number} [cpu] Amount of cpu resources to give (1 core = 100) (0 unlimited)
-     * @param {number} [memory] Amount of memory resources to give (1024 = 1GB) (0 unlimited)
-     * @param {number} [disk] Amount of disk space to give (1024 = 1GB) (0 unlimited)
-     * @param {number} [databases] Amount databases server can create
-     * @param {number} [allocations] Amount allocations server can create
-     * @param {number} [backups] Amount backups server can create
-     * @param {number} [swap] Amount swap resources to give (1024 = 1GB) (-1 unlimited)
-     * @param {number} [io] ADVANCED IO performance of the host server (between 10 and 1000)
-     * @param {string} [threads] ADVANCED Threads for the server to use
-     * @param {ServerIncludesInput} [options] Include information about server relationships
+     * @example
+     *   const res = await app.editServerBuild(1, undefined, undefined, [5, 6]); // res = ServerAttributes
+     *
+     * @example
+     *   app.editServerBuild(1, undefined, [1, 3]).then((res) =>
+     *       console.log(res),
+     *   ); // res = ServerAttributes
+     *
+     * @param {Number} serverId The server ID to get the details of.
+     * @param {Number} [allocationId] The new primary allocation id
+     * @param {Number[]} [addAllocations] Array of new allocation ids to add
+     * @param {Number[]} [removeAllocations] Array of allocation ids to remove from server
+     * @param {Number} [cpu] Amount of cpu resources to give (1 core = 100) (0 unlimited)
+     * @param {Number} [memory] Amount of memory resources to give (1024 = 1GB)
+     *   (0 unlimited)
+     * @param {Number} [disk] Amount of disk space to give (1024 = 1GB) (0 unlimited)
+     * @param {Number} [databases] Amount databases server can create
+     * @param {Number} [allocations] Amount allocations server can create
+     * @param {Number} [backups] Amount backups server can create
+     * @param {Number} [swap] Amount swap resources to give (1024 = 1GB) (-1 unlimited)
+     * @param {Number} [io] ADVANCED IO performance of the host server (between
+     *   10 and 1000)
+     * @param {String} [threads] ADVANCED Threads for the server to use
+     * @param {ServerIncludesInput} [options] Include information about server
+     *   relationships
      * @returns {Promise<ServerAttributes>} Server information
-     * @example
-     * ```js
-     * const res = await app.editServerBuild(1, undefined, undefined, [5, 6]) // res = ServerAttributes
-     * ```
-     * @example
-     * ```js
-     * app.editServerBuild(1, undefined, [1, 3]).then((res) => console.log(res)) // res = ServerAttributes
-     * ```
      */
     public editServerBuild = async (
         serverId: number,
@@ -200,22 +205,23 @@ export default class serverMethods {
         );
     };
     /**
-     * @param {number} serverId The external server ID to get the details of.
-     * @param {string} [startup] The new startup command
+     * @example
+     *   const res = await app.editServerStartup(1, 'node index.js'); // res = ServerAttributes
+     *
+     * @example
+     *   app.editServerStartup(1, 'node index.js').then((res) =>
+     *       console.log(res),
+     *   ); // res = ServerAttributes
+     *
+     * @param {Number} serverId The external server ID to get the details of.
+     * @param {String} [startup] The new startup command
      * @param {ServerEnvironment} [environment] Servers environment variables. REQUIRED!
-     * @param {number} [egg] The new egg you want to use
-     * @param {string} [image] The new docker image you want to use
-     * @param {boolean} [skip_scripts] Skip install script boolean (FALSE by default!)
-     * @param {ServerIncludesInput} [options] Include information about server relationships
+     * @param {Number} [egg] The new egg you want to use
+     * @param {String} [image] The new docker image you want to use
+     * @param {Boolean} [skip_scripts] Skip install script boolean (FALSE by default!)
+     * @param {ServerIncludesInput} [options] Include information about server
+     *   relationships
      * @returns {Promise<ServerAttributes>} Server information
-     * @example
-     * ```js
-     * const res = await app.editServerStartup(1, 'node index.js') // res = ServerAttributes
-     * ```
-     * @example
-     * ```js
-     * app.editServerStartup(1, 'node index.js').then((res) => console.log(res)) // res = ServerAttributes
-     * ```
      */
     public editServerStartup = async (
         serverId: number,
@@ -263,32 +269,42 @@ export default class serverMethods {
         );
     };
     /**
+     * @example
+     *   const res = await app.createServer('BUNGEE', 1, 'BUNGEE SERVER', 1, 1); // res = ServerAttributes
+     *
+     * @example
+     *   app.createServer('BUNGEE', 1, 'BUNGEE SERVER', 1, 1).then((res) =>
+     *       console.log(res),
+     *   ); // res = ServerAttributes
+     *
      * @param {String} name Name of server to create
      * @param {Integer} ownerId User ID of who should own this server
      * @param {String} description Description of server
      * @param {Integer} nestId ID of the nest to use when making a server
      * @param {Integer} eggId Egg ID to use when installing the server
-     * @param {Record<string, unknown>} [environment] Servers environment variables. Some are REQUIRED! If there is a default value and none is provided default is used!
-     * @param {Integer} [cpu=0] Amount of cpu resources to give (1 core = 100) (0 unlimited)
-     * @param {Integer} [ram=0] Amount of memory resources to give (1024 = 1GB) (0 unlimited)
-     * @param {Integer} [disk=0] Amount of disk space to give (1024 = 1GB) (0 unlimited)
-     * @param {Integer} [amountOfDatabases=0] The max amount of databases a server can use
-     * @param {Integer} [amountOfAllocations=0] The max amount of allocation(s) a server can use
-     * @param {Integer} [amountOfBackups=0] The max amount of backups a server can use
+     * @param {Record<string, unknown>} [environment] Servers environment
+     *   variables. Some are REQUIRED! If there is a default value and none is
+     *   provided default is used!
+     * @param {Integer} [cpu=0] Amount of cpu resources to give (1 core = 100)
+     *   (0 unlimited). Default is `0`
+     * @param {Integer} [ram=0] Amount of memory resources to give (1024 = 1GB)
+     *   (0 unlimited). Default is `0`
+     * @param {Integer} [disk=0] Amount of disk space to give (1024 = 1GB) (0
+     *   unlimited). Default is `0`
+     * @param {Integer} [amountOfDatabases=0] The max amount of databases a
+     *   server can use. Default is `0`
+     * @param {Integer} [amountOfAllocations=0] The max amount of allocation(s)
+     *   a server can use. Default is `0`
+     * @param {Integer} [amountOfBackups=0] The max amount of backups a server
+     *   can use. Default is `0`
      * @param {String} [startupCmd] The command to use when starting this server
      * @param {String} [dockerImage] The image to use from Docker
-     * @param {Integer} [swap=0] The amount of Swap the server has
-     * @param {Integer} [io=500] Set this to 500.
-     * @param {ServerIncludesInput} [options] Include information about server relationships
+     * @param {Integer} [swap=0] The amount of Swap the server has. Default is `0`
+     * @param {Integer} [io=500] Set this to
+     *   500. Default is `500`
+     * @param {ServerIncludesInput} [options] Include information about server
+     *   relationships
      * @returns {Promise<string>ServerAttributes} Returns the created server object
-     * @example
-     * ```js
-     * const res = await app.createServer('BUNGEE', 1, 'BUNGEE SERVER', 1, 1) // res = ServerAttributes
-     * ```
-     * @example
-     * ```js
-     * app.createServer('BUNGEE', 1, 'BUNGEE SERVER', 1, 1).then((res) => console.log(res)) // res = ServerAttributes
-     * ```
      */
     public createServer = async (
         name: string,
@@ -369,17 +385,16 @@ export default class serverMethods {
         );
     };
     /**
-     * @param {number} internalId Internal ID of the server to delete
-     * @param {boolean} [forceDelete=false] Boolean if forcefully delete a server
+     * @example
+     *   const res = await app.deleteServer(1); // res = Successfully deleted!
+     *
+     * @example
+     *   app.deleteServer(1, true).then((res) => console.log(res)); // res = Successfully deleted!
+     *
+     * @param {Number} internalId Internal ID of the server to delete
+     * @param {Boolean} [forceDelete=false] Boolean if forcefully delete a
+     *   server. Default is `false`
      * @returns {Promise<string>} If successful returns Successfully deleted!
-     * @example
-     * ```js
-     * const res = await app.deleteServer(1) // res = Successfully deleted!
-     * ```
-     * @example
-     * ```js
-     * app.deleteServer(1, true).then((res) => console.log(res)) // res = Successfully deleted!
-     * ```
      */
     public async deleteServer(
         internalId: number,
@@ -395,16 +410,14 @@ export default class serverMethods {
         );
     }
     /**
+     * @example
+     *   const res = await app.suspendServer(1); // res = Successfully suspended!
+     *
+     * @example
+     *   app.suspendServer(1).then((res) => console.log(res)); // res = Successfully suspended!
+     *
      * @param {Number} internalId Internal ID of the server to suspend
      * @returns {Promise<string>} If successful returns Successfully suspended!
-     * @example
-     * ```js
-     * const res = await app.suspendServer(1) // res = Successfully suspended!
-     * ```
-     * @example
-     * ```js
-     * app.suspendServer(1).then((res) => console.log(res)) // res = Successfully suspended!
-     * ```
      */
     public async suspendServer(internalID: number): Promise<string> {
         return new Request(this.host, this.key).request(
@@ -415,16 +428,14 @@ export default class serverMethods {
         );
     }
     /**
+     * @example
+     *   const res = await app.unSuspendServer(1); // res = Successfully unsuspended!
+     *
+     * @example
+     *   app.unSuspendServer(1).then((res) => console.log(res)); // res = Successfully unsuspended!
+     *
      * @param {Number} internalId Internal ID of the server to suspend
      * @returns {Promise<string>} If successful returns Successfully unsuspended!
-     * @example
-     * ```js
-     * const res = await app.unSuspendServer(1) // res = Successfully unsuspended!
-     * ```
-     * @example
-     * ```js
-     * app.unSuspendServer(1).then((res) => console.log(res)) // res = Successfully unsuspended!
-     * ```
      */
     public async unSuspendServer(internalID: number): Promise<string> {
         return new Request(this.host, this.key).request(
@@ -435,16 +446,14 @@ export default class serverMethods {
         );
     }
     /**
+     * @example
+     *   const res = await app.reinstallServer(1); // res = Successfully reinstalled!
+     *
+     * @example
+     *   app.reinstallServer(1).then((res) => console.log(res)); // res = Successfully reinstalled!
+     *
      * @param {Number} internalId Internal ID of the server to reinstall
      * @returns {Promise<string>} If successful returns Successfully reinstalled!
-     * @example
-     * ```js
-     * const res = await app.reinstallServer(1) // res = Successfully reinstalled!
-     * ```
-     * @example
-     * ```js
-     * app.reinstallServer(1).then((res) => console.log(res)) // res = Successfully reinstalled!
-     * ```
      */
     public async reinstallServer(internalID: number): Promise<string> {
         return new Request(this.host, this.key).request(

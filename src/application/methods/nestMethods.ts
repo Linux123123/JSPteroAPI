@@ -6,20 +6,17 @@ import Nest, {
     NestAttributes,
     NestIncludeInput,
 } from '../interfaces/Nest';
-
 export default class nestMethods {
     public constructor(private host: string, private key: string) {}
     /**
+     * @example
+     *   const res = await app.getAllNests(); // res = Nest[]
+     *
+     * @example
+     *   app.getAllNests().then((res) => console.log(res)); // res = Nest[]
+     *
      * @param {NestIncludeInput} [options] Include information about: eggs or servers
      * @returns {Promise<Nest[]>} Array of nests
-     * @example
-     * ```js
-     * const res = await app.getAllNests() // res = Nest[]
-     * ```
-     * @example
-     * ```js
-     * app.getAllNests().then((res) => console.log(res)) // res = Nest[]
-     * ```
      */
     public getAllNests = async (
         options?: NestIncludeInput,
@@ -32,17 +29,15 @@ export default class nestMethods {
         );
     };
     /**
-     * @param {number} nestId The nest ID to get the details of.
+     * @example
+     *   const res = await app.getNestInfo(1); // res = NestAttributes
+     *
+     * @example
+     *   app.getNestInfo(1).then((res) => console.log(res)); // res = NestAttributes
+     *
+     * @param {Number} nestId The nest ID to get the details of.
      * @param {NestIncludeInput} [options] Include information about: eggs or servers
      * @returns {Promise<NestAttributes>} Nest details
-     * @example
-     * ```js
-     * const res = await app.getNestInfo(1) // res = NestAttributes
-     * ```
-     * @example
-     * ```js
-     * app.getNestInfo(1).then((res) => console.log(res)) // res = NestAttributes
-     * ```
      */
     public getNestInfo = async (
         nestId: number,
@@ -56,17 +51,16 @@ export default class nestMethods {
         );
     };
     /**
-     * @param {number} nestId The nest ID to get the details of.
-     * @param {EggIncludeInput} [options] Include information about: nest or servers or variables
+     * @example
+     *   const res = await app.getEggInfo(1, 1); // res = EggAttributes
+     *
+     * @example
+     *   app.getEggInfo(1, 1).then((res) => console.log(res)); // res = EggAttributes
+     *
+     * @param {Number} nestId The nest ID to get the details of.
+     * @param {EggIncludeInput} [options] Include information about: nest or
+     *   servers or variables
      * @returns {Promise<Egg[]>}
-     * @example
-     * ```js
-     * const res = await app.getEggInfo(1, 1) // res = EggAttributes
-     * ```
-     * @example
-     * ```js
-     * app.getEggInfo(1, 1).then((res) => console.log(res)) // res = EggAttributes
-     * ```
      */
     public getAllNestEggs = async (
         nestId: number,
@@ -80,18 +74,17 @@ export default class nestMethods {
         );
     };
     /**
-     * @param {number} nestId The nest ID to get the details of.
-     * @param {number} eggId Egg ID to use when installing the server
-     * @param {EggIncludeInput} [options] Include information about: nest or servers or variables
+     * @example
+     *   const res = await app.getEggInfo(1, 1); // res = EggAttributes
+     *
+     * @example
+     *   app.getEggInfo(1, 1).then((res) => console.log(res)); // res = EggAttributes
+     *
+     * @param {Number} nestId The nest ID to get the details of.
+     * @param {Number} eggId Egg ID to use when installing the server
+     * @param {EggIncludeInput} [options] Include information about: nest or
+     *   servers or variables
      * @returns {Promise<EggAttributes>}
-     * @example
-     * ```js
-     * const res = await app.getEggInfo(1, 1) // res = EggAttributes
-     * ```
-     * @example
-     * ```js
-     * app.getEggInfo(1, 1).then((res) => console.log(res)) // res = EggAttributes
-     * ```
      */
     public getEggInfo = async (
         nestID: number,
