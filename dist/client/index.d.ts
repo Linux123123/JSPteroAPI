@@ -2,9 +2,9 @@ export default class client {
     private host;
     private key;
     /**
-     * @param {String} Host Panels address
-     * @param {String} Key Api key to use
-     * @param {Boolean} Fast Fast login (No credential check)
+     * @param Host - Panels address
+     * @param Key - Api key to use
+     * @param Fast - Fast login (No credential check)
      */
     constructor(host: string, key: string, fast?: boolean);
     private testAPI;

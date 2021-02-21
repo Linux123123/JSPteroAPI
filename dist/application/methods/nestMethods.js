@@ -10,14 +10,14 @@ class nestMethods {
         this.host = host;
         this.key = key;
         /**
-         * @param {NestIncludeInput} [options] Include information about: eggs or servers
-         * @returns {Promise<Nest[]>} Array of nests
+         * @param options - Include information about: eggs or servers
+         * @returns Array of nests
          * @example
-         * ```js
+         * ```ts
          * const res = await app.getAllNests() // res = Nest[]
          * ```
          * @example
-         * ```js
+         * ```ts
          * app.getAllNests().then((res) => console.log(res)) // res = Nest[]
          * ```
          */
@@ -25,15 +25,15 @@ class nestMethods {
             return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/application/nests${Functions_1.default(options)}`);
         };
         /**
-         * @param {number} nestId The nest ID to get the details of.
-         * @param {NestIncludeInput} [options] Include information about: eggs or servers
-         * @returns {Promise<NestAttributes>} Nest details
+         * @param nestId - The nest ID to get the details of.
+         * @param options - Include information about: eggs or servers
+         * @returns Nest details
          * @example
-         * ```js
+         * ```ts
          * const res = await app.getNestInfo(1) // res = NestAttributes
          * ```
          * @example
-         * ```js
+         * ```ts
          * app.getNestInfo(1).then((res) => console.log(res)) // res = NestAttributes
          * ```
          */
@@ -41,15 +41,15 @@ class nestMethods {
             return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/application/nests/${nestId}${Functions_1.default(options)}`);
         };
         /**
-         * @param {number} nestId The nest ID to get the details of.
-         * @param {EggIncludeInput} [options] Include information about: nest or servers or variables
-         * @returns {Promise<Egg[]>}
+         * @param nestId - The nest ID to get the details of.
+         * @param options - Include information about: nest or servers or variables
+         * @returns
          * @example
-         * ```js
+         * ```ts
          * const res = await app.getEggInfo(1, 1) // res = EggAttributes
          * ```
          * @example
-         * ```js
+         * ```ts
          * app.getEggInfo(1, 1).then((res) => console.log(res)) // res = EggAttributes
          * ```
          */
@@ -57,16 +57,16 @@ class nestMethods {
             return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/application/nests/${nestId}/eggs${Functions_1.default(options)}`);
         };
         /**
-         * @param {number} nestId The nest ID to get the details of.
-         * @param {number} eggId Egg ID to use when installing the server
-         * @param {EggIncludeInput} [options] Include information about: nest or servers or variables
-         * @returns {Promise<EggAttributes>}
+         * @param nestId - The nest ID to get the details of.
+         * @param eggId - Egg ID to use when installing the server
+         * @param options - Include information about: nest or servers or variables
+         * @returns
          * @example
-         * ```js
+         * ```ts
          * const res = await app.getEggInfo(1, 1) // res = EggAttributes
          * ```
          * @example
-         * ```js
+         * ```ts
          * app.getEggInfo(1, 1).then((res) => console.log(res)) // res = EggAttributes
          * ```
          */

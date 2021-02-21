@@ -10,14 +10,14 @@ class accountMethods {
         this.key = key;
     }
     /**
-     * @returns {Promise<Permissions>} Permission data
-     * @warning Just returns all available permissions. Not that useful!
+     * @returns Permission data
+     * @remarks Just returns all available permissions. Not that useful!
      * @example
-     * ```js
+     * ```ts
      * const res = await client.getPermissions() // res = Permissions
      * ```
      * @example
-     * ```js
+     * ```ts
      * client.getPermissions().then((res) => console.log(res)) // res = Permissions
      * ```
      */

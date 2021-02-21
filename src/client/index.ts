@@ -7,9 +7,9 @@ import accountMethods from './methods/accountMethods';
 
 export default class client {
     /**
-     * @param {String} Host Panels address
-     * @param {String} Key Api key to use
-     * @param {Boolean} Fast Fast login (No credential check)
+     * @param Host - Panels address
+     * @param Key - Api key to use
+     * @param Fast - Fast login (No credential check)
      */
     public constructor(
         private host: string,

@@ -4,10 +4,10 @@ import JSPteroAPIError from '../modules/Error';
 export default class Request {
     constructor(readonly host: string, readonly key: string) {}
     /**
-     * @param {String} requestType The type of request to use e. g. GET, POST
-     * @param {(Record<string, unknown>|null)} data Data to send
-     * @param {String} dataObj Data object to return / Text to give on success
-     * @param {String} endpoint Endpoint for server to call
+     * @param requestType - The type of request to use e. g. GET, POST
+     * @param data - Data to send
+     * @param dataObj - Data object to return / Text to give on success
+     * @param endpoint - Endpoint for server to call
      */
     public async request(
         requestType: 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT',

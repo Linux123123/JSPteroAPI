@@ -11,14 +11,14 @@ class serverMethods {
         this.key = key;
     }
     /**
-     * @param {ServerIncludeInput} [options] Include information about server relationships
-     * @returns {Promise<Server[]} An Array of servers
+     * @param options - Include information about server relationships
+     * @returns An Array of servers
      * @example
-     * ```js
+     * ```ts
      * const res = await client.getAllServers() // res = Server[]
      * ```
      * @example
-     * ```js
+     * ```ts
      * client.getAllServers().then((res) => console.log(res)) // res = Server[]
      * ```
      */
@@ -26,15 +26,15 @@ class serverMethods {
         return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/client${Functions_1.default(options)}`);
     }
     /**
-     * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
-     * @param {ServerIncludeInput} [options] Include information about server relationships
-     * @returns {Promise<ServerAttributes>} Server information
+     * @param serverId - ID of the server to get (In the settings tab of server/in link)
+     * @param options - Include information about server relationships
+     * @returns Server information
      * @example
-     * ```js
+     * ```ts
      * const res = await client.getServerInfo('c2f5a3b6') // res = ServerAttributes
      * ```
      * @example
-     * ```js
+     * ```ts
      * client.getServerInfo('c2f5a3b6').then((res) => console.log(res)) // res = ServerAttributes
      * ```
      */
@@ -42,14 +42,14 @@ class serverMethods {
         return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/client/servers/${serverId}${Functions_1.default(options)}`);
     }
     /**
-     * @param {String} serverId ID of the server to get (In the settings tab of server/in link)
-     * @returns {Promise<ServerResources>} Server resource usage object
+     * @param serverId - ID of the server to get (In the settings tab of server/in link)
+     * @returns Server resource usage object
      * @example
-     * ```js
+     * ```ts
      * const res = await client.getServerResources('c2f5a3b6') // res = ServerResources
      * ```
      * @example
-     * ```js
+     * ```ts
      * client.getServerResources('c2f5a3b6').then((res) => console.log(res)) // res = ServerResources
      * ```
      */
@@ -57,15 +57,15 @@ class serverMethods {
         return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/client/servers/${serverId}/resources`);
     }
     /**
-     * @param {String} serverId ID of the server to send a command to
-     * @param {String} command Command to send
-     * @returns {Promise<String>} If successful returns Successfuly sent the command!
+     * @param serverId - ID of the server to send a command to
+     * @param command - Command to send
+     * @returns If successful returns Successfuly sent the command!
      * @example
-     * ```js
+     * ```ts
      * const res = await client.sendCommand('c2f5a3b6', 'give Linux123123 star') // res = Successfuly sent the command!
      * ```
      * @example
-     * ```js
+     * ```ts
      * client.sendCommand('c2f5a3b6', 'give Linux123123 star').then((res) => console.log(res)) // res = Successfuly sent the command!
      * ```
      */
@@ -73,15 +73,15 @@ class serverMethods {
         return new ClientRequest_1.default(this.host, this.key).request('POST', { command: command }, 'Successfuly sent the command!', `/api/client/servers/${serverId}/command`);
     }
     /**
-     * @param {String} serverId ID of the server to send a command to
-     * @param {String} action start / stop / restart / kill
-     * @returns {Promise<String>} If successful returns Successfuly set power state!
+     * @param serverId - ID of the server to send a command to
+     * @param action - start / stop / restart / kill
+     * @returns If successful returns Successfuly set power state!
      * @example
-     * ```js
+     * ```ts
      * const res = await client.setPowerState('c2f5a3b6', 'start') // res = Successfuly set power state!
      * ```
      * @example
-     * ```js
+     * ```ts
      * client.setPowerState('c2f5a3b6', 'kill).then((res) => console.log(res)) // res = Successfuly set power state!
      * ```
      */

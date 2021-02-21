@@ -10,14 +10,14 @@ class userMethods {
         this.host = host;
         this.key = key;
         /**
-         * @param {UserIncludeInput} [options] Include information about relationships
-         * @returns {Promise<User[]>} Array of users
+         * @param options - Include information about relationships
+         * @returns Array of users
          * @example
-         * ```js
+         * ```ts
          * const res = await app.getAllUsers() // res = User[]
          * ```
          * @example
-         * ```js
+         * ```ts
          * app.getAllUsers().then((res) => console.log(res)) // res = User[]
          * ```
          */
@@ -25,15 +25,15 @@ class userMethods {
             return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/application/users${Functions_1.default(options)}`);
         };
         /**
-         * @param {number} userId The user id to get information about
-         * @param {UserIncludeInput} [options] Include information about relationships
-         * @returns {Promise<UserAttributes} User information
+         * @param userId - The user id to get information about
+         * @param options - Include information about relationships
+         * @returns User information
          * @example
-         * ```js
+         * ```ts
          * const res = await app.getUserInfo(1) // res = UserAttributes
          * ```
          * @example
-         * ```js
+         * ```ts
          * app.getUserInfo(1).then((res) => console.log(res)) // res = UserAttributes
          * ```
          */
@@ -41,15 +41,15 @@ class userMethods {
             return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/application/users/${userId}${Functions_1.default(options)}`);
         };
         /**
-         * @param {string} userId The external user id to get information about
-         * @param {UserIncludeInput} [options] Include information about relationships
-         * @returns {Promise<UserAttributes} User information
+         * @param userId - The external user id to get information about
+         * @param options - Include information about relationships
+         * @returns User information
          * @example
-         * ```js
+         * ```ts
          * const res = await app.getUserInfoByExtId(1) // res = UserAttributes
          * ```
          * @example
-         * ```js
+         * ```ts
          * app.getUserInfoByExtId(1).then((res) => console.log(res)) // res = UserAttributes
          * ```
          */
@@ -57,22 +57,22 @@ class userMethods {
             return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/application/users/external/${userId}${Functions_1.default(options)}`);
         };
         /**
-         * @param {string} username The username of the user
-         * @param {string} firstName The first name of the user
-         * @param {string} lastName The last name of the user
-         * @param {string} email The email address of the user
-         * @param {string} [password] The password of the user
-         * @param {boolean} [isAdmin=false] Is the user admin (default false)
-         * @param {string} [language="en"] The language of the user (default en)
-         * @param {string} [externalId] The external id of user
-         * @param {UserIncludeInput} [options] Include information about relationships
-         * @returns {Promise<UserAttributes} User information
+         * @param username - The username of the user
+         * @param firstName - The first name of the user
+         * @param lastName - The last name of the user
+         * @param email - The email address of the user
+         * @param password - The password of the user
+         * @param isAdmin - Is the user admin (default false)
+         * @param language - The language of the user (default en)
+         * @param externalId - The external id of user
+         * @param options - Include information about relationships
+         * @returns User information
          * @example
-         * ```js
+         * ```ts
          * const res = await app.createUser('linux123123', 'Linus', 'ADMIN', 'api@gmail.com') // res = UserAttributes
          * ```
          * @example
-         * ```js
+         * ```ts
          * app.createUser('linux123123', 'Linus', 'ADMIN', 'api@gmail.com').then((res) => console.log(res)) // res = UserAttributes
          * ```
          */
@@ -89,23 +89,23 @@ class userMethods {
             }, 'attributes', `/api/application/users`);
         };
         /**
-         * @param {number} userId The user id of the user to edit
-         * @param {string} [username] The new username of the user
-         * @param {string} [firstName] The new first name of the user
-         * @param {string} [lastName] The new last name of the user
-         * @param {string} pemail] The new email address of the user
-         * @param {string} [password] The new password of the user
-         * @param {boolean} [isAdmin=false] Is the user admin
-         * @param {string} [language="en"] The new language of the user
-         * @param {string} [externalId] The new external id of user
-         * @param {UserIncludeInput} [options] Include information about relationships
-         * @returns {Promise<UserAttributes} User information
+         * @param userId - The user id of the user to edit
+         * @param username - The new username of the user
+         * @param firstName - The new first name of the user
+         * @param lastName - The new last name of the user
+         * @param email - The new email address of the user
+         * @param password - The new password of the user
+         * @param isAdmin - Is the user admin
+         * @param language - The new language of the user
+         * @param externalId - The new external id of user
+         * @param options - Include information about relationships
+         * @returns User information
          * @example
-         * ```js
+         * ```ts
          * const res = await app.editUser(1, 'linux123123', undefined, 'ADMIN_LAST) // res = UserAttributes
          * ```
          * @example
-         * ```js
+         * ```ts
          * app.editUser(1, undefined, 'Linux').then((res) => console.log(res)) // res = UserAttributes
          * ```
          */
@@ -123,14 +123,14 @@ class userMethods {
             }, 'attributes', `/api/application/users/${userId}${Functions_1.default(options)}`);
         };
         /**
-         * @param {number} userId The user id of the user to delete
-         * @returns {Promise<string>} If successful returns Successfully deleted!
+         * @param userId - The user id of the user to delete
+         * @returns If successful returns Successfully deleted!
          * @example
-         * ```js
+         * ```ts
          * const res = await app.deleteUser(1) // res = Successfully deleted!
          * ```
          * @example
-         * ```js
+         * ```ts
          * app.deleteUser(1).then((res) => console.log(res)) // res = Successfully deleted!
          * ```
          */

@@ -8,15 +8,15 @@ import Database, {
 export default class databaseMethods {
     public constructor(private host: string, private key: string) {}
     /**
-     * @param {number} serverId The server ID to get the databases from
-     * @param {DatabaseIncludeInput} [options] Include information about server relationships
-     * @returns {Promise<Database[]>} Array of databases
+     * @param serverId - The server ID to get the databases from
+     * @param options - Include information about server relationships
+     * @returns Array of databases
      * @example
-     * ```js
+     * ```ts
      * const res = await app.getServersDatabase(1) // res = Database[]
      * ```
      * @example
-     * ```js
+     * ```ts
      * app.getServersDatabase(1).then((res) => console.log(res)) // res = Database[]
      * ```
      */
@@ -34,16 +34,16 @@ export default class databaseMethods {
         );
     };
     /**
-     * @param {number} serverId The server ID to get the database from
-     * @param {number} databaseId The ID of the database
-     * @param {DatabaseIncludeInput} [options] Include information about server relationships
-     * @returns {Promise<DatabaseAttributes>} Database information
+     * @param serverId - The server ID to get the database from
+     * @param databaseId - The ID of the database
+     * @param options - Include information about server relationships
+     * @returns Database information
      * @example
-     * ```js
+     * ```ts
      * const res = await app.getServersDatabaseInfo(1, 1) // res = DatabaseAttributes
      * ```
      * @example
-     * ```js
+     * ```ts
      * app.getServersDatabaseInfo(1, 2).then((res) => console.log(res)) // res = DatabaseAttributes
      * ```
      */
@@ -62,18 +62,18 @@ export default class databaseMethods {
         );
     };
     /**
-     * @param {string} name Name of the Database
-     * @param {number} dbHostId ID of the Database Host
-     * @param {number} serverId The server ID to create the database in
-     * @param {string} allowedIp IP allowed to connect, leave "%" if you dont want to restrict
-     * @param {DatabaseIncludeInput} [options] Include information about server relationships
-     * @returns {DatabaseAttributes} Information about the new database
+     * @param name - Name of the Database
+     * @param dbHostId - ID of the Database Host
+     * @param serverId - The server ID to create the database in
+     * @param allowedIp - IP allowed to connect, leave "%" if you dont want to restrict
+     * @param options - Include information about server relationships
+     * @returns Information about the new database
      * @example
-     * ```js
+     * ```ts
      * const res = await app.createDatabase('DATABASE_1', 1, 1) // res = DatabaseAttributes
      * ```
      * @example
-     * ```js
+     * ```ts
      * app.createDatabase('DATABASE_1', 1, 1).then((res) => console.log(res)) // res = DatabaseAttributes
      * ```
      */
@@ -98,15 +98,15 @@ export default class databaseMethods {
         );
     };
     /**
-     * @param {number} serverId The server ID to get the database from
-     * @param {number} databaseId The ID of the database
-     * @returns {Promise<string>} If successful returns Successfully reset the password!
+     * @param serverId - The server ID to get the database from
+     * @param databaseId - The ID of the database
+     * @returns If successful returns Successfully reset the password!
      * @example
-     * ```js
+     * ```ts
      * const res = await app.resetDatabasePassword(1, 1) // res = Successfully reset the password!
      * ```
      * @example
-     * ```js
+     * ```ts
      * app.resetDatabasePassword(1, 2).then((res) => console.log(res)) // res = Successfully reset the password!
      * ```
      */
@@ -122,15 +122,15 @@ export default class databaseMethods {
         );
     };
     /**
-     * @param {number} serverId The server ID to delete the database in
-     * @param {number} databaseId The ID of the database
-     * @returns {Promise<string>} If successful returns Successfully deleted the database!
+     * @param serverId - The server ID to delete the database in
+     * @param databaseId - The ID of the database
+     * @returns If successful returns Successfully deleted the database!
      * @example
-     * ```js
+     * ```ts
      * const res = await app.resetDatabasePassword(1, 1) // res = Successfully deleted the database!
      * ```
      * @example
-     * ```js
+     * ```ts
      * app.resetDatabasePassword(1, 2).then((res) => console.log(res)) // res = Successfully deleted the database!
      * ```
      */
