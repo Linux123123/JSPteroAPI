@@ -1,10 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const index_1 = __importDefault(require("./application/index"));
-const index_2 = __importDefault(require("./client/index"));
+const index_1 = require("./application/index");
+const index_2 = require("./client/index");
 module.exports = {
-    Application: index_1.default,
-    Client: index_2.default,
+    Application: index_1.Application,
+    Client: index_2.Client,
 };

@@ -1,4 +1,4 @@
-export default class Application {
+declare class Application {
     private host;
     private key;
     /**
@@ -7,6 +7,9 @@ export default class Application {
      * @param fast - Fast login (No credential check)
      */
     constructor(host: string, key: string, fast?: boolean);
+    /**
+     @internal
+     */
     private testAPI;
     getAllServers: (options?: import("./interfaces/Server").ServerIncludesInput | undefined) => Promise<import("./interfaces/Server").default[]>;
     getAllNodes: (options?: import("./interfaces/Node").NodeIncludeInput | undefined) => Promise<import("./interfaces/Node").default[]>;
@@ -43,3 +46,4 @@ export default class Application {
     deleteDatabase: (serverId: number, databaseId: number) => Promise<string>;
     deleteAllocation: (nodeId: number, allocationId: number) => Promise<string>;
 }
+export { Application };

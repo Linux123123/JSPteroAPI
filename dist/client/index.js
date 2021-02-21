@@ -3,13 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Client = void 0;
 const node_fetch_1 = __importDefault(require("node-fetch")); // import node-fetch
 const serverMethods_1 = __importDefault(require("./methods/serverMethods"));
 const consoleMethods_1 = __importDefault(require("./methods/consoleMethods"));
 const fileMethods_1 = __importDefault(require("./methods/fileMethods"));
 const databaseMethods_1 = __importDefault(require("./methods/databaseMethods"));
 const accountMethods_1 = __importDefault(require("./methods/accountMethods"));
-class client {
+class Client {
     /**
      * @param Host - Panels address
      * @param Key - Api key to use
@@ -57,6 +58,9 @@ class client {
         const accountmethods = new accountMethods_1.default(host, key);
         this.getAllPermissions = accountmethods.getAllPermissions;
     }
+    /**
+     @internal
+     */
     async testAPI() {
         const options = {
             method: 'GET',
@@ -76,4 +80,4 @@ class client {
         }
     }
 }
-exports.default = client;
+exports.Client = Client;

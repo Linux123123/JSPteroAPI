@@ -1,4 +1,4 @@
-export default class client {
+declare class Client {
     private host;
     private key;
     /**
@@ -7,6 +7,9 @@ export default class client {
      * @param Fast - Fast login (No credential check)
      */
     constructor(host: string, key: string, fast?: boolean);
+    /**
+     @internal
+     */
     private testAPI;
     getAllServers: (options?: import("./interfaces/Server").ServerIncludeInput | undefined) => Promise<import("./interfaces/Server").default[]>;
     getServerInfo: (serverId: string, options?: import("./interfaces/Server").ServerIncludeInput | undefined) => Promise<import("./interfaces/Server").ServerAttributes>;
@@ -31,3 +34,4 @@ export default class client {
     deleteDatabase: (serverId: string, databaseId: string) => Promise<string>;
     renameFile: (serverId: string, data: import("./interfaces/ServerFile").SeverFileRename) => Promise<string>;
 }
+export { Client };
