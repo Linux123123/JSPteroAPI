@@ -8,7 +8,8 @@
         "test": "tsc-watch --onCompilationComplete \"node dist/test.js\"",
         "start": "node dist/test.js",
         "build": "rm -rf dist/* && tsc",
-        "lint": "eslint \"src/**\""
+        "lint": "eslint \"src/**\"",
+        "docs:build": "typedoc"
     },
     "repository": {
         "type": "git",

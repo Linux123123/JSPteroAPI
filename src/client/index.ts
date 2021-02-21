@@ -5,7 +5,7 @@ import fileMethods from './methods/fileMethods';
 import databaseMethods from './methods/databaseMethods';
 import accountMethods from './methods/accountMethods';
 
-export default class client {
+class Client {
     /**
      * @param Host - Panels address
      * @param Key - Api key to use
@@ -53,6 +53,9 @@ export default class client {
         const accountmethods = new accountMethods(host, key);
         this.getAllPermissions = accountmethods.getAllPermissions;
     }
+    /**
+     @internal
+     */
     private async testAPI(): Promise<void> {
         const options: RequestInit = {
             method: 'GET',
@@ -99,3 +102,5 @@ export default class client {
     // PUT
     public renameFile;
 }
+
+export { Client };

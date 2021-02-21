@@ -6,7 +6,7 @@ import nodeMethods from './methods/nodeMethods';
 import serverMethods from './methods/serverMethods';
 import userMethods from './methods/userMethods';
 
-export default class Application {
+class Application {
     /**
      * @param host - Panels address
      * @param key - Api key to use
@@ -62,6 +62,9 @@ export default class Application {
         this.createAllocation = allocationmethods.createAllocation;
         this.deleteAllocation = allocationmethods.deleteAllocation;
     }
+    /**
+     @internal
+     */
     private async testAPI(): Promise<void> {
         const options: RequestInit = {
             method: 'GET',
@@ -120,3 +123,5 @@ export default class Application {
     public deleteDatabase;
     public deleteAllocation;
 }
+
+export { Application };
