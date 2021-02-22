@@ -1,5 +1,5 @@
-import Permissions from '../interfaces/Permissions';
-export default class accountMethods {
+import { Permissions } from '../interfaces/Permissions';
+export declare class accountMethods {
     private host;
     private key;
     constructor(host: string, key: string);

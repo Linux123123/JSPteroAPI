@@ -1,5 +1,6 @@
-import Node from './Node';
-import Server from './Server';
+/** @module ApplicationAllocation */
+import { Node } from './Node';
+import { Server } from './Server';
 export interface AllocationIncludeInput {
     node?: boolean;
     server?: boolean;
@@ -17,7 +18,7 @@ export interface AllocationAttributes {
     assigned: boolean;
     relationships?: AllocationRelationships;
 }
-export default interface Allocation {
+export interface Allocation {
     onject: string;
     attributes: AllocationAttributes;
 }

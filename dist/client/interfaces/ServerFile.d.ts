@@ -1,3 +1,4 @@
+/** @module ClientServerFiles */
 export interface SeverFileRenameFiles {
     from: string;
     to: string;
@@ -30,7 +31,7 @@ export interface ServerFileAttributes {
     created_at: string;
     modified_at: string;
 }
-export default interface ServerFile {
+export interface ServerFile {
     object: string;
     atributes: ServerFileAttributes;
 }

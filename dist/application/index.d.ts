@@ -11,21 +11,21 @@ declare class Application {
      @internal
      */
     private testAPI;
-    getAllServers: (options?: import("./interfaces/Server").ServerIncludesInput | undefined) => Promise<import("./interfaces/Server").default[]>;
-    getAllNodes: (options?: import("./interfaces/Node").NodeIncludeInput | undefined) => Promise<import("./interfaces/Node").default[]>;
-    getAllUsers: (options?: import("./interfaces/User").UserIncludeInput | undefined) => Promise<import("./interfaces/User").default[]>;
+    getAllServers: (options?: import("./interfaces/Server").ServerIncludesInput | undefined) => Promise<import("./interfaces/Server").Server[]>;
+    getAllNodes: (options?: import("./interfaces/Node").NodeIncludeInput | undefined) => Promise<import("./interfaces/Node").Node[]>;
+    getAllUsers: (options?: import("./interfaces/User").UserIncludeInput | undefined) => Promise<import("./interfaces/User").User[]>;
     getUserInfo: (userId: number, options?: import("./interfaces/User").UserIncludeInput | undefined) => Promise<import("./interfaces/User").UserAttributes>;
     getNodeInfo: (nodeId: number, options?: import("./interfaces/Node").NodeIncludeInput | undefined) => Promise<import("./interfaces/Node").NodeAttributes>;
     getServerInfo: (serverId: number, options?: import("./interfaces/Server").ServerIncludesInput | undefined) => Promise<import("./interfaces/Server").ServerAttributes>;
-    getAllNests: (options?: import("./interfaces/Nest").NestIncludeInput | undefined) => Promise<import("./interfaces/Nest").default[]>;
+    getAllNests: (options?: import("./interfaces/Nest").NestIncludeInput | undefined) => Promise<import("./interfaces/Nest").Nest[]>;
     getNestInfo: (nestId: number, options?: import("./interfaces/Nest").NestIncludeInput | undefined) => Promise<import("./interfaces/Nest").NestAttributes>;
-    getAllNestEggs: (nestId: number, options?: import("./interfaces/Nest").EggIncludeInput | undefined) => Promise<import("./interfaces/Egg").default[]>;
+    getAllNestEggs: (nestId: number, options?: import("./interfaces/Nest").EggIncludeInput | undefined) => Promise<import("./interfaces/Egg").Egg[]>;
     getEggInfo: (nestID: number, eggId: number, options?: import("./interfaces/Nest").EggIncludeInput | undefined) => Promise<import("./interfaces/Egg").EggAttributes>;
     getServerInfoByExtId: (serverId: string, options?: import("./interfaces/Server").ServerIncludesInput | undefined) => Promise<import("./interfaces/Server").ServerAttributes>;
-    getServersDatabases: (serverId: number, options?: import("./interfaces/Database").DatabaseIncludeInput | undefined) => Promise<import("./interfaces/Database").default[]>;
+    getServersDatabases: (serverId: number, options?: import("./interfaces/Database").DatabaseIncludeInput | undefined) => Promise<import("./interfaces/Database").Database[]>;
     getServersDatabaseInfo: (serverId: number, databaseId: number, options?: import("./interfaces/Database").DatabaseIncludeInput | undefined) => Promise<import("./interfaces/Database").DatabaseAttributes>;
     getNodeConfig: (nodeId: number) => Promise<import("./interfaces/Node").NodeConfig>;
-    getAllAllocations: (nodeId: number, options?: import("./interfaces/Allocation").AllocationIncludeInput | undefined) => Promise<import("./interfaces/Allocation").default[]>;
+    getAllAllocations: (nodeId: number, options?: import("./interfaces/Allocation").AllocationIncludeInput | undefined) => Promise<import("./interfaces/Allocation").Allocation[]>;
     createUser: (username: string, firstName: string, lastName: string, email: string, password?: string, isAdmin?: boolean, language?: string, externalId?: string | undefined) => Promise<import("./interfaces/User").UserAttributes>;
     createServer: (name: string, ownerId: number, description: string, nestId: number, eggId: number, environment?: import("./interfaces/Server").ServerEnvironment | undefined, cpu?: number, ram?: number, disk?: number, amountOfDatabases?: number, amountOfAllocations?: number, amountOfBackups?: number, startupCmd?: string | undefined, dockerImage?: string | undefined, swap?: number, io?: number, options?: import("./interfaces/Server").ServerIncludesInput | undefined) => Promise<import("./interfaces/Server").ServerAttributes>;
     createNode: (name: string, description: string, locationID: number, fqdn: string, scheme: "http" | "https", ram: number, disk: number, isPublic?: boolean, daemonPort?: number, daemonSFTPPort?: number, ramOverAllocate?: number, diskOverallocate?: number, daemonDir?: string, maintenceMode?: boolean, maxUploadSize?: number, behindProxy?: boolean, options?: import("./interfaces/Node").NodeIncludeInput | undefined) => Promise<import("./interfaces/Node").NodeAttributes>;

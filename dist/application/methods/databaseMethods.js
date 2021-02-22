@@ -1,10 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApplicationRequest_1 = __importDefault(require("../ApplicationRequest"));
-const Functions_1 = __importDefault(require("../../modules/Functions"));
+exports.databaseMethods = void 0;
+const ApplicationRequest_1 = require("../ApplicationRequest");
+const Functions_1 = require("../../modules/Functions");
 class databaseMethods {
     constructor(host, key) {
         this.host = host;
@@ -23,7 +21,7 @@ class databaseMethods {
          * ```
          */
         this.getServersDatabases = async (serverId, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/application/servers/${serverId}/databases${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'data', `/api/application/servers/${serverId}/databases${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param serverId - The server ID to get the database from
@@ -40,7 +38,7 @@ class databaseMethods {
          * ```
          */
         this.getServersDatabaseInfo = async (serverId, databaseId, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/application/servers/${serverId}/databases/${databaseId}${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'attributes', `/api/application/servers/${serverId}/databases/${databaseId}${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param name - Name of the Database
@@ -59,11 +57,11 @@ class databaseMethods {
          * ```
          */
         this.createDatabase = async (name, dbHostId, serverId, allowedIp = '%', options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('POST', {
+            return new ApplicationRequest_1.Request(this.host, this.key).request('POST', {
                 database: name,
                 remote: allowedIp,
                 host: dbHostId,
-            }, 'attributes', `/api/application/servers/${serverId}/databases${Functions_1.default(options)}`);
+            }, 'attributes', `/api/application/servers/${serverId}/databases${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param serverId - The server ID to get the database from
@@ -79,7 +77,7 @@ class databaseMethods {
          * ```
          */
         this.resetDatabasePassword = async (serverId, databaseId) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('POST', null, 'Successfully reset the password!', `/api/application/servers/${serverId}/databases/${databaseId}/reset-password`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('POST', null, 'Successfully reset the password!', `/api/application/servers/${serverId}/databases/${databaseId}/reset-password`);
         };
         /**
          * @param serverId - The server ID to delete the database in
@@ -95,8 +93,8 @@ class databaseMethods {
          * ```
          */
         this.deleteDatabase = async (serverId, databaseId) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('DELETE', null, 'Successfully deleted the database!', `/api/application/servers/${serverId}/databases/${databaseId}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('DELETE', null, 'Successfully deleted the database!', `/api/application/servers/${serverId}/databases/${databaseId}`);
         };
     }
 }
-exports.default = databaseMethods;
+exports.databaseMethods = databaseMethods;

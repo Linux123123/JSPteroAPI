@@ -1,5 +1,5 @@
-import Server, { ServerAttributes, ServerEnvironment, ServerIncludesInput } from '../interfaces/Server';
-export default class serverMethods {
+import { Server, ServerAttributes, ServerEnvironment, ServerIncludesInput } from '../interfaces/Server';
+export declare class serverMethods {
     private host;
     private key;
     constructor(host: string, key: string);

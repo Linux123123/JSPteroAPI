@@ -1,3 +1,4 @@
+/** @module ClientDatabase */
 export interface DatabaseIncludeInput {
     password?: boolean;
 }
@@ -29,7 +30,7 @@ export interface DatabasePasswordAttributes {
     password: string;
 }
 
-export default interface Database {
+export interface Database {
     object: string;
     attributes: DatabaseAttributes;
 }

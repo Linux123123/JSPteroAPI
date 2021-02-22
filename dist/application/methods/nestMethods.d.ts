@@ -1,6 +1,6 @@
-import Egg, { EggAttributes } from '../interfaces/Egg';
-import Nest, { EggIncludeInput, NestAttributes, NestIncludeInput } from '../interfaces/Nest';
-export default class nestMethods {
+import { Egg, EggAttributes } from '../interfaces/Egg';
+import { Nest, EggIncludeInput, NestAttributes, NestIncludeInput } from '../interfaces/Nest';
+export declare class nestMethods {
     private host;
     private key;
     constructor(host: string, key: string);

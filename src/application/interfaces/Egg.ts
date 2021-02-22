@@ -1,5 +1,6 @@
-import Nest from './Nest';
-import Server from './Server';
+/** @module ApplicationEgg*/
+import { Nest } from './Nest';
+import { Server } from './Server';
 
 export interface EggConfig {
     files: unknown[];
@@ -70,7 +71,7 @@ export interface EggAttributes {
     relationships?: EggRelationships;
 }
 
-export default interface Egg {
+export interface Egg {
     object: string;
     attributes: EggAttributes;
 }

@@ -1,5 +1,5 @@
-// TODO add types for Permissions
-
-export default interface Permissions {
-    permissions: unknown;
+/** @module ClientPermissions */
+export interface Permissions {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    permissions: Record<string, any>;
 }

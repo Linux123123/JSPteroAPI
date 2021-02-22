@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.makeIncludes = void 0;
 function makeIncludes(options) {
     if (!options)
         return '';
@@ -14,4 +15,4 @@ function makeIncludes(options) {
     }
     return '';
 }
-exports.default = makeIncludes;
+exports.makeIncludes = makeIncludes;

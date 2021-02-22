@@ -1,5 +1,5 @@
-import ServerFile, { ServerFileAttributes, ServerFileCompress, ServerFileCreateFolder, ServerFileDecompress, ServerFileDelete, SeverFileRename } from '../interfaces/ServerFile';
-export default class fileMethods {
+import { ServerFile, ServerFileAttributes, ServerFileCompress, ServerFileCreateFolder, ServerFileDecompress, ServerFileDelete, SeverFileRename } from '../interfaces/ServerFile';
+export declare class fileMethods {
     private host;
     private key;
     constructor(host: string, key: string);

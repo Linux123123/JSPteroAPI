@@ -1,3 +1,4 @@
+/** @module ApplicationDatabase */
 export interface DatabaseIncludeInput {
     password?: boolean;
     host?: boolean;
@@ -44,7 +45,7 @@ export interface DatabaseAttributes {
     relationships?: DatabaseRelationships;
 }
 
-export default interface Database {
+export interface Database {
     object: string;
     attributes: DatabaseAttributes;
 }

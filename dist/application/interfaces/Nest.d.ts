@@ -1,5 +1,6 @@
-import Egg from './Egg';
-import Server from './Server';
+/** @module ApplicationNest */
+import { Egg } from './Egg';
+import { Server } from './Server';
 export interface NestIncludeInput {
     eggs?: boolean;
     servers?: boolean;
@@ -31,7 +32,7 @@ export interface NestAttributes {
     updated_at: string;
     relationships?: NestRelationships;
 }
-export default interface Nest {
+export interface Nest {
     object: string;
     attributes: NestAttributes;
 }

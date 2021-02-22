@@ -1,6 +1,7 @@
+/** @module ApplicationNode */
 import { Allocations } from './Allocation';
-import Location from './Location';
-import Server from './Server';
+import { Location } from './Location';
+import { Server } from './Server';
 
 export interface NodeIncludeInput {
     allocations?: boolean;
@@ -82,7 +83,7 @@ export interface NodeAttributes {
     relationships?: NodeRelationships;
 }
 
-export default interface Node {
+export interface Node {
     object: string;
     attributes: NodeAttributes;
 }

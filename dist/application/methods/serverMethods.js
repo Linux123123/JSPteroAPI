@@ -1,11 +1,9 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApplicationRequest_1 = __importDefault(require("../ApplicationRequest"));
-const Functions_1 = __importDefault(require("../../modules/Functions"));
-const nestMethods_1 = __importDefault(require("./nestMethods"));
+exports.serverMethods = void 0;
+const ApplicationRequest_1 = require("../ApplicationRequest");
+const Functions_1 = require("../../modules/Functions");
+const nestMethods_1 = require("./nestMethods");
 class serverMethods {
     constructor(host, key) {
         this.host = host;
@@ -23,7 +21,7 @@ class serverMethods {
          * ```
          */
         this.getAllServers = async (options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/application/servers${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'data', `/api/application/servers${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param serverId - The server ID to get the details of.
@@ -39,7 +37,7 @@ class serverMethods {
          * ```
          */
         this.getServerInfo = async (serverId, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/application/servers/${serverId}${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'attributes', `/api/application/servers/${serverId}${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param serverId - The external server ID to get the details of.
@@ -55,7 +53,7 @@ class serverMethods {
          * ```
          */
         this.getServerInfoByExtId = async (serverId, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/application/servers/external/${serverId}${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'attributes', `/api/application/servers/external/${serverId}${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param serverId - The server ID to get the details of.
@@ -76,12 +74,12 @@ class serverMethods {
          */
         this.editServerDetails = async (serverId, name, userId, externalId, description, options) => {
             const server = await this.getServerInfo(serverId);
-            return new ApplicationRequest_1.default(this.host, this.key).request('PATCH', {
+            return new ApplicationRequest_1.Request(this.host, this.key).request('PATCH', {
                 name: name ? name : server.name,
                 user: userId != undefined ? userId : server.user,
                 external_id: externalId ? externalId : server.external_id,
                 description: description ? description : server.description,
-            }, 'attributes', `/api/application/servers/${serverId}/details${Functions_1.default(options)}`);
+            }, 'attributes', `/api/application/servers/${serverId}/details${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param serverId - The server ID to get the details of.
@@ -110,7 +108,7 @@ class serverMethods {
          */
         this.editServerBuild = async (serverId, allocationId, addAllocations, removeAllocations, cpu, memory, disk, databases, allocations, backups, swap, io, threads, options) => {
             const server = await this.getServerInfo(serverId);
-            return new ApplicationRequest_1.default(this.host, this.key).request('PATCH', {
+            return new ApplicationRequest_1.Request(this.host, this.key).request('PATCH', {
                 allocation: allocationId != undefined
                     ? allocationId
                     : server.allocation,
@@ -133,7 +131,7 @@ class serverMethods {
                         ? backups
                         : server.feature_limits.backups,
                 },
-            }, 'attributes', `/api/application/servers/${serverId}/build${Functions_1.default(options)}`);
+            }, 'attributes', `/api/application/servers/${serverId}/build${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param serverId - The external server ID to get the details of.
@@ -174,7 +172,7 @@ class serverMethods {
                     }
                 });
             }
-            return new ApplicationRequest_1.default(this.host, this.key).request('PATCH', {
+            return new ApplicationRequest_1.Request(this.host, this.key).request('PATCH', {
                 startup: startup ? startup : server.container.startup_command,
                 environment: environment
                     ? envVars
@@ -182,7 +180,7 @@ class serverMethods {
                 egg: egg != undefined ? egg : server.egg,
                 image: image ? image : server.container.image,
                 skip_scripts: skip_scripts,
-            }, 'attributes', `/api/application/servers/${serverId}/startup${Functions_1.default(options)}`);
+            }, 'attributes', `/api/application/servers/${serverId}/startup${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param name  -Name of server to create
@@ -213,7 +211,7 @@ class serverMethods {
          * ```
          */
         this.createServer = async (name, ownerId, description, nestId, eggId, environment, cpu = 0, ram = 0, disk = 0, amountOfDatabases = 0, amountOfAllocations = 0, amountOfBackups = 0, startupCmd, dockerImage, swap = 0, io = 500, options) => {
-            const egg = await new nestMethods_1.default(this.host, this.key).getEggInfo(nestId, eggId, { variables: true });
+            const egg = await new nestMethods_1.nestMethods(this.host, this.key).getEggInfo(nestId, eggId, { variables: true });
             const envVars = {};
             let givenEnvVars = [];
             if (environment)
@@ -230,7 +228,7 @@ class serverMethods {
                     throw new Error(`Environment variable ${envVariable} was not defined!`);
                 }
             });
-            return new ApplicationRequest_1.default(this.host, this.key).request('POST', {
+            return new ApplicationRequest_1.Request(this.host, this.key).request('POST', {
                 name: name,
                 user: ownerId,
                 description: description,
@@ -263,7 +261,7 @@ class serverMethods {
                 start_on_completion: false,
                 skip_scripts: false,
                 oom_disabled: false,
-            }, 'attributes', `/api/application/servers${Functions_1.default(options)}`);
+            }, 'attributes', `/api/application/servers${Functions_1.makeIncludes(options)}`);
         };
     }
     /**
@@ -283,7 +281,7 @@ class serverMethods {
         let force = '';
         if (forceDelete)
             force = '/force';
-        return new ApplicationRequest_1.default(this.host, this.key).request('DELETE', null, 'Successfully deleted!', `/api/application/servers/${internalId}${force}`);
+        return new ApplicationRequest_1.Request(this.host, this.key).request('DELETE', null, 'Successfully deleted!', `/api/application/servers/${internalId}${force}`);
     }
     /**
      * @param internalId - Internal ID of the server to suspend
@@ -298,7 +296,7 @@ class serverMethods {
      * ```
      */
     async suspendServer(internalID) {
-        return new ApplicationRequest_1.default(this.host, this.key).request('POST', null, 'Successfully suspended!', `/api/application/servers/${internalID}/suspend`);
+        return new ApplicationRequest_1.Request(this.host, this.key).request('POST', null, 'Successfully suspended!', `/api/application/servers/${internalID}/suspend`);
     }
     /**
      * @param internalId - Internal ID of the server to suspend
@@ -313,7 +311,7 @@ class serverMethods {
      * ```
      */
     async unSuspendServer(internalID) {
-        return new ApplicationRequest_1.default(this.host, this.key).request('POST', null, 'Successfully unsuspended!', `/api/application/servers/${internalID}/unsuspend`);
+        return new ApplicationRequest_1.Request(this.host, this.key).request('POST', null, 'Successfully unsuspended!', `/api/application/servers/${internalID}/unsuspend`);
     }
     /**
      * @param internalId - Internal ID of the server to reinstall
@@ -328,7 +326,7 @@ class serverMethods {
      * ```
      */
     async reinstallServer(internalID) {
-        return new ApplicationRequest_1.default(this.host, this.key).request('POST', null, 'Successfully reinstalled!', `/api/application/servers/${internalID}/reinstall`);
+        return new ApplicationRequest_1.Request(this.host, this.key).request('POST', null, 'Successfully reinstalled!', `/api/application/servers/${internalID}/reinstall`);
     }
 }
-exports.default = serverMethods;
+exports.serverMethods = serverMethods;

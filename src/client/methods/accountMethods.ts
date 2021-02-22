@@ -1,7 +1,7 @@
-import Request from '../ClientRequest';
-import Permissions from '../interfaces/Permissions';
+import { Request } from '../ClientRequest';
+import { Permissions } from '../interfaces/Permissions';
 
-export default class accountMethods {
+export class accountMethods {
     public constructor(private host: string, private key: string) {}
     /**
      * @returns Permission data

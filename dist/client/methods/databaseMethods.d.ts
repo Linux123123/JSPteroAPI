@@ -1,5 +1,5 @@
-import Database, { DatabaseAttributes, DatabaseIncludeInput } from '../interfaces/Database';
-export default class databaseMethods {
+import { Database, DatabaseAttributes, DatabaseIncludeInput } from '../interfaces/Database';
+export declare class databaseMethods {
     private host;
     private key;
     constructor(host: string, key: string);

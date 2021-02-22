@@ -1,5 +1,6 @@
-import Request from '../ClientRequest';
-import ServerFile, {
+import { Request } from '../ClientRequest';
+import {
+    ServerFile,
     ServerFileAttributes,
     ServerFileCompress,
     ServerFileCreateFolder,
@@ -8,7 +9,7 @@ import ServerFile, {
     SeverFileRename,
 } from '../interfaces/ServerFile';
 
-export default class fileMethods {
+export class fileMethods {
     public constructor(private host: string, private key: string) {}
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)

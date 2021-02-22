@@ -5,7 +5,7 @@ import { NodeIncludeInput } from '../application/interfaces/Node';
 import { ServerIncludesInput } from '../application/interfaces/Server';
 import { UserIncludeInput } from '../application/interfaces/User';
 
-export default function makeIncludes(
+export function makeIncludes(
     options:
         | DatabaseIncludeInput
         | ServerIncludesInput

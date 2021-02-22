@@ -8,7 +8,7 @@ interface pterodactylError {
         }
     ];
 }
-export default class JSPteroAPIError extends Error {
+export declare class JSPteroAPIError extends Error {
     constructor(rawData: Response, JSONData: pterodactylError, data: Record<string, unknown> | string | null, requestType: 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT');
     HTML_URL: string;
     HTML_STATUS: number;

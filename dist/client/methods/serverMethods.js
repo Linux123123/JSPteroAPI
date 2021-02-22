@@ -1,10 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Functions_1 = __importDefault(require("../../modules/Functions"));
-const ClientRequest_1 = __importDefault(require("../ClientRequest"));
+exports.serverMethods = void 0;
+const Functions_1 = require("../../modules/Functions");
+const ClientRequest_1 = require("../ClientRequest");
 class serverMethods {
     constructor(host, key) {
         this.host = host;
@@ -23,7 +21,7 @@ class serverMethods {
      * ```
      */
     async getAllServers(options) {
-        return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/client${Functions_1.default(options)}`);
+        return new ClientRequest_1.Request(this.host, this.key).request('GET', null, 'data', `/api/client${Functions_1.makeIncludes(options)}`);
     }
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
@@ -39,7 +37,7 @@ class serverMethods {
      * ```
      */
     async getServerInfo(serverId, options) {
-        return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/client/servers/${serverId}${Functions_1.default(options)}`);
+        return new ClientRequest_1.Request(this.host, this.key).request('GET', null, 'attributes', `/api/client/servers/${serverId}${Functions_1.makeIncludes(options)}`);
     }
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
@@ -54,7 +52,7 @@ class serverMethods {
      * ```
      */
     async getServerResources(serverId) {
-        return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/client/servers/${serverId}/resources`);
+        return new ClientRequest_1.Request(this.host, this.key).request('GET', null, 'attributes', `/api/client/servers/${serverId}/resources`);
     }
     /**
      * @param serverId - ID of the server to send a command to
@@ -70,7 +68,7 @@ class serverMethods {
      * ```
      */
     async sendCommand(serverId, command) {
-        return new ClientRequest_1.default(this.host, this.key).request('POST', { command: command }, 'Successfuly sent the command!', `/api/client/servers/${serverId}/command`);
+        return new ClientRequest_1.Request(this.host, this.key).request('POST', { command: command }, 'Successfuly sent the command!', `/api/client/servers/${serverId}/command`);
     }
     /**
      * @param serverId - ID of the server to send a command to
@@ -86,7 +84,7 @@ class serverMethods {
      * ```
      */
     async setPowerState(serverId, action) {
-        return new ClientRequest_1.default(this.host, this.key).request('POST', { signal: action }, 'Successfuly set power state!', `/api/client/servers/${serverId}/power`);
+        return new ClientRequest_1.Request(this.host, this.key).request('POST', { signal: action }, 'Successfuly set power state!', `/api/client/servers/${serverId}/power`);
     }
 }
-exports.default = serverMethods;
+exports.serverMethods = serverMethods;

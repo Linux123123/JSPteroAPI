@@ -1,11 +1,10 @@
 import fetch, { RequestInit } from 'node-fetch'; // import node-fetch
-import allocationMethods from './methods/allocationMethods';
-import databaseMethods from './methods/databaseMethods';
-import nestMethods from './methods/nestMethods';
-import nodeMethods from './methods/nodeMethods';
-import serverMethods from './methods/serverMethods';
-import userMethods from './methods/userMethods';
-
+import { allocationMethods } from './methods/allocationMethods';
+import { databaseMethods } from './methods/databaseMethods';
+import { nestMethods } from './methods/nestMethods';
+import { nodeMethods } from './methods/nodeMethods';
+import { serverMethods } from './methods/serverMethods';
+import { userMethods } from './methods/userMethods';
 class Application {
     /**
      * @param host - Panels address

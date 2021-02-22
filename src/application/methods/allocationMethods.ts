@@ -1,8 +1,8 @@
-import Request from '../ApplicationRequest';
-import makeIncludes from '../../modules/Functions';
-import Allocation, { AllocationIncludeInput } from '../interfaces/Allocation';
+import { Request } from '../ApplicationRequest';
+import { makeIncludes } from '../../modules/Functions';
+import { Allocation, AllocationIncludeInput } from '../interfaces/Allocation';
 
-export default class allocationMethods {
+export class allocationMethods {
     public constructor(private host: string, private key: string) {}
     /**
      * @param nodeId - The node id of which you want to get allocations from

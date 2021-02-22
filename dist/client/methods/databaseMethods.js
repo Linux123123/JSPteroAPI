@@ -1,10 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Functions_1 = __importDefault(require("../../modules/Functions"));
-const ClientRequest_1 = __importDefault(require("../ClientRequest"));
+exports.databaseMethods = void 0;
+const Functions_1 = require("../../modules/Functions");
+const ClientRequest_1 = require("../ClientRequest");
 class databaseMethods {
     constructor(host, key) {
         this.host = host;
@@ -24,7 +22,7 @@ class databaseMethods {
      * ```
      */
     async getAllDatabases(serverId, options) {
-        return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/client/servers/${serverId}/databases${Functions_1.default(options)}`);
+        return new ClientRequest_1.Request(this.host, this.key).request('GET', null, 'data', `/api/client/servers/${serverId}/databases${Functions_1.makeIncludes(options)}`);
     }
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
@@ -42,7 +40,7 @@ class databaseMethods {
      * ```
      */
     async createDatabase(serverId, databaseName, connectionsAllowedFrom = '%', options) {
-        return new ClientRequest_1.default(this.host, this.key).request('POST', { database: databaseName, remote: connectionsAllowedFrom }, 'attributes', `/api/client/servers/${serverId}/databases${Functions_1.default(options)}`);
+        return new ClientRequest_1.Request(this.host, this.key).request('POST', { database: databaseName, remote: connectionsAllowedFrom }, 'attributes', `/api/client/servers/${serverId}/databases${Functions_1.makeIncludes(options)}`);
     }
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
@@ -58,7 +56,7 @@ class databaseMethods {
      * ```
      */
     async deleteDatabase(serverId, databaseId) {
-        return new ClientRequest_1.default(this.host, this.key).request('DELETE', null, 'Sucesfully deleted!', `/api/client/servers/${serverId}/databases/${databaseId}`);
+        return new ClientRequest_1.Request(this.host, this.key).request('DELETE', null, 'Sucesfully deleted!', `/api/client/servers/${serverId}/databases/${databaseId}`);
     }
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
@@ -74,7 +72,7 @@ class databaseMethods {
      * ```
      */
     async rotateDatabasePass(serverId, databaseId) {
-        return new ClientRequest_1.default(this.host, this.key).request('POST', null, 'attributes', `/api/client/servers/${serverId}/databases/${databaseId}/rotate-password`);
+        return new ClientRequest_1.Request(this.host, this.key).request('POST', null, 'attributes', `/api/client/servers/${serverId}/databases/${databaseId}/rotate-password`);
     }
 }
-exports.default = databaseMethods;
+exports.databaseMethods = databaseMethods;

@@ -1,9 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const ClientRequest_1 = __importDefault(require("../ClientRequest"));
+exports.consoleMethods = void 0;
+const ClientRequest_1 = require("../ClientRequest");
 class consoleMethods {
     constructor(host, key) {
         this.host = host;
@@ -22,7 +20,7 @@ class consoleMethods {
      * ```
      */
     async getWebsocketAuthData(serverId) {
-        return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/client/servers/${serverId}/websocket`);
+        return new ClientRequest_1.Request(this.host, this.key).request('GET', null, 'data', `/api/client/servers/${serverId}/websocket`);
     }
 }
-exports.default = consoleMethods;
+exports.consoleMethods = consoleMethods;

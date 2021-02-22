@@ -1,10 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Functions_1 = __importDefault(require("../../modules/Functions"));
-const ApplicationRequest_1 = __importDefault(require("../ApplicationRequest"));
+exports.userMethods = void 0;
+const Functions_1 = require("../../modules/Functions");
+const ApplicationRequest_1 = require("../ApplicationRequest");
 class userMethods {
     constructor(host, key) {
         this.host = host;
@@ -22,7 +20,7 @@ class userMethods {
          * ```
          */
         this.getAllUsers = async (options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/application/users${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'data', `/api/application/users${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param userId - The user id to get information about
@@ -38,7 +36,7 @@ class userMethods {
          * ```
          */
         this.getUserInfo = async (userId, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/application/users/${userId}${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'attributes', `/api/application/users/${userId}${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param userId - The external user id to get information about
@@ -54,7 +52,7 @@ class userMethods {
          * ```
          */
         this.getUserInfoByExtId = async (userId, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/application/users/external/${userId}${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'attributes', `/api/application/users/external/${userId}${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param username - The username of the user
@@ -77,7 +75,7 @@ class userMethods {
          * ```
          */
         this.createUser = async (username, firstName, lastName, email, password = '', isAdmin = false, language = 'en', externalId) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('POST', {
+            return new ApplicationRequest_1.Request(this.host, this.key).request('POST', {
                 email: email,
                 username: username,
                 first_name: firstName,
@@ -111,7 +109,7 @@ class userMethods {
          */
         this.editUser = async (userId, username, firstName, lastName, email, password, isAdmin, language, externalId, options) => {
             const user = await this.getUserInfo(userId);
-            return new ApplicationRequest_1.default(this.host, this.key).request('PATCH', {
+            return new ApplicationRequest_1.Request(this.host, this.key).request('PATCH', {
                 email: email ? email : user.email,
                 username: username ? username : user.username,
                 first_name: firstName ? firstName : user.first_name,
@@ -120,7 +118,7 @@ class userMethods {
                 root_admin: isAdmin ? isAdmin : user.root_admin,
                 password: password ? password : '',
                 external_id: externalId ? externalId : user.external_id,
-            }, 'attributes', `/api/application/users/${userId}${Functions_1.default(options)}`);
+            }, 'attributes', `/api/application/users/${userId}${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param userId - The user id of the user to delete
@@ -135,8 +133,8 @@ class userMethods {
          * ```
          */
         this.deleteUser = async (userId) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('DELETE', null, 'Successfully deleted!', `/api/application/users/${userId}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('DELETE', null, 'Successfully deleted!', `/api/application/users/${userId}`);
         };
     }
 }
-exports.default = userMethods;
+exports.userMethods = userMethods;

@@ -1,7 +1,7 @@
 import fetch, { RequestInit } from 'node-fetch';
-import JSPteroAPIError from '../modules/Error';
+import { JSPteroAPIError } from '../modules/Error';
 
-export default class Request {
+export class Request {
     constructor(readonly host: string, readonly key: string) {}
     /**
      * @param requestType - The type of request to use e. g. GET, POST

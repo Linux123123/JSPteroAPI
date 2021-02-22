@@ -1,4 +1,5 @@
-import Server from './Server';
+/** @module ApplicationUser */
+import { Server } from './Server';
 export interface UserIncludeInput {
     servers: boolean;
 }
@@ -24,7 +25,7 @@ export interface UserAttributes {
     'updated_at': string;
     'relationships'?: UserRelationships;
 }
-export default interface User {
+export interface User {
     object: string;
     attributes: UserAttributes;
 }

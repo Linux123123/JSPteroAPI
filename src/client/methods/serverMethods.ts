@@ -1,12 +1,13 @@
-import makeIncludes from '../../modules/Functions';
-import Request from '../ClientRequest';
-import Server, {
+import { makeIncludes } from '../../modules/Functions';
+import { Request } from '../ClientRequest';
+import {
+    Server,
     ServerAttributes,
     ServerIncludeInput,
 } from '../interfaces/Server';
-import ServerResources from '../interfaces/ServerResources';
+import { ServerResources } from '../interfaces/ServerResources';
 
-export default class serverMethods {
+export class serverMethods {
     public constructor(private host: string, private key: string) {}
     /**
      * @param options - Include information about server relationships

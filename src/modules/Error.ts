@@ -10,7 +10,7 @@ interface pterodactylError {
     ];
 }
 
-export default class JSPteroAPIError extends Error {
+export class JSPteroAPIError extends Error {
     constructor(
         rawData: Response,
         JSONData: pterodactylError,

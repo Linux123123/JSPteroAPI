@@ -1,10 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApplicationRequest_1 = __importDefault(require("../ApplicationRequest"));
-const Functions_1 = __importDefault(require("../../modules/Functions"));
+exports.allocationMethods = void 0;
+const ApplicationRequest_1 = require("../ApplicationRequest");
+const Functions_1 = require("../../modules/Functions");
 class allocationMethods {
     constructor(host, key) {
         this.host = host;
@@ -23,7 +21,7 @@ class allocationMethods {
          * ```
          */
         this.getAllAllocations = async (nodeId, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/application/nodes/${nodeId}/allocations${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'data', `/api/application/nodes/${nodeId}/allocations${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param nodeId - The node id of which you want to create allocations
@@ -41,7 +39,7 @@ class allocationMethods {
          * ```
          */
         this.createAllocation = async (nodeId, ip = '0.0.0.0', ports, alias = '') => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('POST', {
+            return new ApplicationRequest_1.Request(this.host, this.key).request('POST', {
                 ip: ip,
                 ports: ports,
                 allocation_alias: alias,
@@ -61,8 +59,8 @@ class allocationMethods {
          * ```
          */
         this.deleteAllocation = async (nodeId, allocationId) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('DELETE', null, 'Successfully deleted!', `/api/application/nodes/${nodeId}/allocations/${allocationId}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('DELETE', null, 'Successfully deleted!', `/api/application/nodes/${nodeId}/allocations/${allocationId}`);
         };
     }
 }
-exports.default = allocationMethods;
+exports.allocationMethods = allocationMethods;

@@ -3,8 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Request = void 0;
 const node_fetch_1 = __importDefault(require("node-fetch"));
-const Error_1 = __importDefault(require("../modules/Error"));
+const Error_1 = require("../modules/Error");
 class Request {
     constructor(host, key) {
         this.host = host;
@@ -31,7 +32,7 @@ class Request {
             options.body = JSON.stringify(data);
         const rawData = await node_fetch_1.default(URL, options);
         if (!rawData.ok)
-            throw new Error_1.default(rawData, await rawData.json(), data, requestType);
+            throw new Error_1.JSPteroAPIError(rawData, await rawData.json(), data, requestType);
         if (rawData.status == 204)
             return dataObj;
         const res = await rawData.json();
@@ -45,4 +46,4 @@ class Request {
         }
     }
 }
-exports.default = Request;
+exports.Request = Request;

@@ -1,3 +1,4 @@
-export default interface Permissions {
-    permissions: unknown;
+/** @module ClientPermissions */
+export interface Permissions {
+    permissions: Record<string, any>;
 }

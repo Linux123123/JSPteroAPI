@@ -1,10 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApplicationRequest_1 = __importDefault(require("../ApplicationRequest"));
-const Functions_1 = __importDefault(require("../../modules/Functions"));
+exports.nodeMethods = void 0;
+const ApplicationRequest_1 = require("../ApplicationRequest");
+const Functions_1 = require("../../modules/Functions");
 class nodeMethods {
     constructor(host, key) {
         this.host = host;
@@ -22,7 +20,7 @@ class nodeMethods {
          * ```
          */
         this.getAllNodes = async (options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/application/nodes${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'data', `/api/application/nodes${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param nodeId - The node id of which you want to get information
@@ -38,7 +36,7 @@ class nodeMethods {
          * ```
          */
         this.getNodeInfo = async (nodeId, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/application/nodes/${nodeId}${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'attributes', `/api/application/nodes/${nodeId}${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param name - The name of the node
@@ -69,7 +67,7 @@ class nodeMethods {
          * ```
          */
         this.createNode = async (name, description, locationID, fqdn, scheme, ram, disk, isPublic = true, daemonPort = 8080, daemonSFTPPort = 2022, ramOverAllocate = -1, diskOverallocate = -1, daemonDir = '/var/lib/pterodactyl/volumes', maintenceMode = false, maxUploadSize = 100, behindProxy = false, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('POST', {
+            return new ApplicationRequest_1.Request(this.host, this.key).request('POST', {
                 name: name,
                 description: description,
                 location_id: locationID,
@@ -86,7 +84,7 @@ class nodeMethods {
                 daemon_sftp: daemonSFTPPort,
                 maintenance_mode: maintenceMode,
                 upload_size: maxUploadSize,
-            }, 'attributes', `/api/application/nodes${Functions_1.default(options)}`);
+            }, 'attributes', `/api/application/nodes${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param nodeId - The node id of which you want to get information
@@ -120,7 +118,7 @@ class nodeMethods {
          */
         this.editNode = async (nodeId, name, description, locationID, fqdn, scheme, ram, disk, isPublic, daemonPort, daemonSFTPPort, ramOverAllocate, diskOverallocate, daemonDir, maintenceMode, maxUploadSize, behindProxy, resetSecret = false, options) => {
             const node = await this.getNodeInfo(nodeId);
-            return new ApplicationRequest_1.default(this.host, this.key).request('PATCH', {
+            return new ApplicationRequest_1.Request(this.host, this.key).request('PATCH', {
                 name: name ? name : node.name,
                 description: description ? description : node.description,
                 location_id: locationID ? locationID : node.location_id,
@@ -144,7 +142,7 @@ class nodeMethods {
                     : node.maintenance_mode,
                 upload_size: maxUploadSize ? maxUploadSize : node.upload_size,
                 reset_secret: resetSecret,
-            }, 'attributes', `/api/application/nodes/${nodeId}${Functions_1.default(options)}`);
+            }, 'attributes', `/api/application/nodes/${nodeId}${Functions_1.makeIncludes(options)}`);
         };
     }
     /**
@@ -160,7 +158,7 @@ class nodeMethods {
      * ```
      */
     async getNodeConfig(nodeId) {
-        return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, '', `/api/application/nodes/${nodeId}/configuration`);
+        return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, '', `/api/application/nodes/${nodeId}/configuration`);
     }
     /**
      * @param nodeId - The node id of which you want to get information
@@ -175,7 +173,7 @@ class nodeMethods {
      * ```
      */
     async deleteNode(nodeId) {
-        return new ApplicationRequest_1.default(this.host, this.key).request('DELETE', null, 'Successfully deleted!', `/api/application/nodes/${nodeId}`);
+        return new ApplicationRequest_1.Request(this.host, this.key).request('DELETE', null, 'Successfully deleted!', `/api/application/nodes/${nodeId}`);
     }
 }
-exports.default = nodeMethods;
+exports.nodeMethods = nodeMethods;

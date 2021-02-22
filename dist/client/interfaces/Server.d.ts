@@ -1,3 +1,4 @@
+/** @module ClientServer */
 export interface ServerSftpDetails {
     ip: string;
     port: number;
@@ -101,7 +102,7 @@ export interface ServerAttributes {
     is_transferring: boolean;
     relationships?: ServerRelationships;
 }
-export default interface Server {
+export interface Server {
     object: string;
     attributes: ServerAttributes;
 }

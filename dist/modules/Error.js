@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.JSPteroAPIError = void 0;
 class JSPteroAPIError extends Error {
     constructor(rawData, JSONData, data, requestType) {
         super();
@@ -16,4 +17,4 @@ class JSPteroAPIError extends Error {
         this.ERRORS = errors;
     }
 }
-exports.default = JSPteroAPIError;
+exports.JSPteroAPIError = JSPteroAPIError;

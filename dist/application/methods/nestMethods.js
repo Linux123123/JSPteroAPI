@@ -1,10 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const ApplicationRequest_1 = __importDefault(require("../ApplicationRequest"));
-const Functions_1 = __importDefault(require("../../modules/Functions"));
+exports.nestMethods = void 0;
+const ApplicationRequest_1 = require("../ApplicationRequest");
+const Functions_1 = require("../../modules/Functions");
 class nestMethods {
     constructor(host, key) {
         this.host = host;
@@ -22,7 +20,7 @@ class nestMethods {
          * ```
          */
         this.getAllNests = async (options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/application/nests${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'data', `/api/application/nests${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param nestId - The nest ID to get the details of.
@@ -38,7 +36,7 @@ class nestMethods {
          * ```
          */
         this.getNestInfo = async (nestId, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/application/nests/${nestId}${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'attributes', `/api/application/nests/${nestId}${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param nestId - The nest ID to get the details of.
@@ -54,7 +52,7 @@ class nestMethods {
          * ```
          */
         this.getAllNestEggs = async (nestId, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'data', `/api/application/nests/${nestId}/eggs${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'data', `/api/application/nests/${nestId}/eggs${Functions_1.makeIncludes(options)}`);
         };
         /**
          * @param nestId - The nest ID to get the details of.
@@ -71,8 +69,8 @@ class nestMethods {
          * ```
          */
         this.getEggInfo = async (nestID, eggId, options) => {
-            return new ApplicationRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/application/nests/${nestID}/eggs/${eggId}${Functions_1.default(options)}`);
+            return new ApplicationRequest_1.Request(this.host, this.key).request('GET', null, 'attributes', `/api/application/nests/${nestID}/eggs/${eggId}${Functions_1.makeIncludes(options)}`);
         };
     }
 }
-exports.default = nestMethods;
+exports.nestMethods = nestMethods;

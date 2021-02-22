@@ -1,11 +1,12 @@
-import Request from '../ApplicationRequest';
-import makeIncludes from '../../modules/Functions';
-import Database, {
+import { Request } from '../ApplicationRequest';
+import { makeIncludes } from '../../modules/Functions';
+import {
+    Database,
     DatabaseAttributes,
     DatabaseIncludeInput,
 } from '../interfaces/Database';
 
-export default class databaseMethods {
+export class databaseMethods {
     public constructor(private host: string, private key: string) {}
     /**
      * @param serverId - The server ID to get the databases from

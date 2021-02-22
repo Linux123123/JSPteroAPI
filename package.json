@@ -9,7 +9,7 @@
         "start": "node dist/test.js",
         "build": "rm -rf dist/* && tsc",
         "lint": "eslint \"src/**\"",
-        "docs:build": "typedoc"
+        "docs:build": "typedoc --categorizeByGroup --defaultCategory Types --excludeInternal --name JSPteroAPI"
     },
     "repository": {
         "type": "git",
@@ -36,6 +36,7 @@
         "node-fetch": "^2.6.1"
     },
     "devDependencies": {
+        "@microsoft/tsdoc-config": "^0.14.0",
         "@types/node": "^14.14.31",
         "@types/node-fetch": "^2.5.8",
         "@typescript-eslint/eslint-plugin": "^4.15.1",

@@ -1,13 +1,14 @@
-import Request from '../ApplicationRequest';
-import makeIncludes from '../../modules/Functions';
-import Server, {
+import { Request } from '../ApplicationRequest';
+import { makeIncludes } from '../../modules/Functions';
+import {
+    Server,
     ServerAttributes,
     ServerEnvironment,
     ServerIncludesInput,
 } from '../interfaces/Server';
-import nestMethods from './nestMethods';
+import { nestMethods } from './nestMethods';
 
-export default class serverMethods {
+export class serverMethods {
     public constructor(private host: string, private key: string) {}
     /**
      * @param options - Include information about server relationships

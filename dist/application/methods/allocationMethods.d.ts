@@ -1,5 +1,5 @@
-import Allocation, { AllocationIncludeInput } from '../interfaces/Allocation';
-export default class allocationMethods {
+import { Allocation, AllocationIncludeInput } from '../interfaces/Allocation';
+export declare class allocationMethods {
     private host;
     private key;
     constructor(host: string, key: string);

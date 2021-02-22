@@ -1,8 +1,8 @@
-import makeIncludes from '../../modules/Functions';
-import Request from '../ApplicationRequest';
-import User, { UserAttributes, UserIncludeInput } from '../interfaces/User';
+import { makeIncludes } from '../../modules/Functions';
+import { Request } from '../ApplicationRequest';
+import { User, UserAttributes, UserIncludeInput } from '../interfaces/User';
 
-export default class userMethods {
+export class userMethods {
     public constructor(private host: string, private key: string) {}
     /**
      * @param options - Include information about relationships

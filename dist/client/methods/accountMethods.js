@@ -1,9 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const ClientRequest_1 = __importDefault(require("../ClientRequest"));
+exports.accountMethods = void 0;
+const ClientRequest_1 = require("../ClientRequest");
 class accountMethods {
     constructor(host, key) {
         this.host = host;
@@ -22,7 +20,7 @@ class accountMethods {
      * ```
      */
     async getAllPermissions() {
-        return new ClientRequest_1.default(this.host, this.key).request('GET', null, 'attributes', `/api/client/permissions`);
+        return new ClientRequest_1.Request(this.host, this.key).request('GET', null, 'attributes', `/api/client/permissions`);
     }
 }
-exports.default = accountMethods;
+exports.accountMethods = accountMethods;

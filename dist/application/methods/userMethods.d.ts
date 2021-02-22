@@ -1,5 +1,5 @@
-import User, { UserAttributes, UserIncludeInput } from '../interfaces/User';
-export default class userMethods {
+import { User, UserAttributes, UserIncludeInput } from '../interfaces/User';
+export declare class userMethods {
     private host;
     private key;
     constructor(host: string, key: string);

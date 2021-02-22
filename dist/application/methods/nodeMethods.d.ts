@@ -1,5 +1,5 @@
-import Node, { NodeAttributes, NodeConfig, NodeIncludeInput } from '../interfaces/Node';
-export default class nodeMethods {
+import { Node, NodeAttributes, NodeConfig, NodeIncludeInput } from '../interfaces/Node';
+export declare class nodeMethods {
     private host;
     private key;
     constructor(host: string, key: string);

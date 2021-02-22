@@ -5,12 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Application = void 0;
 const node_fetch_1 = __importDefault(require("node-fetch")); // import node-fetch
-const allocationMethods_1 = __importDefault(require("./methods/allocationMethods"));
-const databaseMethods_1 = __importDefault(require("./methods/databaseMethods"));
-const nestMethods_1 = __importDefault(require("./methods/nestMethods"));
-const nodeMethods_1 = __importDefault(require("./methods/nodeMethods"));
-const serverMethods_1 = __importDefault(require("./methods/serverMethods"));
-const userMethods_1 = __importDefault(require("./methods/userMethods"));
+const allocationMethods_1 = require("./methods/allocationMethods");
+const databaseMethods_1 = require("./methods/databaseMethods");
+const nestMethods_1 = require("./methods/nestMethods");
+const nodeMethods_1 = require("./methods/nodeMethods");
+const serverMethods_1 = require("./methods/serverMethods");
+const userMethods_1 = require("./methods/userMethods");
 class Application {
     /**
      * @param host - Panels address
@@ -26,7 +26,7 @@ class Application {
         this.host = host;
         if (!fast)
             this.testAPI();
-        const servermethods = new serverMethods_1.default(host, key);
+        const servermethods = new serverMethods_1.serverMethods(host, key);
         this.getAllServers = servermethods.getAllServers;
         this.getServerInfo = servermethods.getServerInfo;
         this.createServer = servermethods.createServer;
@@ -38,31 +38,31 @@ class Application {
         this.editServerDetails = servermethods.editServerDetails;
         this.editServerBuild = servermethods.editServerBuild;
         this.editServerStartup = servermethods.editServerStartup;
-        const nestmethods = new nestMethods_1.default(host, key);
+        const nestmethods = new nestMethods_1.nestMethods(host, key);
         this.getAllNests = nestmethods.getAllNests;
         this.getNestInfo = nestmethods.getNestInfo;
         this.getAllNestEggs = nestmethods.getAllNestEggs;
         this.getEggInfo = nestmethods.getEggInfo;
-        const databasemethods = new databaseMethods_1.default(host, key);
+        const databasemethods = new databaseMethods_1.databaseMethods(host, key);
         this.getServersDatabases = databasemethods.getServersDatabases;
         this.getServersDatabaseInfo = databasemethods.getServersDatabaseInfo;
         this.createDatabase = databasemethods.createDatabase;
         this.resetDatabasePassword = databasemethods.resetDatabasePassword;
         this.deleteDatabase = databasemethods.deleteDatabase;
-        const usermethods = new userMethods_1.default(host, key);
+        const usermethods = new userMethods_1.userMethods(host, key);
         this.getAllUsers = usermethods.getAllUsers;
         this.getUserInfo = usermethods.getUserInfo;
         this.createUser = usermethods.createUser;
         this.editUser = usermethods.editUser;
         this.deleteUser = usermethods.deleteUser;
-        const nodemethods = new nodeMethods_1.default(host, key);
+        const nodemethods = new nodeMethods_1.nodeMethods(host, key);
         this.getAllNodes = nodemethods.getAllNodes;
         this.getNodeInfo = nodemethods.getNodeInfo;
         this.getNodeConfig = nodemethods.getNodeConfig;
         this.createNode = nodemethods.createNode;
         this.editNode = nodemethods.editNode;
         this.deleteNode = nodemethods.deleteNode;
-        const allocationmethods = new allocationMethods_1.default(host, key);
+        const allocationmethods = new allocationMethods_1.allocationMethods(host, key);
         this.getAllAllocations = allocationmethods.getAllAllocations;
         this.createAllocation = allocationmethods.createAllocation;
         this.deleteAllocation = allocationmethods.deleteAllocation;

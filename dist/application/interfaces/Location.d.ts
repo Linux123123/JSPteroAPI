@@ -1,3 +1,4 @@
+/** @module ApplicationLocation */
 export interface LocationAttributes {
     id: number;
     short: string;
@@ -5,7 +6,7 @@ export interface LocationAttributes {
     updated_at: string;
     created_at: string;
 }
-export default interface Location {
+export interface Location {
     object: string;
     attributes: LocationAttributes;
 }

@@ -1,5 +1,5 @@
-import WebsocketAuthData from '../interfaces/WebsocketAuthData';
-export default class consoleMethods {
+import { WebsocketAuthData } from '../interfaces/WebsocketAuthData';
+export declare class consoleMethods {
     private host;
     private key;
     constructor(host: string, key: string);

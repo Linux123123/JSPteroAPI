@@ -1,13 +1,14 @@
-import Request from '../ApplicationRequest';
-import makeIncludes from '../../modules/Functions';
-import Egg, { EggAttributes } from '../interfaces/Egg';
-import Nest, {
+import { Request } from '../ApplicationRequest';
+import { makeIncludes } from '../../modules/Functions';
+import { Egg, EggAttributes } from '../interfaces/Egg';
+import {
+    Nest,
     EggIncludeInput,
     NestAttributes,
     NestIncludeInput,
 } from '../interfaces/Nest';
 
-export default class nestMethods {
+export class nestMethods {
     public constructor(private host: string, private key: string) {}
     /**
      * @param options - Include information about: eggs or servers

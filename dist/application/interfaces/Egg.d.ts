@@ -1,5 +1,6 @@
-import Nest from './Nest';
-import Server from './Server';
+/** @module ApplicationEgg*/
+import { Nest } from './Nest';
+import { Server } from './Server';
 export interface EggConfig {
     files: unknown[];
     startup: Record<string, string>;
@@ -61,7 +62,7 @@ export interface EggAttributes {
     updated_at: '2021-01-27T13:46:16+00:00';
     relationships?: EggRelationships;
 }
-export default interface Egg {
+export interface Egg {
     object: string;
     attributes: EggAttributes;
 }

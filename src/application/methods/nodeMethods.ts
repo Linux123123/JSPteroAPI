@@ -1,12 +1,13 @@
-import Request from '../ApplicationRequest';
-import makeIncludes from '../../modules/Functions';
-import Node, {
+import { Request } from '../ApplicationRequest';
+import { makeIncludes } from '../../modules/Functions';
+import {
+    Node,
     NodeAttributes,
     NodeConfig,
     NodeIncludeInput,
 } from '../interfaces/Node';
 
-export default class nodeMethods {
+export class nodeMethods {
     public constructor(private host: string, private key: string) {}
     /**
      * @param options - Include information about relationships

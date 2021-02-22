@@ -1,7 +1,7 @@
-import Request from '../ClientRequest';
-import WebsocketAuthData from '../interfaces/WebsocketAuthData';
+import { Request } from '../ClientRequest';
+import { WebsocketAuthData } from '../interfaces/WebsocketAuthData';
 
-export default class consoleMethods {
+export class consoleMethods {
     public constructor(private host: string, private key: string) {}
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)

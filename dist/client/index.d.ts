@@ -11,13 +11,13 @@ declare class Client {
      @internal
      */
     private testAPI;
-    getAllServers: (options?: import("./interfaces/Server").ServerIncludeInput | undefined) => Promise<import("./interfaces/Server").default[]>;
+    getAllServers: (options?: import("./interfaces/Server").ServerIncludeInput | undefined) => Promise<import("./interfaces/Server").Server[]>;
     getServerInfo: (serverId: string, options?: import("./interfaces/Server").ServerIncludeInput | undefined) => Promise<import("./interfaces/Server").ServerAttributes>;
-    getServerResources: (serverId: string) => Promise<import("./interfaces/ServerResources").default>;
-    getWebsocketAuthData: (serverId: string) => Promise<import("./interfaces/WebsocketAuthData").default>;
-    getAllPermissions: () => Promise<import("./interfaces/Permissions").default>;
-    getAllDatabases: (serverId: string, options?: import("./interfaces/Database").DatabaseIncludeInput | undefined) => Promise<import("./interfaces/Database").default[]>;
-    getAllFiles: (serverId: string, dir?: string) => Promise<import("./interfaces/ServerFile").default[]>;
+    getServerResources: (serverId: string) => Promise<import("./interfaces/ServerResources").ServerResources>;
+    getWebsocketAuthData: (serverId: string) => Promise<import("./interfaces/WebsocketAuthData").WebsocketAuthData>;
+    getAllPermissions: () => Promise<import("./interfaces/Permissions").Permissions>;
+    getAllDatabases: (serverId: string, options?: import("./interfaces/Database").DatabaseIncludeInput | undefined) => Promise<import("./interfaces/Database").Database[]>;
+    getAllFiles: (serverId: string, dir?: string) => Promise<import("./interfaces/ServerFile").ServerFile[]>;
     getFileContents: (serverId: string, file: string) => Promise<string>;
     getFileDownloadLink: (serverId: string, file: string) => Promise<string>;
     getFileUploadLink: (serverId: string) => Promise<string>;

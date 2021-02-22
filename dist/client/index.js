@@ -5,11 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Client = void 0;
 const node_fetch_1 = __importDefault(require("node-fetch")); // import node-fetch
-const serverMethods_1 = __importDefault(require("./methods/serverMethods"));
-const consoleMethods_1 = __importDefault(require("./methods/consoleMethods"));
-const fileMethods_1 = __importDefault(require("./methods/fileMethods"));
-const databaseMethods_1 = __importDefault(require("./methods/databaseMethods"));
-const accountMethods_1 = __importDefault(require("./methods/accountMethods"));
+const serverMethods_1 = require("./methods/serverMethods");
+const consoleMethods_1 = require("./methods/consoleMethods");
+const fileMethods_1 = require("./methods/fileMethods");
+const databaseMethods_1 = require("./methods/databaseMethods");
+const accountMethods_1 = require("./methods/accountMethods");
 class Client {
     /**
      * @param Host - Panels address
@@ -26,17 +26,17 @@ class Client {
         if (!fast)
             this.testAPI();
         // Server
-        const servermethods = new serverMethods_1.default(host, key);
+        const servermethods = new serverMethods_1.serverMethods(host, key);
         this.getAllServers = servermethods.getAllServers;
         this.getServerInfo = servermethods.getServerInfo;
         this.getServerResources = servermethods.getServerResources;
         this.sendCommand = servermethods.sendCommand;
         this.setPowerState = servermethods.setPowerState;
         // Console
-        const consolemethods = new consoleMethods_1.default(host, key);
+        const consolemethods = new consoleMethods_1.consoleMethods(host, key);
         this.getWebsocketAuthData = consolemethods.getWebsocketAuthData;
         // File
-        const filemethods = new fileMethods_1.default(host, key);
+        const filemethods = new fileMethods_1.fileMethods(host, key);
         this.getAllFiles = filemethods.getAllFiles;
         this.getFileContents = filemethods.getFileContents;
         this.writeFile = filemethods.writeFile;
@@ -49,13 +49,13 @@ class Client {
         this.createFolder = filemethods.createFolder;
         this.getFileUploadLink = filemethods.getFileUploadLink;
         // Database
-        const databasemethods = new databaseMethods_1.default(host, key);
+        const databasemethods = new databaseMethods_1.databaseMethods(host, key);
         this.getAllDatabases = databasemethods.getAllDatabases;
         this.createDatabase = databasemethods.createDatabase;
         this.deleteDatabase = databasemethods.deleteDatabase;
         this.rotateDatabasePass = databasemethods.rotateDatabasePass;
         // Account
-        const accountmethods = new accountMethods_1.default(host, key);
+        const accountmethods = new accountMethods_1.accountMethods(host, key);
         this.getAllPermissions = accountmethods.getAllPermissions;
     }
     /**

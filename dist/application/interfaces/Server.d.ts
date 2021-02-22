@@ -1,9 +1,10 @@
-import Database from './Database';
-import Egg from './Egg';
-import Location from './Location';
-import Nest from './Nest';
-import Node from './Node';
-import User from './User';
+/** @module ApplicationServer */
+import { Database } from './Database';
+import { Egg } from './Egg';
+import { Location } from './Location';
+import { Nest } from './Nest';
+import { Node } from './Node';
+import { User } from './User';
 export interface ServerEnvironment {
     [key: string]: unknown;
     MAX_USERS?: number;
@@ -175,7 +176,7 @@ export interface ServerAttributes {
     created_at: string;
     relationships?: ServerRelationships;
 }
-export default interface Server {
+export interface Server {
     object: string;
     attributes: ServerAttributes;
 }

@@ -1,9 +1,9 @@
 import fetch, { RequestInit } from 'node-fetch'; // import node-fetch
-import serverMethods from './methods/serverMethods';
-import consoleMethods from './methods/consoleMethods';
-import fileMethods from './methods/fileMethods';
-import databaseMethods from './methods/databaseMethods';
-import accountMethods from './methods/accountMethods';
+import { serverMethods } from './methods/serverMethods';
+import { consoleMethods } from './methods/consoleMethods';
+import { fileMethods } from './methods/fileMethods';
+import { databaseMethods } from './methods/databaseMethods';
+import { accountMethods } from './methods/accountMethods';
 
 class Client {
     /**

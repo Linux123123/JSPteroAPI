@@ -1,4 +1,4 @@
-export default class Request {
+export declare class Request {
     readonly host: string;
     readonly key: string;
     constructor(host: string, key: string);
