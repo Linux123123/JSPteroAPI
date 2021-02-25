@@ -5,7 +5,8 @@
  */
 import { Application } from './application/index';
 import { Client } from './client/index';
-export { Application, Client };
+import { JSPteroAPIError } from './modules/Error';
+export { Application, Client, JSPteroAPIError };
 declare const _default: {
     Application: typeof Application;
     Client: typeof Client;
