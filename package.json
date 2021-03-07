@@ -6,8 +6,8 @@
     "types": "dist/index.d.ts",
     "scripts": {
         "test": "tsc-watch --onCompilationComplete \"node dist/test.js\"",
-        "start": "node dist/test.js",
-        "build": "rm -rf dist/* && tsc",
+        "build": "rimraf dist/* && tsc",
+        "build:publish": "npm run build && rimraf src/",
         "lint": "eslint \"src/**\"",
         "docs:build": "typedoc --categorizeByGroup --defaultCategory Types --excludeInternal --name JSPteroAPI"
     },
@@ -46,6 +46,7 @@
         "eslint-plugin-prettier": "^3.3.1",
         "eslint-plugin-tsdoc": "^0.2.11",
         "prettier": "^2.2.1",
+        "rimraf": "^3.0.2",
         "tsc-watch": "^4.2.9",
         "typedoc": "^0.20.27",
         "typescript": "^4.1.5"
