@@ -5,6 +5,7 @@ import { nestMethods } from './methods/nestMethods';
 import { nodeMethods } from './methods/nodeMethods';
 import { serverMethods } from './methods/serverMethods';
 import { userMethods } from './methods/userMethods';
+import { locationMethods } from './methods/locationMethods';
 class Application {
     /**
      * @param host - Panels address
@@ -60,6 +61,12 @@ class Application {
         this.getAllAllocations = allocationmethods.getAllAllocations;
         this.createAllocation = allocationmethods.createAllocation;
         this.deleteAllocation = allocationmethods.deleteAllocation;
+        const locationmethods = new locationMethods(host, key);
+        this.getAllLocations = locationmethods.getAllLocations;
+        this.getLocationInfo = locationmethods.getLocationInfo;
+        this.createLocation = locationmethods.createLocation;
+        this.editLocation = locationmethods.editLocation;
+        this.deleteLocation = locationmethods.deleteLocation;
     }
     /**
      @internal
@@ -99,6 +106,8 @@ class Application {
     public getServersDatabaseInfo;
     public getNodeConfig;
     public getAllAllocations;
+    public getAllLocations;
+    public getLocationInfo;
     // POST
     public createUser;
     public createServer;
@@ -109,18 +118,21 @@ class Application {
     public reinstallServer;
     public resetDatabasePassword;
     public createAllocation;
+    public createLocation;
     // PATCH
     public editUser;
     public editServerDetails;
     public editServerBuild;
     public editServerStartup;
     public editNode;
-    // // DELETE
+    public editLocation;
+    // DELETE
     public deleteUser;
     public deleteNode;
     public deleteServer;
     public deleteDatabase;
     public deleteAllocation;
+    public deleteLocation;
 }
 
 export { Application };

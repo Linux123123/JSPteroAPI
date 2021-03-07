@@ -163,7 +163,7 @@ export class fileMethods {
         return new Request(this.host, this.key).request(
             'GET',
             null,
-            'attributesUrl',
+            'attributes url',
             `/api/client/servers/${serverId}/files/download?file=${filePath}`,
         );
     }
@@ -279,7 +279,7 @@ export class fileMethods {
         return new Request(this.host, this.key).request(
             'GET',
             null,
-            'attributesUrl',
+            'attributes url',
             `/api/client/servers/${serverId}/files/upload`,
         );
     }

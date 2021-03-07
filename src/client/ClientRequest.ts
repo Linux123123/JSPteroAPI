@@ -40,15 +40,8 @@ export class Request {
         if (rawData.status == 204) return dataObj;
         if (text) return await rawData.text();
         const res = await rawData.json();
-        switch (dataObj) {
-            case 'data':
-                return res.data;
-            case 'attributes':
-                return res.attributes;
-            case 'attributesUrl':
-                return res.attributes.url;
-            default:
-                return res;
-        }
+        return !dataObj.includes(' ')
+            ? res[dataObj]
+            : res[dataObj.split(' ')[0]][dataObj.split(' ')[1]];
     }
 }

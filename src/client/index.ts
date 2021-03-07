@@ -52,6 +52,9 @@ class Client {
         // Account
         const accountmethods = new accountMethods(host, key);
         this.getAllPermissions = accountmethods.getAllPermissions;
+        this.getAccountInfo = accountmethods.getAccountInfo;
+        this.getAccount2FADetails = accountmethods.getAccount2FADetails;
+        this.enable2FA = accountmethods.enable2FA;
     }
     /**
      @internal
@@ -86,6 +89,8 @@ class Client {
     public getFileContents;
     public getFileDownloadLink;
     public getFileUploadLink;
+    public getAccountInfo;
+    public getAccount2FADetails;
     // POST
     public sendCommand;
     public setPowerState;
@@ -97,6 +102,7 @@ class Client {
     public decompressFile;
     public deleteFile;
     public createFolder;
+    public enable2FA;
     // Delete
     public deleteDatabase;
     // PUT

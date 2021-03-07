@@ -1,5 +1,6 @@
 import { AllocationIncludeInput } from '../application/interfaces/Allocation';
 import { DatabaseIncludeInput } from '../application/interfaces/Database';
+import { LocationIncludeInput } from '../application/interfaces/Location';
 import { NestIncludeInput } from '../application/interfaces/Nest';
 import { NodeIncludeInput } from '../application/interfaces/Node';
 import { ServerIncludesInput } from '../application/interfaces/Server';
@@ -14,6 +15,7 @@ export function makeIncludes(
         | NestIncludeInput
         | NodeIncludeInput
         | UserIncludeInput
+        | LocationIncludeInput
         | undefined,
 ): string {
     if (!options) return '';

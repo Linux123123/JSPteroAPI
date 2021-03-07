@@ -37,13 +37,6 @@ export class Request {
             );
         if (rawData.status == 204) return dataObj;
         const res = await rawData.json();
-        switch (dataObj) {
-            case 'data':
-                return res.data;
-            case 'attributes':
-                return res.attributes;
-            default:
-                return res;
-        }
+        return res[dataObj] || res;
     }
 }
