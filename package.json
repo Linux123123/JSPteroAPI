@@ -36,7 +36,7 @@
         "node-fetch": "^2.6.1"
     },
     "devDependencies": {
-        "@microsoft/tsdoc-config": "^0.14.0",
+        "@microsoft/tsdoc-config": "^0.15.0",
         "@types/node": "^14.14.31",
         "@types/node-fetch": "^2.5.8",
         "@typescript-eslint/eslint-plugin": "^4.15.1",
