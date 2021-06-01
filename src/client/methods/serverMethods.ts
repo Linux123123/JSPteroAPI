@@ -8,7 +8,10 @@ import {
 import { ServerResources } from '../interfaces/ServerResources';
 
 export class serverMethods {
-    public constructor(private host: string, private key: string) {}
+    public constructor(
+        private readonly host: string,
+        private readonly key: string,
+    ) {}
     /**
      * @param options - Include information about server relationships
      * @returns An Array of servers
@@ -116,7 +119,7 @@ export class serverMethods {
      */
     public async setPowerState(
         serverId: string,
-        action: string,
+        action: 'start' | 'stop' | 'restart' | 'kill',
     ): Promise<string> {
         return new Request(this.host, this.key).request(
             'POST',

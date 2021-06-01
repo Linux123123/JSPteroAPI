@@ -4,11 +4,15 @@ import {
     Node,
     NodeAttributes,
     NodeConfig,
+    NodeEditOptions,
     NodeIncludeInput,
 } from '../interfaces/Node';
 
 export class nodeMethods {
-    public constructor(private host: string, private key: string) {}
+    public constructor(
+        private readonly host: string,
+        private readonly key: string,
+    ) {}
     /**
      * @param options - Include information about relationships
      * @returns Array of nodes
@@ -178,55 +182,35 @@ export class nodeMethods {
      */
     public editNode = async (
         nodeId: number,
-        name?: string,
-        description?: string,
-        locationID?: number,
-        fqdn?: string,
-        scheme?: 'http' | 'https',
-        ram?: number,
-        disk?: number,
-        isPublic?: boolean,
-        daemonPort?: number,
-        daemonSFTPPort?: number,
-        ramOverAllocate?: number,
-        diskOverallocate?: number,
-        daemonDir?: string,
-        maintenceMode?: boolean,
-        maxUploadSize?: number,
-        behindProxy?: boolean,
-        resetSecret = false,
-        options?: NodeIncludeInput,
+        options: NodeEditOptions,
     ): Promise<NodeAttributes> => {
         const node = await this.getNodeInfo(nodeId);
         return new Request(this.host, this.key).request(
             'PATCH',
             {
-                name: name ? name : node.name,
-                description: description ? description : node.description,
-                location_id: locationID ? locationID : node.location_id,
-                public: isPublic ? isPublic : node.public,
-                fqdn: fqdn ? fqdn : node.fqdn,
-                scheme: scheme ? scheme : node.scheme,
-                behind_proxy: behindProxy ? behindProxy : node.behind_proxy,
-                memory: ram ? ram : node.memory,
-                memory_overallocate: ramOverAllocate
-                    ? ramOverAllocate
-                    : node.memory_overallocate,
-                disk: disk ? disk : node.disk,
-                disk_overallocate: diskOverallocate
-                    ? diskOverallocate
-                    : node.disk_overallocate,
-                daemon_base: daemonDir ? daemonDir : node.daemon_base,
-                daemon_listen: daemonPort ? daemonPort : node.daemon_listen,
-                daemon_sftp: daemonSFTPPort ? daemonSFTPPort : node.daemon_sftp,
-                maintenance_mode: maintenceMode
-                    ? maintenceMode
-                    : node.maintenance_mode,
-                upload_size: maxUploadSize ? maxUploadSize : node.upload_size,
-                reset_secret: resetSecret,
+                name: options.name ?? node.name,
+                description: options.description ?? node.description,
+                location_id: options.locationID ?? node.location_id,
+                public: options.isPublic ?? node.public,
+                fqdn: options.fqdn ?? node.fqdn,
+                scheme: options.scheme ?? node.scheme,
+                behind_proxy: options.behindProxy ?? node.behind_proxy,
+                memory: options.ram ?? node.memory,
+                memory_overallocate:
+                    options.ramOverAllocate ?? node.memory_overallocate,
+                disk: options.disk ?? node.disk,
+                disk_overallocate:
+                    options.diskOverallocate ?? node.disk_overallocate,
+                daemon_base: options.daemonDir ?? node.daemon_base,
+                daemon_listen: options.daemonPort ?? node.daemon_listen,
+                daemon_sftp: options.daemonSFTPPort ?? node.daemon_sftp,
+                maintenance_mode:
+                    options.maintenceMode ?? node.maintenance_mode,
+                upload_size: options.maxUploadSize ?? node.upload_size,
+                reset_secret: options.resetSecret,
             },
             'attributes',
-            `/api/application/nodes/${nodeId}${makeIncludes(options)}`,
+            `/api/application/nodes/${nodeId}${makeIncludes(options.options)}`,
         );
     };
     /**

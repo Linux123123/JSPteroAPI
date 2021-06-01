@@ -1,13 +1,17 @@
 import { Request } from '../ApplicationRequest';
 import { makeIncludes } from '../../modules/Functions';
 import {
+    EditLocationOptions,
     Location,
     LocationAttributes,
     LocationIncludeInput,
 } from '../interfaces/Location';
 
 export class locationMethods {
-    public constructor(private host: string, private key: string) {}
+    public constructor(
+        private readonly host: string,
+        private readonly key: string,
+    ) {}
     /**
      * @param options - Include information about locations relationships
      * @returns Array of locations
@@ -85,9 +89,7 @@ export class locationMethods {
     };
     /**
      * @param locationId - The location id to edit
-     * @param shortName - The short name
-     * @param description - The description
-     * @param options - Include information about locations relationships
+     * @param options - Location edit options
      * @returns Location information
      * @example
      * ```ts
@@ -100,19 +102,19 @@ export class locationMethods {
      */
     public editLocation = async (
         locationId: number,
-        shortName?: string,
-        description?: string,
-        options?: LocationIncludeInput,
+        options: EditLocationOptions,
     ): Promise<LocationAttributes> => {
         const location = await this.getLocationInfo(locationId);
         return new Request(this.host, this.key).request(
             'PATCH',
             {
-                short: shortName ? shortName : location.short,
-                long: description ? description : location.long,
+                short: options.shortName ?? location.short,
+                long: options.description ?? location.long,
             },
             'attributes',
-            `/api/application/locations/${locationId}${makeIncludes(options)}`,
+            `/api/application/locations/${locationId}${makeIncludes(
+                options.options,
+            )}`,
         );
     };
     /**

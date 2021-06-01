@@ -1,6 +1,9 @@
 import { Request } from '../ApplicationRequest';
 import { makeIncludes } from '../../modules/Functions';
 import {
+    EditServerBuild,
+    EditServerDetails,
+    EditServerStartup,
     Server,
     ServerAttributes,
     ServerEnvironment,
@@ -9,7 +12,10 @@ import {
 import { nestMethods } from './nestMethods';
 
 export class serverMethods {
-    public constructor(private host: string, private key: string) {}
+    public constructor(
+        private readonly host: string,
+        private readonly key: string,
+    ) {}
     /**
      * @param options - Include information about server relationships
      * @returns Array of server
@@ -84,11 +90,7 @@ export class serverMethods {
     };
     /**
      * @param serverId - The server ID to get the details of.
-     * @param name - New server name
-     * @param userId - ID of the new server owner
-     * @param externalId - Set the new external ID
-     * @param description - Set new description
-     * @param options - Include information about server relationships
+     * @param options - The options to edit
      * @returns Server information
      * @example
      * ```ts
@@ -101,42 +103,27 @@ export class serverMethods {
      */
     public editServerDetails = async (
         serverId: number,
-        name?: string,
-        userId?: number,
-        externalId?: string,
-        description?: string,
-        options?: ServerIncludesInput,
+        options: EditServerDetails,
     ): Promise<ServerAttributes> => {
         const server = await this.getServerInfo(serverId);
         return new Request(this.host, this.key).request(
             'PATCH',
             {
-                name: name ? name : server.name,
-                user: userId != undefined ? userId : server.user,
-                external_id: externalId ? externalId : server.external_id,
-                description: description ? description : server.description,
+                name: options.name ?? server.name,
+                user:
+                    options.userId != undefined ? options.userId : server.user,
+                external_id: options.externalId ?? server.external_id,
+                description: options.description ?? server.description,
             },
             'attributes',
             `/api/application/servers/${serverId}/details${makeIncludes(
-                options,
+                options.options,
             )}`,
         );
     };
     /**
      * @param serverId - The server ID to get the details of.
-     * @param allocationId - The new primary allocation id
-     * @param addAllocations - Array of new allocation ids to add
-     * @param removeAllocations - Array of allocation ids to remove from server
-     * @param cpu - Amount of cpu resources to give (1 core = 100) (0 unlimited)
-     * @param memory - Amount of memory resources to give (1024 = 1GB) (0 unlimited)
-     * @param disk - Amount of disk space to give (1024 = 1GB) (0 unlimited)
-     * @param databases - Amount databases server can create
-     * @param allocations - Amount allocations server can create
-     * @param backups - Amount backups server can create
-     * @param swap - Amount swap resources to give (1024 = 1GB) (-1 unlimited)
-     * @param io - ADVANCED IO performance of the host server (between 10 and 1000)
-     * @param threads - ADVANCED Threads for the server to use
-     * @param options - Include information about server relationships
+     * @param options - The options to edit
      * @returns Server information
      * @example
      * ```ts
@@ -149,54 +136,54 @@ export class serverMethods {
      */
     public editServerBuild = async (
         serverId: number,
-        allocationId?: number,
-        addAllocations?: number[],
-        removeAllocations?: number[],
-        cpu?: number,
-        memory?: number,
-        disk?: number,
-        databases?: number,
-        allocations?: number,
-        backups?: number,
-        swap?: number,
-        io?: number,
-        threads?: string,
-        options?: ServerIncludesInput,
+        options: EditServerBuild,
     ): Promise<ServerAttributes> => {
         const server = await this.getServerInfo(serverId);
         return new Request(this.host, this.key).request(
             'PATCH',
             {
                 allocation:
-                    allocationId != undefined
-                        ? allocationId
+                    options.allocationId != undefined
+                        ? options.allocationId
                         : server.allocation,
-                add_allocations: addAllocations ? addAllocations : [],
-                remove_allocations: removeAllocations ? removeAllocations : [],
-                memory: memory != undefined ? memory : server.limits.memory,
-                swap: swap != undefined ? swap : server.limits.swap,
-                disk: disk != undefined ? disk : server.limits.disk,
-                io: io != undefined ? io : server.limits.io,
-                cpu: cpu != undefined ? cpu : server.limits.cpu,
-                threads: threads != undefined ? threads : server.limits.threads,
+                add_allocations: options.addAllocations ?? [],
+                remove_allocations: options.removeAllocations ?? [],
+                memory:
+                    options.memory != undefined
+                        ? options.memory
+                        : server.limits.memory,
+                swap:
+                    options.swap != undefined
+                        ? options.swap
+                        : server.limits.swap,
+                disk:
+                    options.disk != undefined
+                        ? options.disk
+                        : server.limits.disk,
+                io: options.io != undefined ? options.io : server.limits.io,
+                cpu: options.cpu != undefined ? options.cpu : server.limits.cpu,
+                threads:
+                    options.threads != undefined
+                        ? options.threads
+                        : server.limits.threads,
                 feature_limits: {
                     databases:
-                        databases != undefined
-                            ? databases
+                        options.databases != undefined
+                            ? options.databases
                             : server.feature_limits.databases,
                     allocations:
-                        allocations != undefined
-                            ? allocations
+                        options.allocations != undefined
+                            ? options.allocations
                             : server.feature_limits.allocations,
                     backups:
-                        backups != undefined
-                            ? backups
+                        options.backups != undefined
+                            ? options.backups
                             : server.feature_limits.backups,
                 },
             },
             'attributes',
             `/api/application/servers/${serverId}/build${makeIncludes(
-                options,
+                options.options,
             )}`,
         );
     };
@@ -220,21 +207,17 @@ export class serverMethods {
      */
     public editServerStartup = async (
         serverId: number,
-        startup?: string,
-        environment?: ServerEnvironment,
-        egg?: number,
-        image?: string,
-        skip_scripts = false,
-        options?: ServerIncludesInput,
+        options: EditServerStartup,
     ): Promise<ServerAttributes> => {
         const server = await this.getServerInfo(serverId, { variables: true });
         const envVars: Record<string, unknown> = {};
-        if (environment) {
-            const givenEnvVars = Object.keys(environment);
+        if (options.environment) {
+            const env = options.environment;
+            const givenEnvVars = Object.keys(options.environment);
             server.relationships?.variables?.data.forEach((envVar) => {
                 const envVariable = envVar.attributes.env_variable;
                 if (givenEnvVars.includes(envVariable)) {
-                    envVars[envVariable] = environment[envVariable];
+                    envVars[envVariable] = env[envVariable];
                 } else if (envVar.attributes.server_value) {
                     envVars[envVariable] = envVar.attributes.server_value;
                 } else if (envVar.attributes.default_value) {
@@ -249,17 +232,17 @@ export class serverMethods {
         return new Request(this.host, this.key).request(
             'PATCH',
             {
-                startup: startup ? startup : server.container.startup_command,
-                environment: environment
+                startup: options.startup ?? server.container.startup_command,
+                environment: options.environment
                     ? envVars
                     : server.container.environment,
-                egg: egg != undefined ? egg : server.egg,
-                image: image ? image : server.container.image,
-                skip_scripts: skip_scripts,
+                egg: options.egg != undefined ? options.egg : server.egg,
+                image: options.image ?? server.container.image,
+                skip_scripts: options.skip_scripts,
             },
             'attributes',
             `/api/application/servers/${serverId}/startup${makeIncludes(
-                options,
+                options.options,
             )}`,
         );
     };
@@ -310,10 +293,11 @@ export class serverMethods {
         io = 500,
         options?: ServerIncludesInput, // Databases are always empty
     ): Promise<ServerAttributes> => {
-        const egg = await new nestMethods(
-            this.host,
-            this.key,
-        ).getEggInfo(nestId, eggId, { variables: true });
+        const egg = await new nestMethods(this.host, this.key).getEggInfo(
+            nestId,
+            eggId,
+            { variables: true },
+        );
         const envVars: Record<string, unknown> = {};
         let givenEnvVars: string[] = [];
         if (environment) givenEnvVars = Object.keys(environment);
@@ -321,6 +305,8 @@ export class serverMethods {
             const envVariable = envVar.attributes.env_variable;
             if (givenEnvVars.includes(envVariable)) {
                 envVars[envVariable] = environment?.[envVariable];
+            } else if (envVar.attributes.rules.includes('nullable')) {
+                envVars[envVariable] = '';
             } else if (envVar.attributes.default_value) {
                 envVars[envVariable] = envVar.attributes.default_value;
             } else {

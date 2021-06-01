@@ -1,3 +1,4 @@
+/** @module ClientUser */
 export interface UserAttributes {
     id: number;
     admin: boolean;

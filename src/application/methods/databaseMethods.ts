@@ -7,7 +7,10 @@ import {
 } from '../interfaces/Database';
 
 export class databaseMethods {
-    public constructor(private host: string, private key: string) {}
+    public constructor(
+        private readonly host: string,
+        private readonly key: string,
+    ) {}
     /**
      * @param serverId - The server ID to get the databases from
      * @param options - Include information about server relationships

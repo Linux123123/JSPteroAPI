@@ -87,3 +87,24 @@ export interface Node {
     object: string;
     attributes: NodeAttributes;
 }
+
+export interface NodeEditOptions {
+    name?: string;
+    description?: string;
+    locationID?: number;
+    fqdn?: string;
+    scheme?: 'http' | 'https';
+    ram?: number;
+    disk?: number;
+    isPublic?: boolean;
+    daemonPort?: number;
+    daemonSFTPPort?: number;
+    ramOverAllocate?: number;
+    diskOverallocate?: number;
+    daemonDir?: string;
+    maintenceMode?: boolean;
+    maxUploadSize?: number;
+    behindProxy?: boolean;
+    resetSecret: boolean;
+    options?: NodeIncludeInput;
+}

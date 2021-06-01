@@ -198,3 +198,54 @@ export interface Server {
     object: string;
     attributes: ServerAttributes;
 }
+
+export interface EditServerDetails {
+    /** New server name */
+    name?: string;
+    /** ID of the new server owner */
+    userId?: number;
+    /** Set the new external ID */
+    externalId?: string;
+    /** Set new description */
+    description?: string;
+    /** Include information about server relationships */
+    options?: ServerIncludesInput;
+}
+
+export interface EditServerBuild {
+    /** The new primary allocation id */
+    allocationId?: number;
+    /** Array of new allocation ids to add */
+    addAllocations?: number[];
+    /** Array of allocation ids to remove from server */
+    removeAllocations?: number[];
+    /** Amount of cpu resources to give (1 core = 100) (0 unlimited) */
+    cpu?: number;
+    /** Amount of memory resources to give (1024 = 1GB) (0 unlimited) */
+    memory?: number;
+    /** Amount of disk space to give (1024 = 1GB) (0 unlimited) */
+    disk?: number;
+    /** Amount databases server can create */
+    databases?: number;
+    /** Amount allocations server can create */
+    allocations?: number;
+    /** Amount backups server can create */
+    backups?: number;
+    /** Amount swap resources to give (1024 = 1GB) (-1 unlimited) */
+    swap?: number;
+    /** ADVANCED IO performance of the host server (between 10 and 1000) */
+    io?: number;
+    /** ADVANCED Threads for the server to use */
+    threads?: string;
+    /** Include information about server relationships */
+    options?: ServerIncludesInput;
+}
+
+export interface EditServerStartup {
+    startup?: string;
+    environment?: ServerEnvironment;
+    egg?: number;
+    image?: string;
+    skip_scripts: boolean;
+    options?: ServerIncludesInput;
+}

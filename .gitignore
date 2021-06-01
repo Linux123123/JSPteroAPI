@@ -2,5 +2,4 @@ node_modules
 dist
 docs
 test.ts
-package-lock.json
 yarn.lock

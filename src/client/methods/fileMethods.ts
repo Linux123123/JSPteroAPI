@@ -10,7 +10,10 @@ import {
 } from '../interfaces/ServerFile';
 
 export class fileMethods {
-    public constructor(private host: string, private key: string) {}
+    public constructor(
+        private readonly host: string,
+        private readonly key: string,
+    ) {}
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @param dir - Directory to get files from (if not provided gets root server dir) (e. g. dist or dist/classes)

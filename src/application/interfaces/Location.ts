@@ -36,3 +36,12 @@ export interface Location {
     object: string;
     attributes: LocationAttributes;
 }
+
+export interface EditLocationOptions {
+    /** The short name */
+    shortName?: string;
+    /** The description */
+    description?: string;
+    /** Include information about locations relationships */
+    options?: LocationIncludeInput;
+}

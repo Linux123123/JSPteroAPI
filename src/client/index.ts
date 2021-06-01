@@ -4,6 +4,7 @@ import { consoleMethods } from './methods/consoleMethods';
 import { fileMethods } from './methods/fileMethods';
 import { databaseMethods } from './methods/databaseMethods';
 import { accountMethods } from './methods/accountMethods';
+import { scheduleMethods } from './methods/scheduleMethods';
 
 class Client {
     /**
@@ -55,6 +56,17 @@ class Client {
         this.getAccountInfo = accountmethods.getAccountInfo;
         this.getAccount2FADetails = accountmethods.getAccount2FADetails;
         this.enable2FA = accountmethods.enable2FA;
+        this.updateEmail = accountmethods.updateEmail;
+        this.updatePassword = accountmethods.updatePassword;
+        this.getAllApiKeys = accountmethods.getAllApiKeys;
+        this.createApiKey = accountmethods.createApiKey;
+        this.deleteApiKey = accountmethods.deleteApiKey;
+        // Schedule
+        const schedulemethods = new scheduleMethods(host, key);
+        this.getAllSchedules = schedulemethods.getAllSchedules;
+        this.createSchedule = schedulemethods.createSchedule;
+        this.getScheduleInfo = schedulemethods.getScheduleInfo;
+        this.editSchedule = schedulemethods.editSchedule;
     }
     /**
      @internal
@@ -91,6 +103,9 @@ class Client {
     public getFileUploadLink;
     public getAccountInfo;
     public getAccount2FADetails;
+    public getAllApiKeys;
+    public getAllSchedules;
+    public getScheduleInfo;
     // POST
     public sendCommand;
     public setPowerState;
@@ -103,10 +118,16 @@ class Client {
     public deleteFile;
     public createFolder;
     public enable2FA;
+    public createApiKey;
+    public createSchedule;
+    public editSchedule;
     // Delete
     public deleteDatabase;
+    public deleteApiKey;
     // PUT
     public renameFile;
+    public updateEmail;
+    public updatePassword;
 }
 
 export { Client };

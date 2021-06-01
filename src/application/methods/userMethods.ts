@@ -1,9 +1,17 @@
 import { makeIncludes } from '../../modules/Functions';
 import { Request } from '../ApplicationRequest';
-import { User, UserAttributes, UserIncludeInput } from '../interfaces/User';
+import {
+    EditUserOptions,
+    User,
+    UserAttributes,
+    UserIncludeInput,
+} from '../interfaces/User';
 
 export class userMethods {
-    public constructor(private host: string, private key: string) {}
+    public constructor(
+        private readonly host: string,
+        private readonly key: string,
+    ) {}
     /**
      * @param options - Include information about relationships
      * @returns Array of users
@@ -122,15 +130,7 @@ export class userMethods {
     };
     /**
      * @param userId - The user id of the user to edit
-     * @param username - The new username of the user
-     * @param firstName - The new first name of the user
-     * @param lastName - The new last name of the user
-     * @param email - The new email address of the user
-     * @param password - The new password of the user
-     * @param isAdmin - Is the user admin
-     * @param language - The new language of the user
-     * @param externalId - The new external id of user
-     * @param options - Include information about relationships
+     * @param options - Options to edit user
      * @returns User information
      * @example
      * ```ts
@@ -143,31 +143,23 @@ export class userMethods {
      */
     public editUser = async (
         userId: number,
-        username?: string,
-        firstName?: string,
-        lastName?: string,
-        email?: string,
-        password?: string,
-        isAdmin?: boolean,
-        language?: string,
-        externalId?: string,
-        options?: UserIncludeInput,
+        options: EditUserOptions,
     ): Promise<UserAttributes> => {
         const user = await this.getUserInfo(userId);
         return new Request(this.host, this.key).request(
             'PATCH',
             {
-                email: email ? email : user.email,
-                username: username ? username : user.username,
-                first_name: firstName ? firstName : user.first_name,
-                last_name: lastName ? lastName : user.last_name,
-                language: language ? language : user.language,
-                root_admin: isAdmin ? isAdmin : user.root_admin,
-                password: password ? password : '',
-                external_id: externalId ? externalId : user.external_id,
+                email: options.email ?? user.email,
+                username: options.username ?? user.username,
+                first_name: options.firstName ?? user.first_name,
+                last_name: options.lastName ?? user.last_name,
+                language: options.language ?? user.language,
+                root_admin: options.isAdmin ?? user.root_admin,
+                password: options.password ?? '',
+                external_id: options.externalId ?? user.external_id,
             },
             'attributes',
-            `/api/application/users/${userId}${makeIncludes(options)}`,
+            `/api/application/users/${userId}${makeIncludes(options.options)}`,
         );
     };
     /**

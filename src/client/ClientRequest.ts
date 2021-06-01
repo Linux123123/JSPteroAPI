@@ -41,7 +41,7 @@ export class Request {
         if (text) return await rawData.text();
         const res = await rawData.json();
         return !dataObj.includes(' ')
-            ? res[dataObj]
+            ? res[dataObj] || res
             : res[dataObj.split(' ')[0]][dataObj.split(' ')[1]];
     }
 }

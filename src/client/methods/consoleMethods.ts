@@ -2,7 +2,10 @@ import { Request } from '../ClientRequest';
 import { WebsocketAuthData } from '../interfaces/WebsocketAuthData';
 
 export class consoleMethods {
-    public constructor(private host: string, private key: string) {}
+    public constructor(
+        private readonly host: string,
+        private readonly key: string,
+    ) {}
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @returns Data to connect to a websocket

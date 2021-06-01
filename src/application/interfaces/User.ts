@@ -34,3 +34,24 @@ export interface User {
     object: string;
     attributes: UserAttributes;
 }
+
+export interface EditUserOptions {
+    /** The new username of the user */
+    username?: string;
+    /** The new first name of the user */
+    firstName?: string;
+    /** The new last name of the user */
+    lastName?: string;
+    /** The new email address of the user */
+    email?: string;
+    /** The new password of the user */
+    password?: string;
+    /** Is the user admin */
+    isAdmin?: boolean;
+    /** The new language of the user */
+    language?: string;
+    /** The new external id of user */
+    externalId?: string;
+    /** Include information about relationships */
+    options?: UserIncludeInput;
+}

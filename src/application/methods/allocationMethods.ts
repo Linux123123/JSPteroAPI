@@ -3,7 +3,10 @@ import { makeIncludes } from '../../modules/Functions';
 import { Allocation, AllocationIncludeInput } from '../interfaces/Allocation';
 
 export class allocationMethods {
-    public constructor(private host: string, private key: string) {}
+    public constructor(
+        private readonly host: string,
+        private readonly key: string,
+    ) {}
     /**
      * @param nodeId - The node id of which you want to get allocations from
      * @param options - Include information about relationships

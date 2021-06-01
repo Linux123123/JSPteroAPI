@@ -9,7 +9,10 @@ import {
 } from '../interfaces/Nest';
 
 export class nestMethods {
-    public constructor(private host: string, private key: string) {}
+    public constructor(
+        private readonly host: string,
+        private readonly key: string,
+    ) {}
     /**
      * @param options - Include information about: eggs or servers
      * @returns Array of nests
