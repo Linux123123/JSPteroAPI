@@ -5,6 +5,11 @@ export interface UserIncludeInput {
     servers: boolean;
 }
 
+export interface UserFilterInput {
+    filter: string;
+    filterBy: 'email' | 'uuid' | 'username' | 'external_id';
+}
+
 export interface UserServers {
     object: string;
     data: Server[];

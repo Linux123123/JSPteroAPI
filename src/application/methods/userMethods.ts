@@ -1,9 +1,10 @@
-import { makeIncludes } from '../../modules/Functions';
+import { makeIncludes, makeOptions } from '../../modules/Functions';
 import { Request } from '../ApplicationRequest';
 import {
     EditUserOptions,
     User,
     UserAttributes,
+    UserFilterInput,
     UserIncludeInput,
 } from '../interfaces/User';
 
@@ -26,12 +27,13 @@ export class userMethods {
      */
     public getAllUsers = async (
         options?: UserIncludeInput,
+        filter?: UserFilterInput,
     ): Promise<User[]> => {
         return new Request(this.host, this.key).request(
             'GET',
             null,
             'data',
-            `/api/application/users${makeIncludes(options)}`,
+            `/api/application/users${makeOptions(options, filter)}`,
         );
     };
     /**
