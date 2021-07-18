@@ -4,7 +4,5 @@ updates:
       directory: '/'
       schedule:
           interval: 'daily'
-      ignore:
-          - dependency-type: 'development' # Ignore dev dependencies
       allow:
           - dependency-type: 'production' # Only allow to update production deps
