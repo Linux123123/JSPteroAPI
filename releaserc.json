@@ -1,4 +1,17 @@
 {
     "branches": ["master", "next"],
-    "repositoryUrl": "https://github.com/Linux123123/JSPteroAPI.git"
+    "repositoryUrl": "https://github.com/Linux123123/JSPteroAPI.git",
+    "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        [
+            "@amanda-mitchell/semantic-release-npm-multiple",
+            {
+                "registries": {
+                    "github": {},
+                    "npm": {}
+                }
+            }
+        ]
+    ]
 }
