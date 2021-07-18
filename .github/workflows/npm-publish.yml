@@ -5,7 +5,7 @@ on:
         types: [created]
 
 jobs:
-    build:
+    release:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -14,33 +14,7 @@ jobs:
                   node-version: 14
             - run: npm i --also=dev
             - run: npm run-script build
-    publish-npm:
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
-              with:
-                  node-version: 14
-                  registry-url: https://registry.npmjs.org/
-            - run: npm i --also=dev
-            - run: npm run-script build:publish
-            - run: npm publish --access public
-              env:
-                  NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM_TOKEN}}
-
-    publish-gpr:
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
-              with:
-                  node-version: 14
-                  registry-url: https://npm.pkg.github.com/
-                  scope: '@linux123123'
-            - run: npm i --also=dev
-            - run: npm run-script build:publish
-            - run: npm publish
-              env:
-                  NODE_AUTH_TOKEN: ${{secrets.PUBLISH_GITHUB_TOKEN}}
+            - env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - run: npx semantic-release
