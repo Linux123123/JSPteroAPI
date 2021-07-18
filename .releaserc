@@ -1,5 +1,12 @@
 {
-    "branches": ["master", "next"],
+    "branches": [
+        "master",
+        {
+            "name": "next",
+            "channel": "next",
+            "prerelease": "next"
+        }
+    ],
     "repositoryUrl": "https://github.com/Linux123123/JSPteroAPI.git",
     "plugins": [
         "@semantic-release/commit-analyzer",
