@@ -2,7 +2,11 @@ import fetch, { RequestInit } from 'node-fetch';
 import { JSPteroAPIError } from '../modules/Error';
 
 export class Request {
-    constructor(readonly host: string, readonly key: string) {}
+    constructor(
+        private readonly host: string,
+        private readonly key: string,
+        private readonly errorHandler: (error: JSPteroAPIError) => void,
+    ) {}
     /**
      * @param requestType - The type of request to use e. g. GET, POST
      * @param data - Data to send
@@ -29,11 +33,13 @@ export class Request {
         if (data) options.body = JSON.stringify(data);
         const rawData = await fetch(URL, options);
         if (!rawData.ok)
-            throw new JSPteroAPIError(
-                rawData,
-                await rawData.json(),
-                data,
-                requestType,
+            return this.errorHandler(
+                new JSPteroAPIError(
+                    rawData,
+                    await rawData.json(),
+                    data,
+                    requestType,
+                ),
             );
         if (rawData.status == 204) return dataObj;
         const res = await rawData.json();

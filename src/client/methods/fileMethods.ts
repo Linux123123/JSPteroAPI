@@ -1,4 +1,4 @@
-import { Request } from '../ClientRequest';
+import { Client } from '..';
 import {
     ServerFile,
     ServerFileAttributes,
@@ -10,10 +10,7 @@ import {
 } from '../interfaces/ServerFile';
 
 export class fileMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly client: Client) {}
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @param dir - Directory to get files from (if not provided gets root server dir) (e. g. dist or dist/classes)
@@ -31,7 +28,7 @@ export class fileMethods {
         serverId: string,
         dir = '',
     ): Promise<ServerFile[]> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'data',
@@ -59,7 +56,7 @@ export class fileMethods {
         if (file.includes('/')) {
             file.split('/').forEach((f) => (filePath += `%2F${f}`));
         } else filePath = `%2F${file}`;
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             '',
@@ -90,7 +87,7 @@ export class fileMethods {
         if (file.includes('/')) {
             file.split('/').forEach((f) => (filePath += `%2F${f}`));
         } else filePath = `%2F${file}`;
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             contents,
             'Successfuly written the file!',
@@ -114,7 +111,7 @@ export class fileMethods {
         serverId: string,
         data: SeverFileRename,
     ): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'PUT',
             data,
             'Successfuly renamed!',
@@ -135,7 +132,7 @@ export class fileMethods {
      * ```
      */
     public async copyFile(serverId: string, location: string): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             { location: location },
             'Successfuly copied!',
@@ -163,7 +160,7 @@ export class fileMethods {
         if (file.includes('/')) {
             file.split('/').forEach((f) => (filePath += `%2F${f}`));
         } else filePath = `%2F${file}`;
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'attributes url',
@@ -187,7 +184,7 @@ export class fileMethods {
         serverId: string,
         data: ServerFileCompress,
     ): Promise<ServerFileAttributes> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             data,
             'attributes',
@@ -211,7 +208,7 @@ export class fileMethods {
         serverId: string,
         data: ServerFileDecompress,
     ): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             data,
             'Successfuly decompressed!',
@@ -235,7 +232,7 @@ export class fileMethods {
         serverId: string,
         data: ServerFileDelete,
     ): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             data,
             'Successfuly deleted!',
@@ -259,7 +256,7 @@ export class fileMethods {
         serverId: string,
         data: ServerFileCreateFolder,
     ): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             data,
             'Successfuly created!',
@@ -279,7 +276,7 @@ export class fileMethods {
      * ```
      */
     public async getFileUploadLink(serverId: string): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'attributes url',

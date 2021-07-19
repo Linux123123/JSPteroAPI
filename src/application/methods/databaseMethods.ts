@@ -1,16 +1,13 @@
-import { Request } from '../ApplicationRequest';
 import { makeIncludes } from '../../modules/Functions';
 import {
     Database,
     DatabaseAttributes,
     DatabaseIncludeInput,
 } from '../interfaces/Database';
+import { Application } from '..';
 
 export class databaseMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly application: Application) {}
     /**
      * @param serverId - The server ID to get the databases from
      * @param options - Include information about server relationships
@@ -28,7 +25,7 @@ export class databaseMethods {
         serverId: number,
         options?: DatabaseIncludeInput,
     ): Promise<Database[]> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'data',
@@ -56,7 +53,7 @@ export class databaseMethods {
         databaseId: number,
         options?: DatabaseIncludeInput,
     ): Promise<DatabaseAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'attributes',
@@ -88,7 +85,7 @@ export class databaseMethods {
         allowedIp = '%',
         options?: DatabaseIncludeInput,
     ): Promise<DatabaseAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'POST',
             {
                 database: name,
@@ -118,7 +115,7 @@ export class databaseMethods {
         serverId: number,
         databaseId: number,
     ): Promise<string> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'POST',
             null,
             'Successfully reset the password!',
@@ -142,7 +139,7 @@ export class databaseMethods {
         serverId: number,
         databaseId: number,
     ): Promise<string> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'DELETE',
             null,
             'Successfully deleted the database!',

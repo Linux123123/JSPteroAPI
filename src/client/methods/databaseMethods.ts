@@ -1,5 +1,5 @@
+import { Client } from '..';
 import { makeIncludes } from '../../modules/Functions';
-import { Request } from '../ClientRequest';
 import {
     Database,
     DatabaseAttributes,
@@ -7,10 +7,7 @@ import {
 } from '../interfaces/Database';
 
 export class databaseMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly client: Client) {}
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @param options - Include information about relationships
@@ -28,7 +25,7 @@ export class databaseMethods {
         serverId: string,
         options?: DatabaseIncludeInput,
     ): Promise<Database[]> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'data',
@@ -56,7 +53,7 @@ export class databaseMethods {
         connectionsAllowedFrom = '%',
         options?: DatabaseIncludeInput,
     ): Promise<DatabaseAttributes> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             { database: databaseName, remote: connectionsAllowedFrom },
             'attributes',
@@ -80,7 +77,7 @@ export class databaseMethods {
         serverId: string,
         databaseId: string,
     ): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'DELETE',
             null,
             'Sucesfully deleted!',
@@ -104,7 +101,7 @@ export class databaseMethods {
         serverId: string,
         databaseId: string,
     ): Promise<DatabaseAttributes> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             null,
             'attributes',

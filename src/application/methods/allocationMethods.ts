@@ -1,12 +1,9 @@
-import { Request } from '../ApplicationRequest';
 import { makeIncludes } from '../../modules/Functions';
 import { Allocation, AllocationIncludeInput } from '../interfaces/Allocation';
+import { Application } from '..';
 
 export class allocationMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly application: Application) {}
     /**
      * @param nodeId - The node id of which you want to get allocations from
      * @param options - Include information about relationships
@@ -24,7 +21,7 @@ export class allocationMethods {
         nodeId: number,
         options?: AllocationIncludeInput,
     ): Promise<Allocation[]> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'data',
@@ -54,7 +51,7 @@ export class allocationMethods {
         ports: string[],
         alias = '',
     ): Promise<string> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'POST',
             {
                 ip: ip,
@@ -82,7 +79,7 @@ export class allocationMethods {
         nodeId: number,
         allocationId: number,
     ): Promise<string> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'DELETE',
             null,
             'Successfully deleted!',

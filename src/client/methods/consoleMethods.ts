@@ -1,11 +1,8 @@
-import { Request } from '../ClientRequest';
+import { Client } from '..';
 import { WebsocketAuthData } from '../interfaces/WebsocketAuthData';
 
 export class consoleMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly client: Client) {}
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @returns Data to connect to a websocket
@@ -21,7 +18,7 @@ export class consoleMethods {
     public async getWebsocketAuthData(
         serverId: string,
     ): Promise<WebsocketAuthData> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'data',

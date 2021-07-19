@@ -1,4 +1,3 @@
-import { Request } from '../ApplicationRequest';
 import { makeIncludes } from '../../modules/Functions';
 import {
     EditServerBuild,
@@ -9,13 +8,10 @@ import {
     ServerEnvironment,
     ServerIncludesInput,
 } from '../interfaces/Server';
-import { nestMethods } from './nestMethods';
+import { Application } from '..';
 
 export class serverMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly application: Application) {}
     /**
      * @param options - Include information about server relationships
      * @returns Array of server
@@ -31,7 +27,7 @@ export class serverMethods {
     public getAllServers = async (
         options?: ServerIncludesInput,
     ): Promise<Server[]> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'data',
@@ -55,7 +51,7 @@ export class serverMethods {
         serverId: number,
         options?: ServerIncludesInput,
     ): Promise<ServerAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'attributes',
@@ -79,7 +75,7 @@ export class serverMethods {
         serverId: string,
         options?: ServerIncludesInput,
     ): Promise<ServerAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'attributes',
@@ -106,7 +102,7 @@ export class serverMethods {
         options: EditServerDetails,
     ): Promise<ServerAttributes> => {
         const server = await this.getServerInfo(serverId);
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'PATCH',
             {
                 name: options.name ?? server.name,
@@ -139,7 +135,7 @@ export class serverMethods {
         options: EditServerBuild,
     ): Promise<ServerAttributes> => {
         const server = await this.getServerInfo(serverId);
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'PATCH',
             {
                 allocation:
@@ -229,7 +225,7 @@ export class serverMethods {
                 }
             });
         }
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'PATCH',
             {
                 startup: options.startup ?? server.container.startup_command,
@@ -293,11 +289,9 @@ export class serverMethods {
         io = 500,
         options?: ServerIncludesInput, // Databases are always empty
     ): Promise<ServerAttributes> => {
-        const egg = await new nestMethods(this.host, this.key).getEggInfo(
-            nestId,
-            eggId,
-            { variables: true },
-        );
+        const egg = await this.application.getEggInfo(nestId, eggId, {
+            variables: true,
+        });
         const envVars: Record<string, unknown> = {};
         let givenEnvVars: string[] = [];
         if (environment) givenEnvVars = Object.keys(environment);
@@ -315,7 +309,7 @@ export class serverMethods {
                 );
             }
         });
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'POST',
             {
                 name: name,
@@ -374,7 +368,7 @@ export class serverMethods {
     ): Promise<string> {
         let force = '';
         if (forceDelete) force = '/force';
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'DELETE',
             null,
             'Successfully deleted!',
@@ -394,7 +388,7 @@ export class serverMethods {
      * ```
      */
     public async suspendServer(internalID: number): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'POST',
             null,
             'Successfully suspended!',
@@ -414,7 +408,7 @@ export class serverMethods {
      * ```
      */
     public async unSuspendServer(internalID: number): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'POST',
             null,
             'Successfully unsuspended!',
@@ -434,7 +428,7 @@ export class serverMethods {
      * ```
      */
     public async reinstallServer(internalID: number): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'POST',
             null,
             'Successfully reinstalled!',

@@ -1,5 +1,5 @@
+import { Client } from '..';
 import { makeIncludes } from '../../modules/Functions';
-import { Request } from '../ClientRequest';
 import {
     Server,
     ServerAttributes,
@@ -8,10 +8,7 @@ import {
 import { ServerResources } from '../interfaces/ServerResources';
 
 export class serverMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly client: Client) {}
     /**
      * @param options - Include information about server relationships
      * @returns An Array of servers
@@ -27,7 +24,7 @@ export class serverMethods {
     public async getAllServers(
         options?: ServerIncludeInput,
     ): Promise<Server[]> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'data',
@@ -51,7 +48,7 @@ export class serverMethods {
         serverId: string,
         options?: ServerIncludeInput,
     ): Promise<ServerAttributes> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'attributes',
@@ -73,7 +70,7 @@ export class serverMethods {
     public async getServerResources(
         serverId: string,
     ): Promise<ServerResources> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'attributes',
@@ -97,7 +94,7 @@ export class serverMethods {
         serverId: string,
         command: string,
     ): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             { command: command },
             'Successfuly sent the command!',
@@ -121,7 +118,7 @@ export class serverMethods {
         serverId: string,
         action: 'start' | 'stop' | 'restart' | 'kill',
     ): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             { signal: action },
             'Successfuly set power state!',

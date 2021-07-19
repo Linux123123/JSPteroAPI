@@ -1,4 +1,3 @@
-import { Request } from '../ApplicationRequest';
 import { makeIncludes } from '../../modules/Functions';
 import {
     Node,
@@ -7,12 +6,10 @@ import {
     NodeEditOptions,
     NodeIncludeInput,
 } from '../interfaces/Node';
+import { Application } from '..';
 
 export class nodeMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly application: Application) {}
     /**
      * @param options - Include information about relationships
      * @returns Array of nodes
@@ -28,7 +25,7 @@ export class nodeMethods {
     public getAllNodes = async (
         options?: NodeIncludeInput,
     ): Promise<Node[]> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'data',
@@ -52,7 +49,7 @@ export class nodeMethods {
         nodeId: number,
         options?: NodeIncludeInput,
     ): Promise<NodeAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'attributes',
@@ -72,7 +69,7 @@ export class nodeMethods {
      * ```
      */
     public async getNodeConfig(nodeId: number): Promise<NodeConfig> {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             '',
@@ -126,7 +123,7 @@ export class nodeMethods {
         behindProxy = false,
         options?: NodeIncludeInput,
     ): Promise<NodeAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'POST',
             {
                 name: name,
@@ -185,7 +182,7 @@ export class nodeMethods {
         options: NodeEditOptions,
     ): Promise<NodeAttributes> => {
         const node = await this.getNodeInfo(nodeId);
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'PATCH',
             {
                 name: options.name ?? node.name,
@@ -226,7 +223,7 @@ export class nodeMethods {
      * ```
      */
     public async deleteNode(nodeId: number): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'DELETE',
             null,
             'Successfully deleted!',

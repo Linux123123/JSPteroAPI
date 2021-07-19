@@ -1,5 +1,5 @@
+import { Application } from '..';
 import { makeIncludes, makeOptions } from '../../modules/Functions';
-import { Request } from '../ApplicationRequest';
 import {
     EditUserOptions,
     User,
@@ -9,10 +9,7 @@ import {
 } from '../interfaces/User';
 
 export class userMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly application: Application) {}
     /**
      * @param options - Include information about relationships
      * @returns Array of users
@@ -29,7 +26,7 @@ export class userMethods {
         options?: UserIncludeInput,
         filter?: UserFilterInput,
     ): Promise<User[]> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'data',
@@ -53,7 +50,7 @@ export class userMethods {
         userId: number,
         options?: UserIncludeInput,
     ): Promise<UserAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'attributes',
@@ -77,7 +74,7 @@ export class userMethods {
         userId: string,
         options?: UserIncludeInput,
     ): Promise<UserAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'attributes',
@@ -114,7 +111,7 @@ export class userMethods {
         language = 'en',
         externalId?: string,
     ): Promise<UserAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'POST',
             {
                 email: email,
@@ -148,7 +145,7 @@ export class userMethods {
         options: EditUserOptions,
     ): Promise<UserAttributes> => {
         const user = await this.getUserInfo(userId);
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'PATCH',
             {
                 email: options.email ?? user.email,
@@ -177,7 +174,7 @@ export class userMethods {
      * ```
      */
     public deleteUser = async (userId: number): Promise<string> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'DELETE',
             null,
             'Successfully deleted!',

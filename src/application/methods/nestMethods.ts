@@ -1,4 +1,3 @@
-import { Request } from '../ApplicationRequest';
 import { makeIncludes } from '../../modules/Functions';
 import { Egg, EggAttributes } from '../interfaces/Egg';
 import {
@@ -7,12 +6,10 @@ import {
     NestAttributes,
     NestIncludeInput,
 } from '../interfaces/Nest';
+import { Application } from '..';
 
 export class nestMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly application: Application) {}
     /**
      * @param options - Include information about: eggs or servers
      * @returns Array of nests
@@ -28,7 +25,7 @@ export class nestMethods {
     public getAllNests = async (
         options?: NestIncludeInput,
     ): Promise<Nest[]> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'data',
@@ -52,7 +49,7 @@ export class nestMethods {
         nestId: number,
         options?: NestIncludeInput,
     ): Promise<NestAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'attributes',
@@ -76,7 +73,7 @@ export class nestMethods {
         nestId: number,
         options?: EggIncludeInput,
     ): Promise<Egg[]> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'data',
@@ -102,7 +99,7 @@ export class nestMethods {
         eggId: number,
         options?: EggIncludeInput,
     ): Promise<EggAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'attributes',

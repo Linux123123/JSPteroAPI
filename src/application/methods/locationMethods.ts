@@ -1,4 +1,3 @@
-import { Request } from '../ApplicationRequest';
 import { makeIncludes } from '../../modules/Functions';
 import {
     EditLocationOptions,
@@ -6,12 +5,10 @@ import {
     LocationAttributes,
     LocationIncludeInput,
 } from '../interfaces/Location';
+import { Application } from '..';
 
 export class locationMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly application: Application) {}
     /**
      * @param options - Include information about locations relationships
      * @returns Array of locations
@@ -27,7 +24,7 @@ export class locationMethods {
     public getAllLocations = async (
         options?: LocationIncludeInput,
     ): Promise<Location[]> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'data',
@@ -51,7 +48,7 @@ export class locationMethods {
         locationId: number,
         options?: LocationIncludeInput,
     ): Promise<LocationAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'GET',
             null,
             'attributes',
@@ -77,7 +74,7 @@ export class locationMethods {
         description?: string,
         options?: LocationIncludeInput,
     ): Promise<LocationAttributes> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'POST',
             {
                 short: shortName,
@@ -105,7 +102,7 @@ export class locationMethods {
         options: EditLocationOptions,
     ): Promise<LocationAttributes> => {
         const location = await this.getLocationInfo(locationId);
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'PATCH',
             {
                 short: options.shortName ?? location.short,
@@ -130,7 +127,7 @@ export class locationMethods {
      * ```
      */
     public deleteLocation = async (locationId: number): Promise<string> => {
-        return new Request(this.host, this.key).request(
+        return this.application.request(
             'DELETE',
             null,
             'Successfully deleted the location!',

@@ -1,4 +1,4 @@
-import { Request } from '../ClientRequest';
+import { Client } from '..';
 import {
     Schedule,
     ScheduleAttributes,
@@ -6,10 +6,7 @@ import {
 } from '../interfaces/Schedule';
 
 export class scheduleMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly client: Client) {}
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @returns An Array of servers schedules
@@ -23,7 +20,7 @@ export class scheduleMethods {
      * ```
      */
     public async getAllSchedules(serverId: string): Promise<Schedule[]> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'data',
@@ -59,7 +56,7 @@ export class scheduleMethods {
         dayOfWeek: string,
         isActive = true,
     ): Promise<ScheduleAttributes> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             {
                 name: name,
@@ -91,7 +88,7 @@ export class scheduleMethods {
         serverId: string,
         scheduleId: number,
     ): Promise<ScheduleAttributes> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'attributes',
@@ -118,7 +115,7 @@ export class scheduleMethods {
         options: SheduleEditOptions,
     ): Promise<ScheduleAttributes> {
         const schedule = await this.getScheduleInfo(serverId, scheduleId);
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             {
                 name: options.name ?? schedule.name,

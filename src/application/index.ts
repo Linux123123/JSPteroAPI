@@ -6,6 +6,8 @@ import { nodeMethods } from './methods/nodeMethods';
 import { serverMethods } from './methods/serverMethods';
 import { userMethods } from './methods/userMethods';
 import { locationMethods } from './methods/locationMethods';
+import { Request } from './ApplicationRequest';
+import { JSPteroAPIError } from '../modules/Error';
 class Application {
     /**
      * @param host - Panels address
@@ -15,13 +17,16 @@ class Application {
     public constructor(
         private host: string,
         private key: string,
+        private errorHandler = (error: JSPteroAPIError): void => {
+            throw error;
+        },
         fast = false,
     ) {
         host = host.trim();
         if (host.endsWith('/')) host = host.slice(0, -1);
         this.host = host;
         if (!fast) this.testAPI();
-        const servermethods = new serverMethods(host, key);
+        const servermethods = new serverMethods(this);
         this.getAllServers = servermethods.getAllServers;
         this.getServerInfo = servermethods.getServerInfo;
         this.createServer = servermethods.createServer;
@@ -33,35 +38,35 @@ class Application {
         this.editServerDetails = servermethods.editServerDetails;
         this.editServerBuild = servermethods.editServerBuild;
         this.editServerStartup = servermethods.editServerStartup;
-        const nestmethods = new nestMethods(host, key);
+        const nestmethods = new nestMethods(this);
         this.getAllNests = nestmethods.getAllNests;
         this.getNestInfo = nestmethods.getNestInfo;
         this.getAllNestEggs = nestmethods.getAllNestEggs;
         this.getEggInfo = nestmethods.getEggInfo;
-        const databasemethods = new databaseMethods(host, key);
+        const databasemethods = new databaseMethods(this);
         this.getServersDatabases = databasemethods.getServersDatabases;
         this.getServersDatabaseInfo = databasemethods.getServersDatabaseInfo;
         this.createDatabase = databasemethods.createDatabase;
         this.resetDatabasePassword = databasemethods.resetDatabasePassword;
         this.deleteDatabase = databasemethods.deleteDatabase;
-        const usermethods = new userMethods(host, key);
+        const usermethods = new userMethods(this);
         this.getAllUsers = usermethods.getAllUsers;
         this.getUserInfo = usermethods.getUserInfo;
         this.createUser = usermethods.createUser;
         this.editUser = usermethods.editUser;
         this.deleteUser = usermethods.deleteUser;
-        const nodemethods = new nodeMethods(host, key);
+        const nodemethods = new nodeMethods(this);
         this.getAllNodes = nodemethods.getAllNodes;
         this.getNodeInfo = nodemethods.getNodeInfo;
         this.getNodeConfig = nodemethods.getNodeConfig;
         this.createNode = nodemethods.createNode;
         this.editNode = nodemethods.editNode;
         this.deleteNode = nodemethods.deleteNode;
-        const allocationmethods = new allocationMethods(host, key);
+        const allocationmethods = new allocationMethods(this);
         this.getAllAllocations = allocationmethods.getAllAllocations;
         this.createAllocation = allocationmethods.createAllocation;
         this.deleteAllocation = allocationmethods.deleteAllocation;
-        const locationmethods = new locationMethods(host, key);
+        const locationmethods = new locationMethods(this);
         this.getAllLocations = locationmethods.getAllLocations;
         this.getLocationInfo = locationmethods.getLocationInfo;
         this.createLocation = locationmethods.createLocation;
@@ -90,6 +95,13 @@ class Application {
             );
         }
     }
+
+    /**
+     @internal
+     */
+    public request = new Request(this.host, this.host, this.errorHandler)
+        .request;
+
     // GET
     public getAllServers;
     public getAllNodes;

@@ -1,13 +1,10 @@
-import { Request } from '../ClientRequest';
+import { Client } from '..';
 import { ApiKey } from '../interfaces/ApiKey';
 import { Permissions } from '../interfaces/Permissions';
 import { UserAttributes } from '../interfaces/User';
 
 export class accountMethods {
-    public constructor(
-        private readonly host: string,
-        private readonly key: string,
-    ) {}
+    constructor(private readonly client: Client) {}
     /**
      * @returns Permission data
      * @remarks Just returns all available permissions. Not that useful!
@@ -21,7 +18,7 @@ export class accountMethods {
      * ```
      */
     public async getAllPermissions(): Promise<Permissions> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'attributes',
@@ -40,7 +37,7 @@ export class accountMethods {
      * ```
      */
     public async getAccountInfo(): Promise<UserAttributes> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'attributes',
@@ -58,7 +55,7 @@ export class accountMethods {
      * ```
      */
     public async getAccount2FADetails(): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'data image_url_data',
@@ -77,7 +74,7 @@ export class accountMethods {
      * ```
      */
     public async enable2FA(code: string): Promise<string[]> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             {
                 code: code,
@@ -98,7 +95,7 @@ export class accountMethods {
      * ```
      */
     public async disable2FA(password: string): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'DELETE',
             {
                 password: password,
@@ -120,7 +117,7 @@ export class accountMethods {
      * ```
      */
     public async updateEmail(email: string, password: string): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'PUT',
             {
                 email: email,
@@ -146,7 +143,7 @@ export class accountMethods {
         currentPassword: string,
         password: string,
     ): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'PUT',
             {
                 current_password: currentPassword,
@@ -169,7 +166,7 @@ export class accountMethods {
      * ```
      */
     public async getAllApiKeys(): Promise<ApiKey[]> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'GET',
             null,
             'data',
@@ -192,7 +189,7 @@ export class accountMethods {
         description: string,
         allowedIps: string[] = [],
     ): Promise<ApiKey> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'POST',
             {
                 description: description,
@@ -214,7 +211,7 @@ export class accountMethods {
      * ```
      */
     public async deleteApiKey(apiKeyIden: string): Promise<string> {
-        return new Request(this.host, this.key).request(
+        return this.client.request(
             'DELETE',
             null,
             'Successfully deleted api key!',
