@@ -43,3 +43,17 @@ export interface Nest {
     object: string;
     attributes: NestAttributes;
 }
+
+export interface Nests {
+    object: string;
+    data: Nest[];
+    meta: {
+        pagination: {
+            total: number;
+            count: number;
+            per_page: number;
+            current_page: number;
+            total_pages: number;
+        };
+    };
+}

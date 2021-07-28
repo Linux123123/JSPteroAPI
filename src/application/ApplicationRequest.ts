@@ -27,7 +27,7 @@ export class Request {
                 'responseEncoding': 'utf8',
                 'Authorization': 'Bearer ' + this.key,
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
+                'Accept': 'application/vnd.pterodactyl.v1+json',
             },
         };
         if (data) options.body = JSON.stringify(data);

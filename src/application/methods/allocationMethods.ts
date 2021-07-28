@@ -1,9 +1,29 @@
-import { makeIncludes } from '../../modules/Functions';
-import { Allocation, AllocationIncludeInput } from '../interfaces/Allocation';
+import { makeOptions, MakeOpts, paginate } from '../../modules/Functions';
+import {
+    Allocation,
+    AllocationIncludeInput,
+    Allocations,
+} from '../interfaces/Allocation';
 import { Application } from '..';
 
 export class allocationMethods {
     constructor(private readonly application: Application) {}
+    /**
+     * @internal
+     */
+    private getAllocations = async (
+        nodeId: number,
+        options: MakeOpts,
+    ): Promise<Allocations> => {
+        return this.application.request(
+            'GET',
+            null,
+            '',
+            `/api/application/nodes/${nodeId}/allocations${makeOptions(
+                options,
+            )}`,
+        );
+    };
     /**
      * @param nodeId - The node id of which you want to get allocations from
      * @param options - Include information about relationships
@@ -21,13 +41,11 @@ export class allocationMethods {
         nodeId: number,
         options?: AllocationIncludeInput,
     ): Promise<Allocation[]> => {
-        return this.application.request(
-            'GET',
-            null,
-            'data',
-            `/api/application/nodes/${nodeId}/allocations${makeIncludes(
-                options,
-            )}`,
+        return await paginate<Allocation>(
+            this.getAllocations.bind(this, nodeId),
+            {
+                includes: { ...options },
+            },
         );
     };
     /**

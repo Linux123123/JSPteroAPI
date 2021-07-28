@@ -9,6 +9,11 @@ export interface ServerIncludeInput {
     subusers?: boolean;
 }
 
+export interface ServerFilterInput {
+    filter: string;
+    filterBy: 'uuid' | 'name' | 'external_id' | '*';
+}
+
 export interface ServerLimits {
     memory: number;
     swap: number;
@@ -122,4 +127,18 @@ export interface ServerAttributes {
 export interface Server {
     object: string;
     attributes: ServerAttributes;
+}
+
+export interface Servers {
+    object: string;
+    data: Server[];
+    meta: {
+        pagination: {
+            total: number;
+            count: number;
+            per_page: number;
+            current_page: number;
+            total_pages: number;
+        };
+    };
 }

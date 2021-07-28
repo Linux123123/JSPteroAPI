@@ -19,14 +19,14 @@ export class scheduleMethods {
      * client.getAllSchedules().then((res) => console.log(res)) // res = Schedule[]
      * ```
      */
-    public async getAllSchedules(serverId: string): Promise<Schedule[]> {
+    public getAllSchedules = async (serverId: string): Promise<Schedule[]> => {
         return this.client.request(
             'GET',
             null,
             'data',
             `/api/client/servers/${serverId}/schedules`,
         );
-    }
+    };
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @param name - Name of the schedule
@@ -46,7 +46,7 @@ export class scheduleMethods {
      * client.createSchedule('TESTING', '*', '*', '*', '*').then((res) => console.log(res)) // res = ScheduleAttributes
      * ```
      */
-    public async createSchedule(
+    public createSchedule = async (
         serverId: string,
         name: string,
         minute: string,
@@ -55,7 +55,7 @@ export class scheduleMethods {
         month: string,
         dayOfWeek: string,
         isActive = true,
-    ): Promise<ScheduleAttributes> {
+    ): Promise<ScheduleAttributes> => {
         return this.client.request(
             'POST',
             {
@@ -70,7 +70,7 @@ export class scheduleMethods {
             'attributes',
             `/api/client/servers/${serverId}/schedules`,
         );
-    }
+    };
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @param scheduleId - Id of the schedule to get info
@@ -84,17 +84,17 @@ export class scheduleMethods {
      * client.getScheduleInfo('7e74354d', 8).then((res) => console.log(res)) // res = ScheduleAttributes
      * ```
      */
-    public async getScheduleInfo(
+    public getScheduleInfo = async (
         serverId: string,
         scheduleId: number,
-    ): Promise<ScheduleAttributes> {
+    ): Promise<ScheduleAttributes> => {
         return this.client.request(
             'GET',
             null,
             'attributes',
             `/api/client/servers/${serverId}/schedules/${scheduleId}`,
         );
-    }
+    };
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @param scheduleId - Id of the schedule to edit
@@ -109,11 +109,11 @@ export class scheduleMethods {
      * client.editSchedule('7e74354d', 5, { name: 'EditedName' }).then((res) => console.log(res)) // res = ScheduleAttributes
      * ```
      */
-    public async editSchedule(
+    public editSchedule = async (
         serverId: string,
         scheduleId: number,
         options: SheduleEditOptions,
-    ): Promise<ScheduleAttributes> {
+    ): Promise<ScheduleAttributes> => {
         const schedule = await this.getScheduleInfo(serverId, scheduleId);
         return this.client.request(
             'POST',
@@ -129,5 +129,5 @@ export class scheduleMethods {
             'attributes',
             `/api/client/servers/${serverId}/schedules/${scheduleId}`,
         );
-    }
+    };
 }

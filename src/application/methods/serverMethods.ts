@@ -1,4 +1,4 @@
-import { makeIncludes } from '../../modules/Functions';
+import { makeOptions, MakeOpts, paginate } from '../../modules/Functions';
 import {
     EditServerBuild,
     EditServerDetails,
@@ -6,14 +6,28 @@ import {
     Server,
     ServerAttributes,
     ServerEnvironment,
+    ServerFilterInput,
     ServerIncludesInput,
+    Servers,
 } from '../interfaces/Server';
 import { Application } from '..';
 
 export class serverMethods {
     constructor(private readonly application: Application) {}
     /**
+     * @internal
+     */
+    private getServers = async (options: MakeOpts): Promise<Servers> => {
+        return this.application.request(
+            'GET',
+            null,
+            '',
+            `/api/application/servers${makeOptions(options)}`,
+        );
+    };
+    /**
      * @param options - Include information about server relationships
+     * @param filter - Filter Servers by specific fields and values
      * @returns Array of server
      * @example
      * ```ts
@@ -26,13 +40,12 @@ export class serverMethods {
      */
     public getAllServers = async (
         options?: ServerIncludesInput,
+        filter?: ServerFilterInput,
     ): Promise<Server[]> => {
-        return this.application.request(
-            'GET',
-            null,
-            'data',
-            `/api/application/servers${makeIncludes(options)}`,
-        );
+        return await paginate<Server>(this.getServers.bind(this), {
+            includes: { ...options },
+            filter: filter,
+        });
     };
     /**
      * @param serverId - The server ID to get the details of.
@@ -55,7 +68,9 @@ export class serverMethods {
             'GET',
             null,
             'attributes',
-            `/api/application/servers/${serverId}${makeIncludes(options)}`,
+            `/api/application/servers/${serverId}${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -79,9 +94,9 @@ export class serverMethods {
             'GET',
             null,
             'attributes',
-            `/api/application/servers/external/${serverId}${makeIncludes(
-                options,
-            )}`,
+            `/api/application/servers/external/${serverId}${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -112,9 +127,9 @@ export class serverMethods {
                 description: options.description ?? server.description,
             },
             'attributes',
-            `/api/application/servers/${serverId}/details${makeIncludes(
-                options.options,
-            )}`,
+            `/api/application/servers/${serverId}/details$${makeOptions({
+                includes: { ...options.options },
+            })}`,
         );
     };
     /**
@@ -178,9 +193,9 @@ export class serverMethods {
                 },
             },
             'attributes',
-            `/api/application/servers/${serverId}/build${makeIncludes(
-                options.options,
-            )}`,
+            `/api/application/servers/${serverId}/build${makeOptions({
+                includes: { ...options.options },
+            })}`,
         );
     };
     /**
@@ -237,9 +252,9 @@ export class serverMethods {
                 skip_scripts: options.skip_scripts,
             },
             'attributes',
-            `/api/application/servers/${serverId}/startup${makeIncludes(
-                options.options,
-            )}`,
+            `/api/application/servers/${serverId}/startup$${makeOptions({
+                includes: { ...options.options },
+            })}`,
         );
     };
     /**
@@ -346,7 +361,9 @@ export class serverMethods {
                 oom_disabled: false,
             },
             'attributes',
-            `/api/application/servers${makeIncludes(options)}`,
+            `/api/application/servers${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -362,10 +379,10 @@ export class serverMethods {
      * app.deleteServer(1, true).then((res) => console.log(res)) // res = Successfully deleted!
      * ```
      */
-    public async deleteServer(
+    public deleteServer = async (
         internalId: number,
         forceDelete = false,
-    ): Promise<string> {
+    ): Promise<string> => {
         let force = '';
         if (forceDelete) force = '/force';
         return this.application.request(
@@ -374,7 +391,7 @@ export class serverMethods {
             'Successfully deleted!',
             `/api/application/servers/${internalId}${force}`,
         );
-    }
+    };
     /**
      * @param internalId - Internal ID of the server to suspend
      * @returns If successful returns Successfully suspended!
@@ -387,14 +404,14 @@ export class serverMethods {
      * app.suspendServer(1).then((res) => console.log(res)) // res = Successfully suspended!
      * ```
      */
-    public async suspendServer(internalID: number): Promise<string> {
+    public suspendServer = (internalID: number): Promise<string> => {
         return this.application.request(
             'POST',
             null,
             'Successfully suspended!',
             `/api/application/servers/${internalID}/suspend`,
         );
-    }
+    };
     /**
      * @param internalId - Internal ID of the server to suspend
      * @returns If successful returns Successfully unsuspended!
@@ -407,14 +424,14 @@ export class serverMethods {
      * app.unSuspendServer(1).then((res) => console.log(res)) // res = Successfully unsuspended!
      * ```
      */
-    public async unSuspendServer(internalID: number): Promise<string> {
+    public unSuspendServer = (internalID: number): Promise<string> => {
         return this.application.request(
             'POST',
             null,
             'Successfully unsuspended!',
             `/api/application/servers/${internalID}/unsuspend`,
         );
-    }
+    };
     /**
      * @param internalId - Internal ID of the server to reinstall
      * @returns If successful returns Successfully reinstalled!
@@ -427,12 +444,12 @@ export class serverMethods {
      * app.reinstallServer(1).then((res) => console.log(res)) // res = Successfully reinstalled!
      * ```
      */
-    public async reinstallServer(internalID: number): Promise<string> {
+    public reinstallServer = (internalID: number): Promise<string> => {
         return this.application.request(
             'POST',
             null,
             'Successfully reinstalled!',
             `/api/application/servers/${internalID}/reinstall`,
         );
-    }
+    };
 }

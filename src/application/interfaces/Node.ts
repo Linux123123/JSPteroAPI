@@ -9,6 +9,11 @@ export interface NodeIncludeInput {
     servers?: boolean;
 }
 
+export interface NodeFilterInput {
+    filter: string;
+    filterBy: 'uuid' | 'name' | 'fqdn' | 'daemon_token_id';
+}
+
 export interface NodeConfigSsl {
     enabled: boolean;
     cert: string;
@@ -86,6 +91,20 @@ export interface NodeAttributes {
 export interface Node {
     object: string;
     attributes: NodeAttributes;
+}
+
+export interface Nodes {
+    object: string;
+    data: Node[];
+    meta: {
+        pagination: {
+            total: number;
+            count: number;
+            per_page: number;
+            current_page: number;
+            total_pages: number;
+        };
+    };
 }
 
 export interface NodeEditOptions {

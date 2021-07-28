@@ -1,4 +1,4 @@
-import { makeIncludes } from '../../modules/Functions';
+import { makeOptions } from '../../modules/Functions';
 import {
     Database,
     DatabaseAttributes,
@@ -29,9 +29,9 @@ export class databaseMethods {
             'GET',
             null,
             'data',
-            `/api/application/servers/${serverId}/databases${makeIncludes(
-                options,
-            )}`,
+            `/api/application/servers/${serverId}/databases${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -57,8 +57,8 @@ export class databaseMethods {
             'GET',
             null,
             'attributes',
-            `/api/application/servers/${serverId}/databases/${databaseId}${makeIncludes(
-                options,
+            `/api/application/servers/${serverId}/databases/${databaseId}${makeOptions(
+                { includes: { ...options } },
             )}`,
         );
     };
@@ -93,9 +93,9 @@ export class databaseMethods {
                 host: dbHostId,
             },
             'attributes',
-            `/api/application/servers/${serverId}/databases${makeIncludes(
-                options,
-            )}`,
+            `/api/application/servers/${serverId}/databases${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**

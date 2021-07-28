@@ -8,6 +8,11 @@ export interface LocationIncludeInput {
     servers?: boolean;
 }
 
+export interface LocationFilterInput {
+    filter: string;
+    filterBy: 'short' | 'long';
+}
+
 export interface LocationNodes {
     object: string;
     data: Node[];
@@ -35,6 +40,20 @@ export interface LocationAttributes {
 export interface Location {
     object: string;
     attributes: LocationAttributes;
+}
+
+export interface Locations {
+    object: string;
+    data: Location[];
+    meta: {
+        pagination: {
+            total: number;
+            count: number;
+            per_page: number;
+            current_page: number;
+            total_pages: number;
+        };
+    };
 }
 
 export interface EditLocationOptions {

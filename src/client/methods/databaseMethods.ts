@@ -1,5 +1,5 @@
 import { Client } from '..';
-import { makeIncludes } from '../../modules/Functions';
+import { makeOptions } from '../../modules/Functions';
 import {
     Database,
     DatabaseAttributes,
@@ -21,17 +21,19 @@ export class databaseMethods {
      * client.getAllDatabases('c2f5a3b6').then((res) => console.log(res)) // res = Database[]
      * ```
      */
-    public async getAllDatabases(
+    public getAllDatabases = async (
         serverId: string,
         options?: DatabaseIncludeInput,
-    ): Promise<Database[]> {
+    ): Promise<Database[]> => {
         return this.client.request(
             'GET',
             null,
             'data',
-            `/api/client/servers/${serverId}/databases${makeIncludes(options)}`,
+            `/api/client/servers/${serverId}/databases${makeOptions({
+                includes: { ...options },
+            })}`,
         );
-    }
+    };
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @param databaseName - Database name
@@ -47,19 +49,21 @@ export class databaseMethods {
      * client.createDatabase('c2f5a3b6', 'info').then((res) => console.log(res)) // res = DatabaseAttributes
      * ```
      */
-    public async createDatabase(
+    public createDatabase = async (
         serverId: string,
         databaseName: string,
         connectionsAllowedFrom = '%',
         options?: DatabaseIncludeInput,
-    ): Promise<DatabaseAttributes> {
+    ): Promise<DatabaseAttributes> => {
         return this.client.request(
             'POST',
             { database: databaseName, remote: connectionsAllowedFrom },
             'attributes',
-            `/api/client/servers/${serverId}/databases${makeIncludes(options)}`,
+            `/api/client/servers/${serverId}/databases${makeOptions({
+                includes: { ...options },
+            })}`,
         );
-    }
+    };
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @param databaseId - Database id
@@ -73,17 +77,17 @@ export class databaseMethods {
      * client.deleteDatabase('c2f5a3b6', 's3_good').then((res) => console.log(res)) // res = Sucesfully deleted!
      * ```
      */
-    public async deleteDatabase(
+    public deleteDatabase = (
         serverId: string,
         databaseId: string,
-    ): Promise<string> {
+    ): Promise<string> => {
         return this.client.request(
             'DELETE',
             null,
             'Sucesfully deleted!',
             `/api/client/servers/${serverId}/databases/${databaseId}`,
         );
-    }
+    };
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @param databaseId - Database id
@@ -97,15 +101,15 @@ export class databaseMethods {
      * client.rotateDatabasePass('c2f5a3b6', 's3_good').then((res) => console.log(res)) // res = DatabaseAttributesRelationship
      * ```
      */
-    public async rotateDatabasePass(
+    public rotateDatabasePass = async (
         serverId: string,
         databaseId: string,
-    ): Promise<DatabaseAttributes> {
+    ): Promise<DatabaseAttributes> => {
         return this.client.request(
             'POST',
             null,
             'attributes',
             `/api/client/servers/${serverId}/databases/${databaseId}/rotate-password`,
         );
-    }
+    };
 }

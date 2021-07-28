@@ -59,6 +59,11 @@ export interface ServerEnvironment {
     ADDITIONAL_ARGS?: null | string;
 }
 
+export interface ServerFilterInput {
+    filter: string;
+    filterBy: 'uuidShort' | 'uuid' | 'name' | 'external_id' | 'image';
+}
+
 export interface ServerIncludesInput {
     allocations?: boolean;
     user?: boolean;
@@ -197,6 +202,20 @@ export interface ServerAttributes {
 export interface Server {
     object: string;
     attributes: ServerAttributes;
+}
+
+export interface Servers {
+    object: string;
+    data: Server[];
+    meta: {
+        pagination: {
+            total: number;
+            count: number;
+            per_page: number;
+            current_page: number;
+            total_pages: number;
+        };
+    };
 }
 
 export interface EditServerDetails {

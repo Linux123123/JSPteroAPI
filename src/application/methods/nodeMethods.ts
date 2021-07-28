@@ -1,17 +1,31 @@
-import { makeIncludes } from '../../modules/Functions';
+import { makeOptions, MakeOpts, paginate } from '../../modules/Functions';
 import {
     Node,
     NodeAttributes,
     NodeConfig,
     NodeEditOptions,
+    NodeFilterInput,
     NodeIncludeInput,
+    Nodes,
 } from '../interfaces/Node';
 import { Application } from '..';
 
 export class nodeMethods {
     constructor(private readonly application: Application) {}
     /**
+     * @internal
+     */
+    private getNodes = async (options: MakeOpts): Promise<Nodes> => {
+        return this.application.request(
+            'GET',
+            null,
+            '',
+            `/api/application/nodes${makeOptions(options)}`,
+        );
+    };
+    /**
      * @param options - Include information about relationships
+     * @param filter - Filter Nodes by specific fields and values
      * @returns Array of nodes
      * @example
      * ```ts
@@ -24,13 +38,12 @@ export class nodeMethods {
      */
     public getAllNodes = async (
         options?: NodeIncludeInput,
+        filter?: NodeFilterInput,
     ): Promise<Node[]> => {
-        return this.application.request(
-            'GET',
-            null,
-            'data',
-            `/api/application/nodes${makeIncludes(options)}`,
-        );
+        return await paginate<Node>(this.getNodes.bind(this), {
+            includes: { ...options },
+            filter: filter,
+        });
     };
     /**
      * @param nodeId - The node id of which you want to get information
@@ -53,7 +66,9 @@ export class nodeMethods {
             'GET',
             null,
             'attributes',
-            `/api/application/nodes/${nodeId}${makeIncludes(options)}`,
+            `/api/application/nodes/${nodeId}${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -68,14 +83,14 @@ export class nodeMethods {
      * app.getNodeConfig(1).then((res) => console.log(res)) // res = NodeConfig
      * ```
      */
-    public async getNodeConfig(nodeId: number): Promise<NodeConfig> {
+    public getNodeConfig = (nodeId: number): Promise<NodeConfig> => {
         return this.application.request(
             'GET',
             null,
             '',
             `/api/application/nodes/${nodeId}/configuration`,
         );
-    }
+    };
     /**
      * @param name - The name of the node
      * @param description - A description for the node
@@ -144,7 +159,9 @@ export class nodeMethods {
                 upload_size: maxUploadSize,
             },
             'attributes',
-            `/api/application/nodes${makeIncludes(options)}`,
+            `/api/application/nodes${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -207,7 +224,9 @@ export class nodeMethods {
                 reset_secret: options.resetSecret,
             },
             'attributes',
-            `/api/application/nodes/${nodeId}${makeIncludes(options.options)}`,
+            `/api/application/nodes/${nodeId}${makeOptions({
+                includes: { ...options.options },
+            })}`,
         );
     };
     /**
@@ -222,12 +241,12 @@ export class nodeMethods {
      * app.deleteNode(1).then((res) => console.log(res)) // res = Successfully deleted!
      * ```
      */
-    public async deleteNode(nodeId: number): Promise<string> {
+    public deleteNode = async (nodeId: number): Promise<string> => {
         return this.application.request(
             'DELETE',
             null,
             'Successfully deleted!',
             `/api/application/nodes/${nodeId}`,
         );
-    }
+    };
 }

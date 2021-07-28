@@ -1,16 +1,30 @@
-import { makeIncludes } from '../../modules/Functions';
+import { makeOptions, MakeOpts, paginate } from '../../modules/Functions';
 import {
     EditLocationOptions,
     Location,
     LocationAttributes,
+    LocationFilterInput,
     LocationIncludeInput,
+    Locations,
 } from '../interfaces/Location';
 import { Application } from '..';
 
 export class locationMethods {
     constructor(private readonly application: Application) {}
     /**
+     * @internal
+     */
+    private getLocations = async (options: MakeOpts): Promise<Locations> => {
+        return this.application.request(
+            'GET',
+            null,
+            '',
+            `/api/application/locations${makeOptions(options)}`,
+        );
+    };
+    /**
      * @param options - Include information about locations relationships
+     * @param filter - Filter Location by specific fields and values
      * @returns Array of locations
      * @example
      * ```ts
@@ -23,13 +37,12 @@ export class locationMethods {
      */
     public getAllLocations = async (
         options?: LocationIncludeInput,
+        filter?: LocationFilterInput,
     ): Promise<Location[]> => {
-        return this.application.request(
-            'GET',
-            null,
-            'data',
-            `/api/application/locations${makeIncludes(options)}`,
-        );
+        return await paginate<Location>(this.getLocations.bind(this), {
+            includes: { ...options },
+            filter: filter,
+        });
     };
     /**
      * @param locationId - The location id to get information about
@@ -52,7 +65,9 @@ export class locationMethods {
             'GET',
             null,
             'attributes',
-            `/api/application/locations/${locationId}${makeIncludes(options)}`,
+            `/api/application/locations/${locationId}${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -81,7 +96,9 @@ export class locationMethods {
                 long: description ? description : '',
             },
             'attributes',
-            `/api/application/locations${makeIncludes(options)}`,
+            `/api/application/locations${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -109,9 +126,9 @@ export class locationMethods {
                 long: options.description ?? location.long,
             },
             'attributes',
-            `/api/application/locations/${locationId}${makeIncludes(
-                options.options,
-            )}`,
+            `/api/application/locations/${locationId}${makeOptions({
+                includes: { ...options.options },
+            })}`,
         );
     };
     /**

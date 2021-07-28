@@ -40,6 +40,20 @@ export interface User {
     attributes: UserAttributes;
 }
 
+export interface Users {
+    object: string;
+    data: User[];
+    meta: {
+        pagination: {
+            total: number;
+            count: number;
+            per_page: number;
+            current_page: number;
+            total_pages: number;
+        };
+    };
+}
+
 export interface EditUserOptions {
     /** The new username of the user */
     username?: string;

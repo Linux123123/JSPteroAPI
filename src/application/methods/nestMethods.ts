@@ -1,15 +1,27 @@
-import { makeIncludes } from '../../modules/Functions';
+import { makeOptions, MakeOpts, paginate } from '../../modules/Functions';
 import { Egg, EggAttributes } from '../interfaces/Egg';
 import {
     Nest,
     EggIncludeInput,
     NestAttributes,
     NestIncludeInput,
+    Nests,
 } from '../interfaces/Nest';
 import { Application } from '..';
 
 export class nestMethods {
     constructor(private readonly application: Application) {}
+    /**
+     * @internal
+     */
+    private getNests = async (options: MakeOpts): Promise<Nests> => {
+        return this.application.request(
+            'GET',
+            null,
+            '',
+            `/api/application/nests${makeOptions(options)}`,
+        );
+    };
     /**
      * @param options - Include information about: eggs or servers
      * @returns Array of nests
@@ -25,12 +37,9 @@ export class nestMethods {
     public getAllNests = async (
         options?: NestIncludeInput,
     ): Promise<Nest[]> => {
-        return this.application.request(
-            'GET',
-            null,
-            'data',
-            `/api/application/nests${makeIncludes(options)}`,
-        );
+        return await paginate<Nest>(this.getNests.bind(this), {
+            includes: { ...options },
+        });
     };
     /**
      * @param nestId - The nest ID to get the details of.
@@ -53,7 +62,9 @@ export class nestMethods {
             'GET',
             null,
             'attributes',
-            `/api/application/nests/${nestId}${makeIncludes(options)}`,
+            `/api/application/nests/${nestId}${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -62,11 +73,11 @@ export class nestMethods {
      * @returns
      * @example
      * ```ts
-     * const res = await app.getEggInfo(1, 1) // res = EggAttributes
+     * const res = await app.getAllNestEggs(1) // res = Egg[]
      * ```
      * @example
      * ```ts
-     * app.getEggInfo(1, 1).then((res) => console.log(res)) // res = EggAttributes
+     * app.getAllNestEggs(1).then((res) => console.log(res)) // res = Egg[]
      * ```
      */
     public getAllNestEggs = async (
@@ -77,7 +88,9 @@ export class nestMethods {
             'GET',
             null,
             'data',
-            `/api/application/nests/${nestId}/eggs${makeIncludes(options)}`,
+            `/api/application/nests/${nestId}/eggs${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -103,9 +116,9 @@ export class nestMethods {
             'GET',
             null,
             'attributes',
-            `/api/application/nests/${nestID}/eggs/${eggId}${makeIncludes(
-                options,
-            )}`,
+            `/api/application/nests/${nestID}/eggs/${eggId}${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
 }

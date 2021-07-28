@@ -1,17 +1,30 @@
 import { Application } from '..';
-import { makeIncludes, makeOptions } from '../../modules/Functions';
+import { makeOptions, MakeOpts, paginate } from '../../modules/Functions';
 import {
     EditUserOptions,
     User,
     UserAttributes,
     UserFilterInput,
     UserIncludeInput,
+    Users,
 } from '../interfaces/User';
 
 export class userMethods {
     constructor(private readonly application: Application) {}
     /**
+     * @internal
+     */
+    private getUsers = async (options: MakeOpts): Promise<Users> => {
+        return this.application.request(
+            'GET',
+            null,
+            '',
+            `/api/application/users${makeOptions(options)}`,
+        );
+    };
+    /**
      * @param options - Include information about relationships
+     * @param filter - Filter Users by specific fields and values
      * @returns Array of users
      * @example
      * ```ts
@@ -26,12 +39,10 @@ export class userMethods {
         options?: UserIncludeInput,
         filter?: UserFilterInput,
     ): Promise<User[]> => {
-        return this.application.request(
-            'GET',
-            null,
-            'data',
-            `/api/application/users${makeOptions(options, filter)}`,
-        );
+        return await paginate<User>(this.getUsers.bind(this), {
+            includes: { ...options },
+            filter: filter,
+        });
     };
     /**
      * @param userId - The user id to get information about
@@ -54,7 +65,9 @@ export class userMethods {
             'GET',
             null,
             'attributes',
-            `/api/application/users/${userId}${makeIncludes(options)}`,
+            `/api/application/users/${userId}${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -78,7 +91,9 @@ export class userMethods {
             'GET',
             null,
             'attributes',
-            `/api/application/users/external/${userId}${makeIncludes(options)}`,
+            `/api/application/users/external/${userId}${makeOptions({
+                includes: { ...options },
+            })}`,
         );
     };
     /**
@@ -158,7 +173,9 @@ export class userMethods {
                 external_id: options.externalId ?? user.external_id,
             },
             'attributes',
-            `/api/application/users/${userId}${makeIncludes(options.options)}`,
+            `/api/application/users/${userId}${makeOptions({
+                includes: { ...options.options },
+            })}`,
         );
     };
     /**

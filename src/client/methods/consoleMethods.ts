@@ -15,14 +15,14 @@ export class consoleMethods {
      * client.getWebsocketAuthData('c2f5a3b6').then((res) => console.log(res)) // res = WebsocketAuthData
      * ```
      */
-    public async getWebsocketAuthData(
+    public getWebsocketAuthData = async (
         serverId: string,
-    ): Promise<WebsocketAuthData> {
+    ): Promise<WebsocketAuthData> => {
         return this.client.request(
             'GET',
             null,
             'data',
             `/api/client/servers/${serverId}/websocket`,
         );
-    }
+    };
 }

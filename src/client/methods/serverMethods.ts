@@ -1,16 +1,30 @@
 import { Client } from '..';
-import { makeIncludes } from '../../modules/Functions';
+import { makeOptions, MakeOpts, paginate } from '../../modules/Functions';
 import {
     Server,
     ServerAttributes,
+    ServerFilterInput,
     ServerIncludeInput,
+    Servers,
 } from '../interfaces/Server';
 import { ServerResources } from '../interfaces/ServerResources';
 
 export class serverMethods {
     constructor(private readonly client: Client) {}
     /**
+     * @internal
+     */
+    private getServers = async (options: MakeOpts): Promise<Servers> => {
+        return this.client.request(
+            'GET',
+            null,
+            '',
+            `/api/client${makeOptions(options)}`,
+        );
+    };
+    /**
      * @param options - Include information about server relationships
+     * @param filter - Filter servers by specified field and value
      * @returns An Array of servers
      * @example
      * ```ts
@@ -21,16 +35,15 @@ export class serverMethods {
      * client.getAllServers().then((res) => console.log(res)) // res = Server[]
      * ```
      */
-    public async getAllServers(
+    public getAllServers = async (
         options?: ServerIncludeInput,
-    ): Promise<Server[]> {
-        return this.client.request(
-            'GET',
-            null,
-            'data',
-            `/api/client${makeIncludes(options)}`,
-        );
-    }
+        filter?: ServerFilterInput,
+    ): Promise<Server[]> => {
+        return await paginate<Server>(this.getServers.bind(this), {
+            includes: { ...options },
+            filter: filter,
+        });
+    };
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @param options - Include information about server relationships
@@ -44,17 +57,19 @@ export class serverMethods {
      * client.getServerInfo('c2f5a3b6').then((res) => console.log(res)) // res = ServerAttributes
      * ```
      */
-    public async getServerInfo(
+    public getServerInfo = async (
         serverId: string,
         options?: ServerIncludeInput,
-    ): Promise<ServerAttributes> {
+    ): Promise<ServerAttributes> => {
         return this.client.request(
             'GET',
             null,
             'attributes',
-            `/api/client/servers/${serverId}${makeIncludes(options)}`,
+            `/api/client/servers/${serverId}${makeOptions({
+                includes: { ...options },
+            })}`,
         );
-    }
+    };
     /**
      * @param serverId - ID of the server to get (In the settings tab of server/in link)
      * @returns Server resource usage object
@@ -67,16 +82,16 @@ export class serverMethods {
      * client.getServerResources('c2f5a3b6').then((res) => console.log(res)) // res = ServerResources
      * ```
      */
-    public async getServerResources(
+    public getServerResources = async (
         serverId: string,
-    ): Promise<ServerResources> {
+    ): Promise<ServerResources> => {
         return this.client.request(
             'GET',
             null,
             'attributes',
             `/api/client/servers/${serverId}/resources`,
         );
-    }
+    };
     /**
      * @param serverId - ID of the server to send a command to
      * @param command - Command to send
@@ -90,17 +105,17 @@ export class serverMethods {
      * client.sendCommand('c2f5a3b6', 'give Linux123123 star').then((res) => console.log(res)) // res = Successfuly sent the command!
      * ```
      */
-    public async sendCommand(
+    public sendCommand = async (
         serverId: string,
         command: string,
-    ): Promise<string> {
+    ): Promise<string> => {
         return this.client.request(
             'POST',
             { command: command },
             'Successfuly sent the command!',
             `/api/client/servers/${serverId}/command`,
         );
-    }
+    };
     /**
      * @param serverId - ID of the server to send a command to
      * @param action - start / stop / restart / kill
@@ -114,15 +129,15 @@ export class serverMethods {
      * client.setPowerState('c2f5a3b6', 'kill).then((res) => console.log(res)) // res = Successfuly set power state!
      * ```
      */
-    public async setPowerState(
+    public setPowerState = async (
         serverId: string,
         action: 'start' | 'stop' | 'restart' | 'kill',
-    ): Promise<string> {
+    ): Promise<string> => {
         return this.client.request(
             'POST',
             { signal: action },
             'Successfuly set power state!',
             `/api/client/servers/${serverId}/power`,
         );
-    }
+    };
 }
