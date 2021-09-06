@@ -37,21 +37,21 @@
     "node-fetch": "^3.0.0"
   },
   "devDependencies": {
-    "@amanda-mitchell/semantic-release-npm-multiple": "^2.11.0",
+    "@amanda-mitchell/semantic-release-npm-multiple": "^2.14.0",
     "@microsoft/tsdoc-config": "^0.15.0",
-    "@types/node": "^16.3.1",
-    "@types/node-fetch": "^2.5.11",
-    "@typescript-eslint/eslint-plugin": "^4.28.3",
-    "@typescript-eslint/parser": "^4.28.3",
-    "eslint": "^7.20.0",
+    "@types/node": "^16.7.10",
+    "@types/node-fetch": "^2.5.12",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.0.0",
-    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-prettier": "^3.4.1",
     "eslint-plugin-tsdoc": "^0.2.11",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "semantic-release": "^17.4.4",
-    "tsc-watch": "^4.2.9",
-    "typedoc": "^0.21.4",
-    "typescript": "^4.2.4"
+    "semantic-release": "^17.4.7",
+    "tsc-watch": "^4.5.0",
+    "typedoc": "^0.21.9",
+    "typescript": "^4.4.2"
   }
 }

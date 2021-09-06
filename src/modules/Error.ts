@@ -1,6 +1,6 @@
 import { Response } from 'node-fetch';
 
-interface pterodactylError {
+export interface pterodactylError {
     errors: [
         {
             code: string;

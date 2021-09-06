@@ -1,5 +1,5 @@
 import fetch, { RequestInit } from 'node-fetch';
-import { JSPteroAPIError } from '../modules/Error';
+import { JSPteroAPIError, pterodactylError } from '../modules/Error';
 
 export class Request {
     constructor(
@@ -38,16 +38,18 @@ export class Request {
             return this.errorHandler(
                 new JSPteroAPIError(
                     rawData,
-                    await rawData.json(),
+                    (await rawData.json()) as pterodactylError,
                     data as Record<string, unknown>,
                     requestType,
                 ),
             );
         if (rawData.status == 204) return dataObj;
         if (text) return await rawData.text();
-        const res = await rawData.json();
+        const res = (await rawData.json()) as Record<string, unknown>;
         return !dataObj.includes(' ')
             ? res[dataObj] || res
-            : res[dataObj.split(' ')[0]][dataObj.split(' ')[1]];
+            : (res[dataObj.split(' ')[0]] as Record<string, unknown>)[
+                  dataObj.split(' ')[1]
+              ];
     }
 }
