@@ -34,7 +34,9 @@
   },
   "homepage": "https://github.com/Linux123123/JSPteroAPI#readme",
   "dependencies": {
-    "node-fetch": "^3.0.0"
+    "node-fetch": "^3.0.0",
+    "sockette": "^2.0.6",
+    "ws": "^8.2.1"
   },
   "devDependencies": {
     "@amanda-mitchell/semantic-release-npm-multiple": "^2.14.0",

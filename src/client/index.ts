@@ -36,7 +36,7 @@ class Client {
         this.setPowerState = servermethods.setPowerState;
         // Console
         const consolemethods = new consoleMethods(this);
-        this.getWebsocketAuthData = consolemethods.getWebsocketAuthData;
+        this.startConsoleConnection = consolemethods.startConsoleConnection;
         // File
         const filemethods = new fileMethods(this);
         this.getAllFiles = filemethods.getAllFiles;
@@ -107,7 +107,6 @@ class Client {
     public getAllServers;
     public getServerInfo;
     public getServerResources;
-    public getWebsocketAuthData;
     public getAllPermissions;
     public getAllDatabases;
     public getAllFiles;
@@ -141,6 +140,8 @@ class Client {
     public renameFile;
     public updateEmail;
     public updatePassword;
+
+    public startConsoleConnection;
 }
 
 export { Client };

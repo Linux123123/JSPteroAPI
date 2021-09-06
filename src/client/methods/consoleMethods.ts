@@ -1,21 +1,13 @@
 import { Client } from '..';
 import { WebsocketAuthData } from '../interfaces/WebsocketAuthData';
+import { WebsocketClient } from '../Websocket';
 
 export class consoleMethods {
     constructor(private readonly client: Client) {}
     /**
-     * @param serverId - ID of the server to get (In the settings tab of server/in link)
-     * @returns Data to connect to a websocket
-     * @example
-     * ```ts
-     * const res = await client.getWebsocketAuthData('c2f5a3b6') // res = WebsocketAuthData
-     * ```
-     * @example
-     * ```ts
-     * client.getWebsocketAuthData('c2f5a3b6').then((res) => console.log(res)) // res = WebsocketAuthData
-     * ```
+     * @internal
      */
-    public getWebsocketAuthData = async (
+    private getWebsocketAuthData = async (
         serverId: string,
     ): Promise<WebsocketAuthData> => {
         return this.client.request(
@@ -23,6 +15,13 @@ export class consoleMethods {
             null,
             'data',
             `/api/client/servers/${serverId}/websocket`,
+        );
+    };
+    public startConsoleConnection = async (
+        serverId: string,
+    ): Promise<WebsocketClient> => {
+        return new WebsocketClient(
+            this.getWebsocketAuthData.bind(undefined, serverId),
         );
     };
 }
