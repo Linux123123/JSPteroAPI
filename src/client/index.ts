@@ -7,6 +7,7 @@ import { accountMethods } from './methods/accountMethods';
 import { scheduleMethods } from './methods/scheduleMethods';
 import { JSPteroAPIError } from '../modules/Error';
 import { Request } from './ClientRequest';
+import { networkMethods } from './methods/networkMethods';
 
 class Client {
     /**
@@ -73,6 +74,14 @@ class Client {
         this.createSchedule = schedulemethods.createSchedule;
         this.getScheduleInfo = schedulemethods.getScheduleInfo;
         this.editSchedule = schedulemethods.editSchedule;
+
+        // Network
+        const networkmethods = new networkMethods(this);
+        this.getAllAlocations = networkmethods.getAllAlocations;
+        this.assignAllocation = networkmethods.assignAllocation;
+        this.setAllocationNote = networkmethods.setAllocationNote;
+        this.setAllocationPrimary = networkmethods.setAllocationPrimary;
+        this.deleteAllocation = networkmethods.deleteAllocation;
     }
     /**
      @internal
@@ -118,6 +127,7 @@ class Client {
     public getAllApiKeys;
     public getAllSchedules;
     public getScheduleInfo;
+    public getAllAlocations;
     // POST
     public sendCommand;
     public setPowerState;
@@ -133,9 +143,13 @@ class Client {
     public createApiKey;
     public createSchedule;
     public editSchedule;
+    public assignAllocation;
+    public setAllocationNote;
+    public setAllocationPrimary;
     // Delete
     public deleteDatabase;
     public deleteApiKey;
+    public deleteAllocation;
     // PUT
     public renameFile;
     public updateEmail;
