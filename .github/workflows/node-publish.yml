@@ -17,9 +17,9 @@ jobs:
               with:
                   node-version: 14
             - name: Install dependencies
-              run: npm ci --include=dev
+              run: yarn install --frozen-lockfile
             - name: Build
-              run: npm run build
+              run: yarn build
             - name: Release
               env:
                   GITHUB_NPM_CONFIG_REGISTRY: 'https://npm.pkg.github.com/'
