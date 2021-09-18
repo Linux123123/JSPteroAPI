@@ -47,6 +47,7 @@ export class Request {
         if (text) return await rawData.text();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let res = (await rawData.json()) as any;
+        if (!dataObj) return res;
         const objArr = dataObj.split('.');
         objArr.forEach((obj) => {
             res = res[obj];
