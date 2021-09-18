@@ -233,6 +233,8 @@ export class serverMethods {
                     envVars[envVariable] = envVar.attributes.server_value;
                 } else if (envVar.attributes.default_value) {
                     envVars[envVariable] = envVar.attributes.default_value;
+                } else if (envVar.attributes.rules.includes('nullable')) {
+                    envVars[envVariable] = '';
                 } else {
                     throw new Error(
                         `Environment variable ${envVariable} was not defined!`,
@@ -249,10 +251,10 @@ export class serverMethods {
                     : server.container.environment,
                 egg: options.egg != undefined ? options.egg : server.egg,
                 image: options.image ?? server.container.image,
-                skip_scripts: options.skip_scripts,
+                skip_scripts: options.skip_scripts ?? false,
             },
             'attributes',
-            `/api/application/servers/${serverId}/startup$${makeOptions({
+            `/api/application/servers/${serverId}/startup${makeOptions({
                 includes: { ...options.options },
             })}`,
         );
