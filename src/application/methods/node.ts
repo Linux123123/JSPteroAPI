@@ -8,7 +8,7 @@ import {
     NodeIncludeInput,
     Nodes,
 } from '../interfaces/Node';
-import { Application } from '..';
+import { Application } from '../index';
 
 export class nodeMethods {
     constructor(private readonly application: Application) {}

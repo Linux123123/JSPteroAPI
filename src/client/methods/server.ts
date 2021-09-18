@@ -1,4 +1,4 @@
-import { Client } from '..';
+import { Client } from '../index';
 import { makeOptions, MakeOpts, paginate } from '../../modules/Functions';
 import {
     Server,

@@ -1,11 +1,11 @@
 import fetch, { RequestInit } from 'node-fetch'; // import node-fetch
-import { allocationMethods } from './methods/allocationMethods';
-import { databaseMethods } from './methods/databaseMethods';
-import { nestMethods } from './methods/nestMethods';
-import { nodeMethods } from './methods/nodeMethods';
-import { serverMethods } from './methods/serverMethods';
-import { userMethods } from './methods/userMethods';
-import { locationMethods } from './methods/locationMethods';
+import { allocationMethods } from './methods/allocation';
+import { databaseMethods } from './methods/database';
+import { nestMethods } from './methods/nest';
+import { nodeMethods } from './methods/node';
+import { serverMethods } from './methods/server';
+import { userMethods } from './methods/user';
+import { locationMethods } from './methods/location';
 import { Request } from './ApplicationRequest';
 import { JSPteroAPIError } from '../modules/Error';
 class Application {
@@ -26,6 +26,11 @@ class Application {
         if (host.endsWith('/')) host = host.slice(0, -1);
         this.host = host;
         if (!fast) this.testAPI();
+        this.request = new Request(
+            this.host,
+            this.key,
+            this.errorHandler,
+        ).request;
         const servermethods = new serverMethods(this);
         this.getAllServers = servermethods.getAllServers;
         this.getServerInfo = servermethods.getServerInfo;
@@ -99,8 +104,7 @@ class Application {
     /**
      @internal
      */
-    public request = new Request(this.host, this.host, this.errorHandler)
-        .request;
+    public request;
 
     // GET
     public getAllServers;

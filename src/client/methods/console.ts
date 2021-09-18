@@ -1,4 +1,4 @@
-import { Client } from '..';
+import { Client } from '../index';
 import { WebsocketAuthData } from '../interfaces/WebsocketAuthData';
 import { WebsocketClient } from '../Websocket';
 
@@ -17,6 +17,19 @@ export class consoleMethods {
             `/api/client/servers/${serverId}/websocket`,
         );
     };
+    /**
+     * @param serverId - ID of the server to get (In the settings tab of server/in link)
+     * @remarks This method is used to connect to server websocket and have automatic authentication. This exposes the websocket client.
+     * @returns WebsocketClient
+     * @example
+     * ```ts
+     * const res = await client.startConsoleConnection('c2f5a3b6') // res = WebsocketClient
+     * ```
+     * @example
+     * ```ts
+     * client.startConsoleConnection('c2f5a3b6').then((res) => console.log(res)) // res = WebsocketClient
+     * ```
+     */
     public startConsoleConnection = async (
         serverId: string,
     ): Promise<WebsocketClient> => {

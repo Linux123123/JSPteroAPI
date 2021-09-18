@@ -1,13 +1,14 @@
 import fetch, { RequestInit } from 'node-fetch'; // import node-fetch
-import { serverMethods } from './methods/serverMethods';
-import { consoleMethods } from './methods/consoleMethods';
-import { fileMethods } from './methods/fileMethods';
-import { databaseMethods } from './methods/databaseMethods';
-import { accountMethods } from './methods/accountMethods';
-import { scheduleMethods } from './methods/scheduleMethods';
+import { serverMethods } from './methods/server';
+import { consoleMethods } from './methods/console';
+import { fileMethods } from './methods/file';
+import { databaseMethods } from './methods/database';
+import { accountMethods } from './methods/account';
+import { scheduleMethods } from './methods/schedule';
 import { JSPteroAPIError } from '../modules/Error';
 import { Request } from './ClientRequest';
-import { networkMethods } from './methods/networkMethods';
+import { networkMethods } from './methods/network';
+import { subUserMethods } from './methods/subUser';
 
 class Client {
     /**
@@ -28,6 +29,11 @@ class Client {
         if (host.endsWith('/')) host = host.slice(0, -1);
         this.host = host;
         if (!fast) this.testAPI();
+        this.request = new Request(
+            this.host,
+            this.host,
+            this.errorHandler,
+        ).request;
         // Server
         const servermethods = new serverMethods(this);
         this.getAllServers = servermethods.getAllServers;
@@ -82,6 +88,14 @@ class Client {
         this.setAllocationNote = networkmethods.setAllocationNote;
         this.setAllocationPrimary = networkmethods.setAllocationPrimary;
         this.deleteAllocation = networkmethods.deleteAllocation;
+
+        // SubUsers
+        const subusermethods = new subUserMethods(this);
+        this.getAllSubUsers = subusermethods.getAllSubUsers;
+        this.createSubUser = subusermethods.createSubUser;
+        this.getSubUserInfo = subusermethods.getSubUserInfo;
+        this.updateSubUserPermissions = subusermethods.updateSubUserPermissions;
+        this.deleteSubUser = subusermethods.deleteSubUser;
     }
     /**
      @internal
@@ -109,8 +123,7 @@ class Client {
     /**
      @internal
      */
-    public request = new Request(this.host, this.host, this.errorHandler)
-        .request;
+    public request;
 
     // Get
     public getAllServers;
@@ -128,6 +141,8 @@ class Client {
     public getAllSchedules;
     public getScheduleInfo;
     public getAllAlocations;
+    public getAllSubUsers;
+    public getSubUserInfo;
     // POST
     public sendCommand;
     public setPowerState;
@@ -146,10 +161,13 @@ class Client {
     public assignAllocation;
     public setAllocationNote;
     public setAllocationPrimary;
+    public createSubUser;
+    public updateSubUserPermissions;
     // Delete
     public deleteDatabase;
     public deleteApiKey;
     public deleteAllocation;
+    public deleteSubUser;
     // PUT
     public renameFile;
     public updateEmail;

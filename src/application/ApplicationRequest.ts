@@ -42,7 +42,12 @@ export class Request {
                 ),
             );
         if (rawData.status == 204) return dataObj;
-        const res = (await rawData.json()) as Record<string, unknown>;
-        return res[dataObj] || res;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let res = (await rawData.json()) as any;
+        const objArr = dataObj.split('.');
+        objArr.forEach((obj) => {
+            res = res[obj];
+        });
+        return res;
     }
 }

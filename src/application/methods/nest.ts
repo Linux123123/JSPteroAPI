@@ -7,7 +7,7 @@ import {
     NestIncludeInput,
     Nests,
 } from '../interfaces/Nest';
-import { Application } from '..';
+import { Application } from '../index';
 
 export class nestMethods {
     constructor(private readonly application: Application) {}

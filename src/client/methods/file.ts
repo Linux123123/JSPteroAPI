@@ -1,4 +1,4 @@
-import { Client } from '..';
+import { Client } from '../index';
 import {
     ServerFile,
     ServerFileAttributes,
@@ -166,7 +166,7 @@ export class fileMethods {
         return this.client.request(
             'GET',
             null,
-            'attributes url',
+            'attributes.url',
             `/api/client/servers/${serverId}/files/download?file=${filePath}`,
         );
     };
@@ -282,7 +282,7 @@ export class fileMethods {
         return this.client.request(
             'GET',
             null,
-            'attributes url',
+            'attributes.url',
             `/api/client/servers/${serverId}/files/upload`,
         );
     };

@@ -45,11 +45,12 @@ export class Request {
             );
         if (rawData.status == 204) return dataObj;
         if (text) return await rawData.text();
-        const res = (await rawData.json()) as Record<string, unknown>;
-        return !dataObj.includes(' ')
-            ? res[dataObj] || res
-            : (res[dataObj.split(' ')[0]] as Record<string, unknown>)[
-                  dataObj.split(' ')[1]
-              ];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let res = (await rawData.json()) as any;
+        const objArr = dataObj.split('.');
+        objArr.forEach((obj) => {
+            res = res[obj];
+        });
+        return res;
     }
 }

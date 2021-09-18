@@ -1,4 +1,4 @@
-import { Application } from '..';
+import { Application } from '../index';
 import { makeOptions, MakeOpts, paginate } from '../../modules/Functions';
 import {
     EditUserOptions,

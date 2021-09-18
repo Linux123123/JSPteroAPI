@@ -1,4 +1,4 @@
-import { Client } from '..';
+import { Client } from '../index';
 import { ApiKey } from '../interfaces/ApiKey';
 import { Permissions } from '../interfaces/Permissions';
 import { UserAttributes } from '../interfaces/User';
@@ -58,7 +58,7 @@ export class accountMethods {
         return this.client.request(
             'GET',
             null,
-            'data image_url_data',
+            'data.image_url_data',
             `/api/client/account/two-factor`,
         );
     };
@@ -79,7 +79,7 @@ export class accountMethods {
             {
                 code: code,
             },
-            'attributes tokens',
+            'attributes.tokens',
             `/api/client/account/two-factor`,
         );
     };

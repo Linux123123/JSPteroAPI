@@ -4,7 +4,7 @@ import {
     AllocationIncludeInput,
     Allocations,
 } from '../interfaces/Allocation';
-import { Application } from '..';
+import { Application } from '../index';
 
 export class allocationMethods {
     constructor(private readonly application: Application) {}
@@ -50,24 +50,24 @@ export class allocationMethods {
     };
     /**
      * @param nodeId - The node id of which you want to create allocations
-     * @param ip - IP for the allocation
      * @param ports - Ports array to add
      * @param alias - The alias for this allocation
+     * @param ip - IP for the allocation
      * @returns If successful returns Successfully created!
      * @example
      * ```ts
-     * const res = await app.createAllocation(1, undefined, ['25565']) // res = Successfully created!
+     * const res = await app.createAllocation(1, ['25565']) // res = Successfully created!
      * ```
      * @example
      * ```ts
-     * app.createAllocation(1, undefined, ['25565'], 'minecraft').then((res) => console.log(res)) // res = Successfully created!
+     * app.createAllocation(1, ['25565'], 'minecraft').then((res) => console.log(res)) // res = Successfully created!
      * ```
      */
     public createAllocation = async (
         nodeId: number,
-        ip = '0.0.0.0',
         ports: string[],
         alias = '',
+        ip = '0.0.0.0',
     ): Promise<string> => {
         return this.application.request(
             'POST',

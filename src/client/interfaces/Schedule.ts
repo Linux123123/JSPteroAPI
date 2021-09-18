@@ -15,6 +15,7 @@ export interface ScheduleTaskAttributes {
     payload: string;
     time_offset: number;
     is_queued: boolean;
+    continue_on_failure: boolean;
     created_at: string;
     updated_at: string;
 }
@@ -71,4 +72,15 @@ export interface SheduleEditOptions {
     dayOfWeek?: string;
     /** Whether the schedule should be activated on creation */
     isActive?: boolean;
+}
+
+export interface TaskEditOptions {
+    /** Action that the schedule should perform (command/power/backup) */
+    action?: 'command' | 'power' | 'backup';
+    /** What that action should do. Command or power (start/stop/restart/kill). Backup payload is ignored file list. */
+    payload?: string;
+    /** The time offset that the task should run after the schdule is triggered. */
+    timeOffset?: number;
+    /** Should the task continue to work on failure. */
+    continueOnFailure?: boolean;
 }

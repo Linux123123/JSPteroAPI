@@ -10,7 +10,7 @@ import {
     ServerIncludesInput,
     Servers,
 } from '../interfaces/Server';
-import { Application } from '..';
+import { Application } from '../index';
 
 export class serverMethods {
     constructor(private readonly application: Application) {}
@@ -127,7 +127,7 @@ export class serverMethods {
                 description: options.description ?? server.description,
             },
             'attributes',
-            `/api/application/servers/${serverId}/details$${makeOptions({
+            `/api/application/servers/${serverId}/details${makeOptions({
                 includes: { ...options.options },
             })}`,
         );
@@ -310,20 +310,28 @@ export class serverMethods {
         const envVars: Record<string, unknown> = {};
         let givenEnvVars: string[] = [];
         if (environment) givenEnvVars = Object.keys(environment);
-        egg.relationships?.variables?.data.forEach((envVar) => {
-            const envVariable = envVar.attributes.env_variable;
-            if (givenEnvVars.includes(envVariable)) {
-                envVars[envVariable] = environment?.[envVariable];
-            } else if (envVar.attributes.rules.includes('nullable')) {
-                envVars[envVariable] = '';
-            } else if (envVar.attributes.default_value) {
-                envVars[envVariable] = envVar.attributes.default_value;
-            } else {
-                throw new Error(
-                    `Environment variable ${envVariable} was not defined!`,
-                );
-            }
-        });
+        egg.relationships?.variables?.data.forEach(
+            (envVar: {
+                attributes: {
+                    env_variable: string;
+                    rules: string;
+                    default_value: string;
+                };
+            }) => {
+                const envVariable = envVar.attributes.env_variable;
+                if (givenEnvVars.includes(envVariable)) {
+                    envVars[envVariable] = environment?.[envVariable];
+                } else if (envVar.attributes.rules.includes('nullable')) {
+                    envVars[envVariable] = '';
+                } else if (envVar.attributes.default_value) {
+                    envVars[envVariable] = envVar.attributes.default_value;
+                } else {
+                    throw new Error(
+                        `Environment variable ${envVariable} was not defined!`,
+                    );
+                }
+            },
+        );
         return this.application.request(
             'POST',
             {

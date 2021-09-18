@@ -4,7 +4,7 @@ import {
     DatabaseAttributes,
     DatabaseIncludeInput,
 } from '../interfaces/Database';
-import { Application } from '..';
+import { Application } from '../index';
 
 export class databaseMethods {
     constructor(private readonly application: Application) {}

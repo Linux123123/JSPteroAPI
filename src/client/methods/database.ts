@@ -1,4 +1,4 @@
-import { Client } from '..';
+import { Client } from '../index';
 import { makeOptions } from '../../modules/Functions';
 import {
     Database,

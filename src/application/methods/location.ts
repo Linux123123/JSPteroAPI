@@ -7,7 +7,7 @@ import {
     LocationIncludeInput,
     Locations,
 } from '../interfaces/Location';
-import { Application } from '..';
+import { Application } from '../index';
 
 export class locationMethods {
     constructor(private readonly application: Application) {}

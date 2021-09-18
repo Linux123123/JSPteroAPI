@@ -1,4 +1,4 @@
-import { Client } from '..';
+import { Client } from '../index';
 import { Allocation } from '../interfaces/Allocation';
 
 export class networkMethods {
