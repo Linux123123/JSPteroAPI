@@ -15,7 +15,13 @@
 
 <h5>Install from the command line:</h5>
 
+**Npm**
+
 `npm install @linux123123/jspteroapi`
+
+**Yarn**
+
+`yarn add @linux123123/jspteroapi`
 
 Then include it in your application:
 
