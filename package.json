@@ -34,7 +34,7 @@
     },
     "homepage": "https://github.com/Linux123123/JSPteroAPI#readme",
     "dependencies": {
-        "node-fetch": "2.6.2",
+        "node-fetch": "3.0.0",
         "sockette": "^2.0.6",
         "ws": "^8.2.2"
     },
