@@ -1,223 +1,71 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>JSPteroAPI</title>
-	<meta name="description" content="Documentation for JSPteroAPI">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">JSPteroAPI</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>JSPteroAPI</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#jspteroapi" id="jspteroapi" style="color: inherit; text-decoration: none;">
-					<h1>JSPteroAPI</h1>
-				</a>
-				<p><a href="https://npmjs.com/package/@linux123123/jspteroapi"><img src="https://nodeico.herokuapp.com/@linux123123/jspteroapi.svg" alt="NPM"></a></p>
-				<p><a href="https://github.com/Linux123123/JSPteroAPI/blob/main/LICENSE"><img src="https://img.shields.io/github/license/linux123123/jspteroapi" alt="GitHub"></a>
-					<a href="https://www.npmjs.com/package/node-fetch"><img src="https://img.shields.io/github/package-json/dependency-version/linux123123/jspteroapi/node-fetch" alt="GitHub package.json dependency version (prod)"></a>
-					<img src="https://github.com/Linux123123/JSPteroAPI/workflows/Node.js%20Package/badge.svg" alt="Node.js Package">
-					<a href="https://github.com/Linux123123/JSPteroAPI/issues"><img src="https://img.shields.io/github/issues/linux123123/jspteroapi" alt="GitHub issues"></a>
-				<a href="https://github.com/Linux123123/JSPteroAPI/pulls"><img src="https://img.shields.io/github/issues-pr/linux123123/jspteroapi" alt="GitHub pull requests"></a></p>
-				<h3>A simple Pterodactyl API library using node-fetch</h3>
-				<span>(written in typescript)</span>
-				<a href="#to-install" id="to-install" style="color: inherit; text-decoration: none;">
-					<h1>To install:</h1>
-				</a>
-				<h5>Install from the command line:</h5>
-				<p><strong>Npm</strong></p>
-				<p><code>npm install @linux123123/jspteroapi</code></p>
-				<p><strong>Yarn</strong></p>
-				<p><code>yarn add @linux123123/jspteroapi</code></p>
-				<p>Then include it in your application:</p>
-				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">node</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;@linux123123/jspteroapi&#039;</span><span style="color: #000000">);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">application</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #001080">node</span><span style="color: #000000">.</span><span style="color: #795E26">Application</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;HOST&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;TOKEN&#039;</span><span style="color: #000000">); </span><span style="color: #008000">// for application API</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #001080">node</span><span style="color: #000000">.</span><span style="color: #795E26">Client</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;HOST&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;TOKEN&#039;</span><span style="color: #000000">); </span><span style="color: #008000">// for Client API</span>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>JSPteroAPI</title><meta name="description" content="Documentation for JSPteroAPI"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">JSPteroAPI</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>JSPteroAPI</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#jspteroapi" id="jspteroapi" style="color: inherit; text-decoration: none;">
+  <h1>JSPteroAPI</h1>
+</a>
+<p><a href="https://npmjs.com/package/@linux123123/jspteroapi"><img src="https://nodeico.herokuapp.com/@linux123123/jspteroapi.svg" alt="NPM"></a></p>
+<p><a href="https://github.com/Linux123123/JSPteroAPI/blob/main/LICENSE"><img src="https://img.shields.io/github/license/linux123123/jspteroapi" alt="GitHub"></a>
+<a href="https://www.npmjs.com/package/node-fetch"><img src="https://img.shields.io/github/package-json/dependency-version/linux123123/jspteroapi/node-fetch" alt="GitHub package.json dependency version (prod)"></a>
+<img src="https://github.com/Linux123123/JSPteroAPI/workflows/Node.js%20Package/badge.svg" alt="Node.js Package">
+<a href="https://github.com/Linux123123/JSPteroAPI/issues"><img src="https://img.shields.io/github/issues/linux123123/jspteroapi" alt="GitHub issues"></a>
+<a href="https://github.com/Linux123123/JSPteroAPI/pulls"><img src="https://img.shields.io/github/issues-pr/linux123123/jspteroapi" alt="GitHub pull requests"></a></p>
+<h3>A simple Pterodactyl API library using node-fetch</h3>
+<span>(written in typescript)</span>
+    
+
+<a href="#to-install" id="to-install" style="color: inherit; text-decoration: none;">
+  <h1>To install:</h1>
+</a>
+<h5>Install from the command line:</h5>
+
+<p><strong>Npm</strong></p>
+<p><code>npm install @linux123123/jspteroapi</code></p>
+<p><strong>Yarn</strong></p>
+<p><code>yarn add @linux123123/jspteroapi</code></p>
+<p>Then include it in your application:</p>
+<pre><code class="language-javascript"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">node</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;@linux123123/jspteroapi&#39;</span><span class="hl-1">);</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">application</span><span class="hl-1"> = </span><span class="hl-0">new</span><span class="hl-1"> </span><span class="hl-5">node</span><span class="hl-1">.</span><span class="hl-3">Application</span><span class="hl-1">(</span><span class="hl-4">&#39;HOST&#39;</span><span class="hl-1">, </span><span class="hl-4">&#39;TOKEN&#39;</span><span class="hl-1">); </span><span class="hl-6">// for application API</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">client</span><span class="hl-1"> = </span><span class="hl-0">new</span><span class="hl-1"> </span><span class="hl-5">node</span><span class="hl-1">.</span><span class="hl-3">Client</span><span class="hl-1">(</span><span class="hl-4">&#39;HOST&#39;</span><span class="hl-1">, </span><span class="hl-4">&#39;TOKEN&#39;</span><span class="hl-1">); </span><span class="hl-6">// for Client API</span>
 </code></pre>
-				<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
-					<h1>How to use</h1>
-				</a>
-				<p>You can use any application funtion you want:</p>
-				<pre><code class="language-javascript"><span style="color: #001080">application</span><span style="color: #000000">.</span><span style="color: #795E26">function</span><span style="color: #000000">(</span><span style="color: #001080">parameters</span><span style="color: #000000">).</span><span style="color: #795E26">then</span><span style="color: #000000">((</span><span style="color: #001080">response</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #008000">// response</span>
-<span style="color: #000000">});</span>
+
+<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
+  <h1>How to use</h1>
+</a>
+<p>You can use any application funtion you want:</p>
+<pre><code class="language-javascript"><span class="hl-5">application</span><span class="hl-1">.</span><span class="hl-3">function</span><span class="hl-1">(</span><span class="hl-5">parameters</span><span class="hl-1">).</span><span class="hl-3">then</span><span class="hl-1">((</span><span class="hl-5">response</span><span class="hl-1">) </span><span class="hl-0">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">// response</span><br/><span class="hl-1">});</span>
 </code></pre>
-				<p>or using async / await</p>
-				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">res</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">application</span><span style="color: #000000">.</span><span style="color: #795E26">function</span><span style="color: #000000">(</span><span style="color: #001080">parameters</span><span style="color: #000000">);</span>
+<p>or using async / await</p>
+<pre><code class="language-javascript"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">res</span><span class="hl-1"> = </span><span class="hl-7">await</span><span class="hl-1"> </span><span class="hl-5">application</span><span class="hl-1">.</span><span class="hl-3">function</span><span class="hl-1">(</span><span class="hl-5">parameters</span><span class="hl-1">);</span>
 </code></pre>
-				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
-					<h1>Documentation</h1>
-				</a>
-				<h3><a href="https://jspteroapi.linux123123.tk/classes/JSPteroAPI.Application.html">Application</a></h3>
-				<h3><a href="https://jspteroapi.linux123123.tk/classes/JSPteroAPI.Client.html">Client</a></h3>
-				<a href="#example-project" id="example-project" style="color: inherit; text-decoration: none;">
-					<h1>Example project</h1>
-				</a>
-				<p>I have created a discord bot using this library
-				<a href="https://github.com/Linux123123/Pterodactyl-Discord-Bot">Pterodactyl-Discord-Bot</a></p>
-				<a href="#versions" id="versions" style="color: inherit; text-decoration: none;">
-					<h1>Versions</h1>
-				</a>
-				<p><strong>How versions work:</strong></p>
-				<ul>
-					<li>The first number is the release.</li>
-					<li>The second number is the function release.</li>
-					<li>The third number is the bug fix release.</li>
-				</ul>
-				<a href="#disclaimer" id="disclaimer" style="color: inherit; text-decoration: none;">
-					<h1>Disclaimer</h1>
-				</a>
-				<p>I am not responsible for any damages that you cause to your servers/nodes by using <strong>this API</strong>.</p>
-				<p><strong>Remember: This API can potentially be dangerous with the ability to Delete Servers/Nodes at an instant!</strong></p>
-				<a href="#contributors" id="contributors" style="color: inherit; text-decoration: none;">
-					<h1>Contributors</h1>
-				</a>
-				<p>Created and maintained by <a href="https://github.com/linux123123">Linux123123</a></p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Modules</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/Allocation.html">Allocation</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ApplicationAllocation.html">Application<wbr>Allocation</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ApplicationDatabase.html">Application<wbr>Database</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ApplicationEgg.html">Application<wbr>Egg</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ApplicationLocation.html">Application<wbr>Location</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ApplicationNest.html">Application<wbr>Nest</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ApplicationNode.html">Application<wbr>Node</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ApplicationServer.html">Application<wbr>Server</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ApplicationUser.html">Application<wbr>User</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ClientApiKey.html">Client<wbr>Api<wbr>Key</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ClientDatabase.html">Client<wbr>Database</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ClientPermissions.html">Client<wbr>Permissions</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ClientSchedule.html">Client<wbr>Schedule</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ClientServer.html">Client<wbr>Server</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ClientServerFiles.html">Client<wbr>Server<wbr>Files</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ClientServerResources.html">Client<wbr>Server<wbr>Resources</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ClientSubUser.html">Client<wbr>Sub<wbr>User</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ClientUser.html">Client<wbr>User</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/ClientWebsocketAuthData.html">Client<wbr>Websocket<wbr>Auth<wbr>Data</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/JSPteroAPI.html">JSPteroAPI</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+
+<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+  <h1>Documentation</h1>
+</a>
+<h3><a href="https://jspteroapi.linux123123.tk/classes/JSPteroAPI.Application.html">Application</a></h3>
+<h3><a href="https://jspteroapi.linux123123.tk/classes/JSPteroAPI.Client.html">Client</a></h3>
+
+
+<a href="#example-project" id="example-project" style="color: inherit; text-decoration: none;">
+  <h1>Example project</h1>
+</a>
+<p>I have created a discord bot using this library
+<a href="https://github.com/Linux123123/Pterodactyl-Discord-Bot">Pterodactyl-Discord-Bot</a></p>
+
+<a href="#versions" id="versions" style="color: inherit; text-decoration: none;">
+  <h1>Versions</h1>
+</a>
+<p><strong>How versions work:</strong></p>
+<ul>
+<li>The first number is the release.</li>
+<li>The second number is the function release.</li>
+<li>The third number is the bug fix release.</li>
+</ul>
+
+<a href="#disclaimer" id="disclaimer" style="color: inherit; text-decoration: none;">
+  <h1>Disclaimer</h1>
+</a>
+<p>I am not responsible for any damages that you cause to your servers/nodes by using <strong>this API</strong>.</p>
+<p><strong>Remember: This API can potentially be dangerous with the ability to Delete Servers/Nodes at an instant!</strong></p>
+
+<a href="#contributors" id="contributors" style="color: inherit; text-decoration: none;">
+  <h1>Contributors</h1>
+</a>
+<p>Created and maintained by <a href="https://github.com/linux123123">Linux123123</a></p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-class"><a href="classes/Application.html" class="tsd-kind-icon">Application</a></li><li class="tsd-kind-class"><a href="classes/Client.html" class="tsd-kind-icon">Client</a></li><li class="tsd-kind-class"><a href="classes/JSPteroAPIError.html" class="tsd-kind-icon">JSPteroAPIError</a></li><li class="tsd-kind-property"><a href="modules.html#default" class="tsd-kind-icon">default</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
