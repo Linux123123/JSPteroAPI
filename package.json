@@ -1,59 +1,59 @@
 {
-    "name": "@linux123123/jspteroapi",
-    "version": "0.0.0",
-    "description": "A pterodactyl v1 api using node-fetch",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "scripts": {
-        "test": "tsc-watch --onCompilationComplete \"node dist/test.js\"",
-        "build": "rimraf dist/* && tsc",
-        "build:publish": "yarn build && rimraf src/",
-        "lint": "eslint \"src/**\"",
-        "docs:build": "typedoc --categorizeByGroup --defaultCategory Types --excludeInternal --name JSPteroAPI",
-        "semantic-release": "semantic-release"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Linux123123/JSPteroAPI.git"
-    },
-    "keywords": [
-        "Pterodactyl",
-        "API",
-        "node-fetch",
-        "node-js",
-        "js",
-        "ptero-api",
-        "ptero",
-        "pterodactyl-api",
-        "API client"
-    ],
-    "author": "Linux123123",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/Linux123123/JSPteroAPI/issues"
-    },
-    "homepage": "https://github.com/Linux123123/JSPteroAPI#readme",
-    "dependencies": {
-        "node-fetch": "2.6.2",
-        "sockette": "^2.0.6",
-        "ws": "^8.2.2"
-    },
-    "devDependencies": {
-        "@amanda-mitchell/semantic-release-npm-multiple": "^2.14.0",
-        "@microsoft/tsdoc-config": "^0.15.2",
-        "@types/node": "^16.9.2",
-        "@types/node-fetch": "2.5.12",
-        "@typescript-eslint/eslint-plugin": "^4.31.1",
-        "@typescript-eslint/parser": "^4.31.1",
-        "eslint": "^7.32.0",
-        "eslint-config-prettier": "^8.3.0",
-        "eslint-plugin-prettier": "^3.4.1",
-        "eslint-plugin-tsdoc": "^0.2.14",
-        "prettier": "^2.4.1",
-        "rimraf": "^3.0.2",
-        "semantic-release": "^17.4.7",
-        "tsc-watch": "^4.5.0",
-        "typedoc": "^0.21.9",
-        "typescript": "^4.4.3"
-    }
+  "name": "@linux123123/jspteroapi",
+  "version": "0.0.0",
+  "description": "A pterodactyl v1 api using node-fetch",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsc-watch --onCompilationComplete \"node dist/test.js\"",
+    "build": "rimraf dist/* && tsc",
+    "build:publish": "yarn build && rimraf src/",
+    "lint": "eslint \"src/**\"",
+    "docs:build": "typedoc --categorizeByGroup --defaultCategory Types --excludeInternal --name JSPteroAPI",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Linux123123/JSPteroAPI.git"
+  },
+  "keywords": [
+    "Pterodactyl",
+    "API",
+    "node-fetch",
+    "node-js",
+    "js",
+    "ptero-api",
+    "ptero",
+    "pterodactyl-api",
+    "API client"
+  ],
+  "author": "Linux123123",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Linux123123/JSPteroAPI/issues"
+  },
+  "homepage": "https://github.com/Linux123123/JSPteroAPI#readme",
+  "dependencies": {
+    "node-fetch": "2.6.2",
+    "sockette": "^2.0.6",
+    "ws": "^8.2.2"
+  },
+  "devDependencies": {
+    "@amanda-mitchell/semantic-release-npm-multiple": "^2.14.0",
+    "@microsoft/tsdoc-config": "^0.15.2",
+    "@types/node": "^16.9.2",
+    "@types/node-fetch": "2.5.12",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-tsdoc": "^0.2.14",
+    "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "semantic-release": "^17.4.7",
+    "tsc-watch": "^4.5.0",
+    "typedoc": "^0.21.9",
+    "typescript": "^4.4.3"
+  }
 }

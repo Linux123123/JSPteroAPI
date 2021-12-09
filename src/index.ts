@@ -8,6 +8,6 @@ import { Client } from './client/index';
 import { JSPteroAPIError } from './modules/Error';
 export { Application, Client, JSPteroAPIError };
 export default {
-    Application,
-    Client,
+  Application,
+  Client
 };

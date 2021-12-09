@@ -1,5 +1,5 @@
 /** @module ClientWebsocketAuthData */
 export interface WebsocketAuthData {
-    token: string;
-    socket: string;
+  token: string;
+  socket: string;
 }
