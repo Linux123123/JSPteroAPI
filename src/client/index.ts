@@ -1,4 +1,12 @@
-import fetch, { RequestInit } from 'node-fetch'; // import node-fetch
+import { RequestInit, Response } from 'node-fetch';
+const _importDynamic = new Function('modulePath', 'return import(modulePath)');
+async function fetch(
+  url: RequestInfo,
+  init?: RequestInit | undefined
+): Promise<Response> {
+  const { default: fetch } = await _importDynamic('node-fetch');
+  return fetch(url, init);
+}
 import { serverMethods } from './methods/server';
 import { consoleMethods } from './methods/console';
 import { fileMethods } from './methods/file';
