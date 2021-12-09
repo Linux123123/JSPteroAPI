@@ -30,7 +30,7 @@ jobs:
         run: npx semantic-release
       - name: BuildDocs
         if: github.ref == 'refs/heads/master'
-        run: docs:build
+        run: yarn docs:build
       - name: Deploy Docs
         if: github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@4.1.7
