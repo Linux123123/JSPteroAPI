@@ -37,7 +37,7 @@ You can use any application funtion you want:
 
 ```javascript
 application.function(parameters).then((response) => {
-    // response
+  // response
 });
 ```
 
@@ -49,8 +49,8 @@ const res = await application.function(parameters);
 
 # Documentation
 
-<h3><a href="https://jspteroapidocs.linux123123.tk/classes/JSPteroAPI.Application.html">Application</a></h3>
-<h3><a href="https://jspteroapidocs.linux123123.tk/classes/JSPteroAPI.Client.html">Client</a></h3>
+<h3><a href="https://jspteroapi.linux123123.tk/classes/JSPteroAPI.Application.html">Application</a></h3>
+<h3><a href="https://jspteroapi.linux123123.tk/classes/JSPteroAPI.Client.html">Client</a></h3>
 
 # Example project
 
@@ -61,9 +61,9 @@ I have created a discord bot using this library
 
 **How versions work:**
 
--   The first number is the release.
--   The second number is the function release.
--   The third number is the bug fix release.
+- The first number is the release.
+- The second number is the function release.
+- The third number is the bug fix release.
 
 # Disclaimer
 
