@@ -29,10 +29,10 @@ jobs:
           NPM_NPM_TOKEN: ${{ secrets.NPM_NPM_TOKEN }}
         run: npx semantic-release
       - name: BuildDocs
-        if: contains(github.base_ref, 'master')
+        if: github.ref == 'refs/heads/master'
         run: docs:build
       - name: Deploy Docs
-        if: contains(github.base_ref, 'master')
+        if: github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
           branch: gh-pages
