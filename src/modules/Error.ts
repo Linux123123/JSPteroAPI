@@ -1,3 +1,5 @@
+/** @module JSPteroAPIError */
+
 import { Response } from 'node-fetch';
 
 export interface pterodactylError {

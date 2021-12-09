@@ -1,3 +1,5 @@
+/** @module ClientWebsocket */
+
 import Sockette from 'sockette';
 import { EventEmitter } from 'events';
 import { WebsocketAuthData } from './interfaces/WebsocketAuthData';

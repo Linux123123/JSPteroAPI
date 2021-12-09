@@ -7,7 +7,6 @@
   "scripts": {
     "dev": "tsc-watch --onCompilationComplete \"node dist/test.js\"",
     "build": "rimraf dist/* && tsc",
-    "build:publish": "yarn build && rimraf src/",
     "lint": "eslint \"src/**\"",
     "docs:build": "typedoc --categorizeByGroup --defaultCategory Types --excludeInternal --name JSPteroAPI",
     "semantic-release": "semantic-release"
