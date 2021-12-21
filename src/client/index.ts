@@ -17,6 +17,7 @@ import { JSPteroAPIError } from '../modules/Error';
 import { Request } from './ClientRequest';
 import { networkMethods } from './methods/network';
 import { subUserMethods } from './methods/subUser';
+import { backupMethods } from './methods/backups';
 
 class Client {
   /**
@@ -100,6 +101,13 @@ class Client {
     this.getSubUserInfo = subusermethods.getSubUserInfo;
     this.updateSubUserPermissions = subusermethods.updateSubUserPermissions;
     this.deleteSubUser = subusermethods.deleteSubUser;
+    // Backups
+    const backupmethods = new backupMethods(this);
+    this.getAllBackups = backupmethods.getAllBackups;
+    this.createBackup = backupmethods.createBackup;
+    this.getBackupInfo = backupmethods.getBackupInfo;
+    this.getBackupDownloadLink = backupmethods.getBackupDownloadLink;
+    this.deleteBackup = backupmethods.deleteBackup;
   }
   /**
      @internal
@@ -147,6 +155,9 @@ class Client {
   public getAllAlocations;
   public getAllSubUsers;
   public getSubUserInfo;
+  public getAllBackups;
+  public getBackupInfo;
+  public getBackupDownloadLink;
   // POST
   public sendCommand;
   public setPowerState;
@@ -167,11 +178,13 @@ class Client {
   public setAllocationPrimary;
   public createSubUser;
   public updateSubUserPermissions;
+  public createBackup;
   // Delete
   public deleteDatabase;
   public deleteApiKey;
   public deleteAllocation;
   public deleteSubUser;
+  public deleteBackup;
   // PUT
   public renameFile;
   public updateEmail;
