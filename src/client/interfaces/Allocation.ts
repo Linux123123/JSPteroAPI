@@ -1,4 +1,4 @@
-/** @module Allocation */
+/** @module ClientAllocation */
 
 export interface Allocation {
   id: number;

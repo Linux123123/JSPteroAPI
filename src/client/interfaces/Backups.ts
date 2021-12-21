@@ -1,4 +1,4 @@
-/** @module Backups */
+/** @module ClientBackup */
 
 export interface BackupAttributes {
   uuid: string;
