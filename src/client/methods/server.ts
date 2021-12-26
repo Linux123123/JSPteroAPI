@@ -37,10 +37,12 @@ export class serverMethods {
    */
   public getAllServers = async (
     options?: ServerIncludeInput,
-    filter?: ServerFilterInput
+    filter?: ServerFilterInput,
+    admin = false
   ): Promise<Server[]> => {
     return await paginate<Server>(this.getServers.bind(this), {
       includes: { ...options },
+      admin: admin,
       filter: filter
     });
   };

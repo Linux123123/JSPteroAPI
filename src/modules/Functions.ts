@@ -10,6 +10,7 @@ export interface MakeFilter {
 export interface MakeOpts {
   includes?: MakeIncl;
   filter?: MakeFilter;
+  admin?: boolean;
   page?: number;
 }
 
@@ -33,9 +34,10 @@ export const makeOptions = (options: MakeOpts): string => {
       query.append('include', includes.slice(0, -1));
     }
   }
-  if (options.filter) {
+  if (options.filter)
     query.append(`filter[${options.filter.filterBy}]`, options.filter.filter);
-  }
+
+  if (options.admin) query.append('type', 'admin');
   const queryString = query.toString();
   return queryString ? `?${queryString}` : '';
 };
