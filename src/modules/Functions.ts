@@ -37,7 +37,7 @@ export const makeOptions = (options: MakeOpts): string => {
   if (options.filter)
     query.append(`filter[${options.filter.filterBy}]`, options.filter.filter);
 
-  if (options.admin) query.append('type', 'admin');
+  if (options.admin) query.append('type', 'admin-all');
   const queryString = query.toString();
   return queryString ? `?${queryString}` : '';
 };
