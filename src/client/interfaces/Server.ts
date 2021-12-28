@@ -59,8 +59,8 @@ export interface ServerSubusers {
 }
 
 export interface ServerRelationships {
-  allocations?: ServerAllocations;
-  variables?: ServerVariables;
+  allocations: ServerAllocations;
+  variables: ServerVariables;
   egg?: ServerEgg;
   subusers?: ServerSubusers;
 }
