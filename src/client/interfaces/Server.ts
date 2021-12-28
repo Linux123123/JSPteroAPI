@@ -121,7 +121,7 @@ export interface ServerAttributes {
   is_suspended: boolean;
   is_installing: boolean;
   is_transferring: boolean;
-  relationships?: ServerRelationships;
+  relationships: ServerRelationships;
 }
 
 export interface Server {
