@@ -112,7 +112,7 @@ class Client {
   /**
      @internal
      */
-  private async testAPI(): Promise<void> {
+  public testAPI = async (throwError = true): Promise<boolean> => {
     const options: RequestInit = {
       method: 'GET',
       headers: {
@@ -123,14 +123,18 @@ class Client {
       }
     };
     const res = await fetch(this.host + '/api/client', options);
-    if (res.status == 403) {
-      throw new Error('API Key is not valid! (Client)!');
-    } else if (!res.ok) {
+    if (res.ok) return true;
+
+    if (!res.ok && throwError) {
+      if (res.status == 403)
+        throw new Error('API Key is not valid! (Application)!');
       throw new Error(
         `There was an error while trying to access host! Status: ${res.status} StatusText: ${res.statusText}`
       );
     }
-  }
+
+    return false;
+  };
 
   /**
      @internal
