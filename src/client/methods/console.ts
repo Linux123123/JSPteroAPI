@@ -1,9 +1,13 @@
+import { JSPteroAPIError } from 'index';
 import { Client } from '../index';
 import { WebsocketAuthData } from '../interfaces/WebsocketAuthData';
 import { WebsocketClient } from '../Websocket';
 
 export class consoleMethods {
-  constructor(private readonly client: Client) {}
+  constructor(
+    private readonly client: Client,
+    private readonly errorHandler: (error: JSPteroAPIError) => void
+  ) {}
   /**
    * @internal
    */
@@ -35,6 +39,7 @@ export class consoleMethods {
   ): Promise<WebsocketClient> => {
     const auth = await this.getWebsocketAuthData(serverId);
     return new WebsocketClient(
+      this.errorHandler,
       auth,
       this.getWebsocketAuthData.bind(this, serverId)
     );

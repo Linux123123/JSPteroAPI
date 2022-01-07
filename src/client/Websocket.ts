@@ -3,7 +3,7 @@
 import Sockette from 'sockette';
 import { EventEmitter } from 'events';
 import { WebsocketAuthData } from './interfaces/WebsocketAuthData';
-import { JSPteroAPIError } from 'index';
+import { JSPteroAPIError } from '../modules/Error';
 
 const reconnectErrors = [
   'jwt: exp claim is invalid',
@@ -16,6 +16,7 @@ global.WebSocket = require('ws');
 
 export class WebsocketClient extends EventEmitter {
   constructor(
+    errorHandler: (error: JSPteroAPIError) => void,
     auth: WebsocketAuthData,
     private getToken: () => Promise<WebsocketAuthData>
   ) {
@@ -38,9 +39,11 @@ export class WebsocketClient extends EventEmitter {
             e.ERRORS[0] ===
             'This server is currently suspended and the functionality requested is unavailable.'
           ) {
-            this.close(409, 'Suspended');
+            return this.close(409, 'Suspended');
           }
+          return errorHandler(e);
         }
+        throw e;
       }
     }).bind(undefined, this.getToken, this);
 

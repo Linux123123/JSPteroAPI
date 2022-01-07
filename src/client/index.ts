@@ -47,7 +47,7 @@ class Client {
     this.sendCommand = servermethods.sendCommand;
     this.setPowerState = servermethods.setPowerState;
     // Console
-    const consolemethods = new consoleMethods(this);
+    const consolemethods = new consoleMethods(this, this.errorHandler);
     this.startConsoleConnection = consolemethods.startConsoleConnection;
     // File
     const filemethods = new fileMethods(this);
