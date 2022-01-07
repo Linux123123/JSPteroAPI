@@ -79,8 +79,13 @@ export class WebsocketClient extends EventEmitter {
         this.authenticate();
       },
       onclose: () => this.emit('SOCKET_CLOSE'),
-      onerror: (event) => {
-        throw new Error(JSON.stringify(event));
+      onerror: (event: Event) => {
+        if (
+          (event as ErrorEvent).message ===
+          'WebSocket was closed before the connection was established'
+        )
+          return;
+        throw new Error((event as ErrorEvent).message);
       }
     });
 
@@ -110,7 +115,7 @@ export class WebsocketClient extends EventEmitter {
 
     this.timer = setTimeout(() => {
       this.backoff = this.backoff + 2500 >= 20000 ? 20000 : this.backoff + 2500;
-      this.socket && this.socket.close();
+      this.socket && this.socket.close(undefined, 'timeout');
       clearTimeout(this.timer);
 
       // Re-attempt connecting to the socket.
@@ -140,7 +145,7 @@ export class WebsocketClient extends EventEmitter {
     }
   }
 
-  close(code?: number, reason?: string): void {
+  public close(code?: number, reason?: string): void {
     this.url = null;
     this.token = '';
     this.socket && this.socket.close(code, reason);
