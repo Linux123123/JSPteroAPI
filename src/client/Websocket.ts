@@ -3,6 +3,7 @@
 import Sockette from 'sockette';
 import { EventEmitter } from 'events';
 import { WebsocketAuthData } from './interfaces/WebsocketAuthData';
+import { JSPteroAPIError } from 'index';
 
 const reconnectErrors = [
   'jwt: exp claim is invalid',
@@ -14,7 +15,10 @@ global.WebSocket = require('ws');
 // Code mostly from pterodactyl websocket implementation
 
 export class WebsocketClient extends EventEmitter {
-  constructor(private getToken: () => Promise<WebsocketAuthData>) {
+  constructor(
+    auth: WebsocketAuthData,
+    private getToken: () => Promise<WebsocketAuthData>
+  ) {
     super();
     this.updateToken = ((
       getToken: () => Promise<WebsocketAuthData>,
@@ -26,10 +30,21 @@ export class WebsocketClient extends EventEmitter {
 
       this.isUpdating = true;
 
-      getToken().then((data) => socket.setToken(data.token));
+      try {
+        getToken().then((data) => socket.setToken(data.token));
+      } catch (e) {
+        if (e instanceof JSPteroAPIError) {
+          if (
+            e.ERRORS[0] ===
+            'This server is currently suspended and the functionality requested is unavailable.'
+          ) {
+            this.close(409, 'Suspended');
+          }
+        }
+      }
     }).bind(undefined, this.getToken, this);
 
-    getToken().then((data) => this.setToken(data.token).connect(data.socket));
+    this.setToken(auth.token).connect(auth.socket);
   }
 
   private isUpdating = false;

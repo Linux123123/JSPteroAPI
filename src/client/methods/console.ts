@@ -33,8 +33,10 @@ export class consoleMethods {
   public startConsoleConnection = async (
     serverId: string
   ): Promise<WebsocketClient> => {
+    const auth = await this.getWebsocketAuthData(serverId);
     return new WebsocketClient(
-      this.getWebsocketAuthData.bind(undefined, serverId)
+      auth,
+      this.getWebsocketAuthData.bind(this, serverId)
     );
   };
 }
