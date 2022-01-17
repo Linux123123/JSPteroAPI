@@ -52,7 +52,7 @@ export class Request {
           requestType
         )
       );
-    if (rawData.status == 204) return dataObj;
+    if (rawData.status === 204 || rawData.status === 202) return dataObj;
     if (text) return await rawData.text();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let res = (await rawData.json()) as any;

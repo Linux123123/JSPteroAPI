@@ -18,6 +18,7 @@ import { Request } from './ClientRequest';
 import { networkMethods } from './methods/network';
 import { subUserMethods } from './methods/subUser';
 import { backupMethods } from './methods/backups';
+import { settingsMethods } from './methods/settings';
 
 class Client {
   /**
@@ -85,7 +86,6 @@ class Client {
     this.createSchedule = schedulemethods.createSchedule;
     this.getScheduleInfo = schedulemethods.getScheduleInfo;
     this.editSchedule = schedulemethods.editSchedule;
-
     // Network
     const networkmethods = new networkMethods(this);
     this.getAllAlocations = networkmethods.getAllAlocations;
@@ -93,7 +93,6 @@ class Client {
     this.setAllocationNote = networkmethods.setAllocationNote;
     this.setAllocationPrimary = networkmethods.setAllocationPrimary;
     this.deleteAllocation = networkmethods.deleteAllocation;
-
     // SubUsers
     const subusermethods = new subUserMethods(this);
     this.getAllSubUsers = subusermethods.getAllSubUsers;
@@ -108,6 +107,10 @@ class Client {
     this.getBackupInfo = backupmethods.getBackupInfo;
     this.getBackupDownloadLink = backupmethods.getBackupDownloadLink;
     this.deleteBackup = backupmethods.deleteBackup;
+    // Settings
+    const settingsmethods = new settingsMethods(this);
+    this.renameServer = settingsmethods.renameServer;
+    this.reinstallServer = settingsmethods.reinstallServer;
   }
   /**
      @internal
@@ -183,6 +186,8 @@ class Client {
   public createSubUser;
   public updateSubUserPermissions;
   public createBackup;
+  public renameServer;
+  public reinstallServer;
   // Delete
   public deleteDatabase;
   public deleteApiKey;
