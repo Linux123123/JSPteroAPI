@@ -280,11 +280,12 @@ export class serverMethods {
    */
   public createServer = async (
     name: string,
-    locationIds: number[],
     ownerId: number,
     description: string,
     nestId: number,
     eggId: number,
+    defaultAllocationId: number,
+    addAllocationIds: number[] = [],
     environment?: ServerEnvironment,
     cpu = 0,
     ram = 0,
@@ -350,12 +351,8 @@ export class serverMethods {
         },
         environment: envVars,
         allocation: {
-          default: 1
-        },
-        deploy: {
-          locations: locationIds,
-          dedicated_ip: false,
-          port_range: []
+          default: defaultAllocationId,
+          allocation_additional: addAllocationIds ?? []
         },
         start_on_completion: false,
         skip_scripts: false,
