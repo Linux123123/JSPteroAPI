@@ -280,6 +280,7 @@ export class serverMethods {
    */
   public createServer = async (
     name: string,
+    locationIds: number[],
     ownerId: number,
     description: string,
     nestId: number,
@@ -349,11 +350,10 @@ export class serverMethods {
         },
         environment: envVars,
         allocation: {
-          default: 1,
-          additional: []
+          default: 1
         },
         deploy: {
-          locations: [1],
+          locations: locationIds,
           dedicated_ip: false,
           port_range: []
         },
