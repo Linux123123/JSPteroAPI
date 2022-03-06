@@ -1,12 +1,4 @@
-import { RequestInit, Response } from 'node-fetch';
-const _importDynamic = new Function('modulePath', 'return import(modulePath)');
-async function fetch(
-  url: RequestInfo,
-  init?: RequestInit | undefined
-): Promise<Response> {
-  const { default: fetch } = await _importDynamic('node-fetch');
-  return fetch(url, init);
-}
+import { Request } from '../modules/Request';
 import { serverMethods } from './methods/server';
 import { consoleMethods } from './methods/console';
 import { fileMethods } from './methods/file';
@@ -14,7 +6,6 @@ import { databaseMethods } from './methods/database';
 import { accountMethods } from './methods/account';
 import { scheduleMethods } from './methods/schedule';
 import { JSPteroAPIError } from '../modules/Error';
-import { Request } from './ClientRequest';
 import { networkMethods } from './methods/network';
 import { subUserMethods } from './methods/subUser';
 import { backupMethods } from './methods/backups';
@@ -38,7 +29,6 @@ class Client {
     host = host.trim();
     if (host.endsWith('/')) host = host.slice(0, -1);
     this.host = host;
-    if (!fast) this.testAPI();
     this.request = new Request(this.host, this.host, this.errorHandler).request;
     // Server
     const servermethods = new serverMethods(this);
@@ -111,32 +101,29 @@ class Client {
     const settingsmethods = new settingsMethods(this);
     this.renameServer = settingsmethods.renameServer;
     this.reinstallServer = settingsmethods.reinstallServer;
+
+    if (!fast) this.testAPI();
   }
   /**
-     @internal
-     */
+   * @param throwError - Whether to throw an error or return bool
+   * @remarks Will not work if using custom error handler.
+   */
   public testAPI = async (throwError = true): Promise<boolean> => {
-    const options: RequestInit = {
-      method: 'GET',
-      headers: {
-        'responseEncoding': 'utf8',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.key
+    try {
+      await this.getAllServers();
+      return true;
+    } catch (e) {
+      if (e instanceof JSPteroAPIError) {
+        if (throwError) {
+          if (e.HTML_STATUS === 403) e.ERRORS = ['Invalid Client API key'];
+          throw e;
+        }
+        return false;
+      } else {
+        if (throwError) throw e;
+        return false;
       }
-    };
-    const res = await fetch(this.host + '/api/client', options);
-    if (res.ok) return true;
-
-    if (!res.ok && throwError) {
-      if (res.status == 403)
-        throw new Error('API Key is not valid! (Application)!');
-      throw new Error(
-        `There was an error while trying to access host! Status: ${res.status} StatusText: ${res.statusText}`
-      );
     }
-
-    return false;
   };
 
   /**

@@ -8,7 +8,7 @@ async function fetch(
   return fetch(url, init);
 }
 
-import { JSPteroAPIError, pterodactylError } from '../modules/Error';
+import { JSPteroAPIError, pterodactylError } from './Error';
 
 export class Request {
   constructor(
@@ -21,12 +21,14 @@ export class Request {
    * @param data - Data to send
    * @param dataObj - Data object to return / Text to give on success
    * @param endpoint - Endpoint for server to call
+   * @param text - Boolean if we want to return text of the response
    */
   public async request(
     requestType: 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT',
-    data: Record<string, unknown> | null,
+    data: Record<string, unknown> | string | unknown | null,
     dataObj: string,
-    endpoint: string
+    endpoint: string,
+    text = false
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
     const URL = this.host + endpoint;
@@ -46,11 +48,12 @@ export class Request {
         new JSPteroAPIError(
           rawData,
           (await rawData.json()) as pterodactylError,
-          data,
+          data as Record<string, unknown>,
           requestType
         )
       );
-    if (rawData.status == 204) return dataObj;
+    if (rawData.status === 204 || rawData.status === 202) return dataObj;
+    if (text) return await rawData.text();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let res = (await rawData.json()) as any;
     if (!dataObj) return res;
