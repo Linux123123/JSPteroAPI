@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/Linux123123/JSPteroAPI/issues"
   },
-  "homepage": "https://github.com/Linux123123/JSPteroAPI#readme",
+  "homepage": "https://jspteroapi.linux123123.tk/",
   "dependencies": {
     "node-fetch": "^3.2.1",
     "sockette": "^2.0.6",
