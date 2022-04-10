@@ -17,9 +17,7 @@ jobs:
         with:
           node-version: 16
       - name: Install dependencies
-        run: yarn install
-      - name: Build
-        run: yarn build
+        uses: bahmutov/npm-install@v1
       - name: BuildDocs
         if: github.ref == 'refs/heads/master'
         run: yarn docs:build

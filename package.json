@@ -28,6 +28,9 @@
   ],
   "author": "Linux123123",
   "license": "MIT",
+  "files": [
+    "dist/*"
+  ],
   "bugs": {
     "url": "https://github.com/Linux123123/JSPteroAPI/issues"
   },
