@@ -33,7 +33,7 @@
   },
   "homepage": "https://jspteroapi.linux123123.tk/",
   "dependencies": {
-    "node-fetch": "^3.2.1",
+    "node-fetch": "^3.2.3",
     "sockette": "^2.0.6",
     "ws": "^8.5.0"
   },
