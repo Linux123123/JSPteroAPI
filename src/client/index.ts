@@ -29,7 +29,7 @@ class Client {
     host = host.trim();
     if (host.endsWith('/')) host = host.slice(0, -1);
     this.host = host;
-    this.request = new Request(this.host, this.host, this.errorHandler).request;
+    this.request = new Request(this.host, this.key, this.errorHandler).request;
     // Server
     const servermethods = new serverMethods(this);
     this.getAllServers = servermethods.getAllServers;
@@ -97,6 +97,8 @@ class Client {
     this.getBackupInfo = backupmethods.getBackupInfo;
     this.getBackupDownloadLink = backupmethods.getBackupDownloadLink;
     this.deleteBackup = backupmethods.deleteBackup;
+    this.toggleLockBackup = backupmethods.toggleLockBackup;
+    this.restoreBackup = backupmethods.restoreBackup;
     // Settings
     const settingsmethods = new settingsMethods(this);
     this.renameServer = settingsmethods.renameServer;
@@ -175,6 +177,8 @@ class Client {
   public createBackup;
   public renameServer;
   public reinstallServer;
+  public toggleLockBackup;
+  public restoreBackup;
   // Delete
   public deleteDatabase;
   public deleteApiKey;

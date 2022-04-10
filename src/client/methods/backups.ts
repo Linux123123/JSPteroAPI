@@ -87,6 +87,56 @@ export class backupMethods {
   };
   /**
    * @param serverId - ID of the server to get (In the settings tab of server/in link)
+   * @param backupId - ID of the backup to toggle lock of
+   * @returns Backup information
+   * @example
+   * ```ts
+   * const res = await client.toggleLockBackup('7e74354d', '3a4e4b2a') // res = BackupAttributes
+   * ```
+   * @example
+   * ```ts
+   * client.toggleLockBackup('7e74354d', '3a4e4b2a').then((res) => console.log(res)) // res = BackupAttributes
+   * ```
+   */
+  public toggleLockBackup = async (
+    serverId: string,
+    backupId: string
+  ): Promise<BackupAttributes> => {
+    return this.client.request(
+      'POST',
+      null,
+      'attributes',
+      `/api/client/servers/${serverId}/backups/${backupId}/lock`
+    );
+  };
+  /**
+   * @param serverId - ID of the server to get (In the settings tab of server/in link)
+   * @param backupId - ID of the backup to restore
+   * @param truncate - Whether to remove all files before restoring backup
+   * @returns Sucessfully restored backup
+   * @example
+   * ```ts
+   * const res = await client.restoreBackup('7e74354d', '3a4e4b2a') // res = Sucessfully restored backup
+   * ```
+   * @example
+   * ```ts
+   * client.restoreBackup('7e74354d', '3a4e4b2a').then((res) => console.log(res)) // res = Sucessfully restored backup
+   * ```
+   */
+  public restoreBackup = async (
+    serverId: string,
+    backupId: string,
+    truncate = false
+  ): Promise<BackupAttributes> => {
+    return this.client.request(
+      'POST',
+      { truncate },
+      'Sucessfully restored backup',
+      `/api/client/servers/${serverId}/backups/${backupId}/restore`
+    );
+  };
+  /**
+   * @param serverId - ID of the server to get (In the settings tab of server/in link)
    * @param backupId - ID of the backup to get
    * @returns Returns backup download url
    * @example
