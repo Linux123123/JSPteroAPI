@@ -297,6 +297,7 @@ export class serverMethods {
     dockerImage?: string,
     swap = 0,
     io = 500,
+    startOnCompletion = false,
     options?: ServerIncludesInput // Databases are always empty
   ): Promise<ServerAttributes> => {
     const egg = await this.application.getEggInfo(nestId, eggId, {
@@ -354,9 +355,9 @@ export class serverMethods {
           default: defaultAllocationId,
           allocation_additional: addAllocationIds ?? []
         },
-        start_on_completion: false,
+        start_on_completion: startOnCompletion,
         skip_scripts: false,
-        oom_disabled: false
+        oom_disabled: true
       },
       'attributes',
       `/api/application/servers${makeOptions({
