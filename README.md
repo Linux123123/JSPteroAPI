@@ -49,8 +49,8 @@ const res = await application.function(parameters);
 
 # Documentation
 
-<h3><a href="https://jspteroapi.linux123123.tk/classes/JSPteroAPI.Application.html">Application</a></h3>
-<h3><a href="https://jspteroapi.linux123123.tk/classes/JSPteroAPI.Client.html">Client</a></h3>
+<h3><a href="https://jspteroapi.linux123123.com/classes/JSPteroAPI.Application.html">Application</a></h3>
+<h3><a href="https://jspteroapi.linux123123.com/classes/JSPteroAPI.Client.html">Client</a></h3>
 
 # Example project
 
