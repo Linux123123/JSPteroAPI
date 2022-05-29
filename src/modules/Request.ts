@@ -41,7 +41,7 @@ export class Request {
         'Accept': 'application/vnd.pterodactyl.v1+json'
       }
     };
-    if (data) options.body = JSON.stringify(data);
+    if (data) options.body = data;
     const rawData = await fetch(URL, options);
     if (!rawData.ok)
       return this.errorHandler(
