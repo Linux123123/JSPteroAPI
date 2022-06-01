@@ -37,11 +37,12 @@ export class Request {
       headers: {
         'responseEncoding': 'utf8',
         'Authorization': 'Bearer ' + this.key,
-        'Content-Type': 'application/json',
-        'Accept': 'application/vnd.pterodactyl.v1+json'
+        'Content-Type': `${!endpoint.includes('files/write') ? 'application/json' : ''}`,
+        'Accept': 'application/json'
       }
     };
-    if (data) options.body = JSON.stringify(data);
+    if (data && endpoint.includes('files/write')) options.body = data;
+    if (data && !endpoint.includes('files/write')) options.body = JSON.stringify(data);
     const rawData = await fetch(URL, options);
     if (!rawData.ok)
       return this.errorHandler(
