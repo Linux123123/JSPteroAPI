@@ -52,11 +52,6 @@ const res = await application.function(parameters);
 <h3><a href="https://jspteroapi.linux123123.com/classes/JSPteroAPI.Application.html">Application</a></h3>
 <h3><a href="https://jspteroapi.linux123123.com/classes/JSPteroAPI.Client.html">Client</a></h3>
 
-# Example project
-
-I have created a discord bot using this library
-[Pterodactyl-Discord-Bot](https://github.com/Linux123123/Pterodactyl-Discord-Bot)
-
 # Versions
 
 **How versions work:**
