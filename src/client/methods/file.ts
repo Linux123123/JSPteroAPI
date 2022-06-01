@@ -80,15 +80,13 @@ export class fileMethods {
     file: string,
     contents: string
   ): Promise<string> => {
-    let filePath = '';
-    if (file.includes('/')) {
-      file.split('/').forEach((f) => (filePath += `%2F${f}`));
-    } else filePath = `%2F${file}`;
     return this.client.request(
       'POST',
       contents,
       'Successfuly written the file!',
-      `/api/client/servers/${serverId}/files/write?file=${filePath}`
+      `/api/client/servers/${serverId}/files/write?file=${encodeURIComponent(
+        file
+      )}`
     );
   };
   /**
