@@ -1,0 +1,6 @@
+test.js
+test.d.ts
+.eslintrc.js
+.prettierignore
+.prettierrc
+tsdoc.json

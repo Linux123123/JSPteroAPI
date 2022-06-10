@@ -7,6 +7,11 @@ export interface AllocationIncludeInput {
   server?: boolean;
 }
 
+export interface AllocationFilterInput {
+  filter: string;
+  filterBy: 'ip' | 'port' | 'ip_alias' | 'server_id';
+}
+
 export interface AllocationRelationships {
   server?: Server;
   node?: Node;

@@ -1,6 +1,7 @@
 import { makeOptions, MakeOpts, paginate } from '../../modules/Functions';
 import {
   Allocation,
+  AllocationFilterInput,
   AllocationIncludeInput,
   Allocations
 } from '../interfaces/Allocation';
@@ -37,10 +38,12 @@ export class allocationMethods {
    */
   public getAllAllocations = async (
     nodeId: number,
-    options?: AllocationIncludeInput
+    options?: AllocationIncludeInput,
+    filter?: AllocationFilterInput
   ): Promise<Allocation[]> => {
     return await paginate<Allocation>(this.getAllocations.bind(this, nodeId), {
-      includes: { ...options }
+      includes: { ...options },
+      filter
     });
   };
   /**

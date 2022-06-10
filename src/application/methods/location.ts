@@ -41,7 +41,7 @@ export class locationMethods {
   ): Promise<Location[]> => {
     return await paginate<Location>(this.getLocations.bind(this), {
       includes: { ...options },
-      filter: filter
+      filter
     });
   };
   /**

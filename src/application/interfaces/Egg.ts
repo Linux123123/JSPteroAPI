@@ -62,7 +62,7 @@ export interface EggAttributes {
   author: string;
   description: string;
   docker_image: string;
-  docker_images: string[];
+  docker_images: Record<string, string>;
   config: EggConfig;
   startup: string;
   script: EggScript;

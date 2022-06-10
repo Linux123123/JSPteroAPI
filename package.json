@@ -9,7 +9,7 @@
     "build": "rimraf dist/* && tsc",
     "lint": "eslint \"src/**\"",
     "docs:build": "typedoc --categorizeByGroup --defaultCategory Types --excludeInternal --name JSPteroAPI",
-    "release": "np"
+    "release": "yarn build && np"
   },
   "repository": {
     "type": "git",
@@ -36,16 +36,16 @@
   },
   "homepage": "https://github.com/Linux123123/JSPteroAPI#readme",
   "dependencies": {
-    "node-fetch": "^3.2.4",
+    "node-fetch": "^3.2.6",
     "sockette": "^2.0.6",
-    "ws": "^8.7.0"
+    "ws": "^8.8.0"
   },
   "devDependencies": {
     "@microsoft/tsdoc-config": "^0.16.1",
-    "@types/node": "^17.0.38",
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
-    "@typescript-eslint/parser": "^5.27.0",
-    "eslint": "^8.16.0",
+    "@types/node": "^17.0.41",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-tsdoc": "^0.2.16",
@@ -54,6 +54,6 @@
     "rimraf": "^3.0.2",
     "tsc-watch": "^5.0.3",
     "typedoc": "^0.22.17",
-    "typescript": "^4.7.2"
+    "typescript": "^4.7.3"
   }
 }
