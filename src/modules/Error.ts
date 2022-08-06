@@ -3,7 +3,7 @@
 import { Response } from 'node-fetch';
 
 export interface pterodactylError {
-  errors: [
+  errors?: [
     {
       code: string;
       status: string;
@@ -26,9 +26,10 @@ export class JSPteroAPIError extends Error {
     this.REQUEST_TYPE = requestType;
     if (data) this.REQUEST_BODY = data;
     const errors: string[] = [];
-    JSONData.errors.forEach((element) => {
-      errors.push(element.detail);
-    });
+    if (JSONData.errors)
+      JSONData.errors.forEach((element) => {
+        errors.push(element.detail);
+      });
     this.ERRORS = errors;
   }
   public HTML_URL: string;
