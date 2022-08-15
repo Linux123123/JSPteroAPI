@@ -3,12 +3,12 @@
 [![NPM](https://nodeico.herokuapp.com/@linux123123/jspteroapi.svg)](https://npmjs.com/package/@linux123123/jspteroapi)
 
 [![GitHub](https://img.shields.io/github/license/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/blob/main/LICENSE)
-[![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/linux123123/jspteroapi/node-fetch)](https://www.npmjs.com/package/node-fetch)
+[![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/linux123123/jspteroapi/undici)](https://www.npmjs.com/package/undici)
 ![Node.js Package](https://github.com/Linux123123/JSPteroAPI/workflows/Node.js%20Package/badge.svg)
 [![GitHub issues](https://img.shields.io/github/issues/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/pulls)
 
-<h3>A simple Pterodactyl API library using node-fetch</h3>
+<h3>A simple Pterodactyl API library using undici</h3>
 <span>(written in typescript)</span>
     
 # To install:

@@ -1,6 +1,6 @@
 /** @module JSPteroAPIError */
 
-import { Response } from 'node-fetch';
+import { Response } from 'undici';
 
 export interface pterodactylError {
   errors?: [

@@ -1,12 +1,4 @@
-import { RequestInit, Response } from 'node-fetch';
-const _importDynamic = new Function('modulePath', 'return import(modulePath)');
-async function fetch(
-  url: RequestInfo,
-  init?: RequestInit | undefined
-): Promise<Response> {
-  const { default: fetch } = await _importDynamic('node-fetch');
-  return fetch(url, init);
-}
+import { fetch, RequestInit } from 'undici';
 
 import { JSPteroAPIError, pterodactylError } from './Error';
 
