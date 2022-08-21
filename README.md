@@ -1,6 +1,6 @@
 # JSPteroAPI
 
-[![NPM](https://nodeico.herokuapp.com/@linux123123/jspteroapi.svg)](https://npmjs.com/package/@linux123123/jspteroapi)
+[![NPM](https://nodeico.herokuapp.com/jspteroapi.svg)](https://npmjs.com/package/jspteroapi)
 
 [![GitHub](https://img.shields.io/github/license/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/blob/main/LICENSE)
 [![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/linux123123/jspteroapi/undici)](https://www.npmjs.com/package/undici)
@@ -17,16 +17,16 @@
 
 **Npm**
 
-`npm install @linux123123/jspteroapi`
+`npm install jspteroapi`
 
 **Yarn**
 
-`yarn add @linux123123/jspteroapi`
+`yarn add jspteroapi`
 
 Then include it in your application:
 
 ```javascript
-const node = require('@linux123123/jspteroapi');
+const node = require('jspteroapi');
 const application = new node.Application('HOST', 'TOKEN'); // for application API
 const client = new node.Client('HOST', 'TOKEN'); // for Client API
 ```
