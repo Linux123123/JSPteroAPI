@@ -56,7 +56,7 @@ const res = await application.function(parameters);
 
 **How versions work:**
 
-- The first number is the release.
+- Panel major version
 - The second number is the function release.
 - The third number is the bug fix release.
 
