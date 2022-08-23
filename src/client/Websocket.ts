@@ -1,18 +1,14 @@
 /** @module ClientWebsocket */
 
-import Sockette from 'sockette';
 import { EventEmitter } from 'events';
 import { WebsocketAuthData } from './interfaces/WebsocketAuthData';
 import { JSPteroAPIError } from '../modules/Error';
+import { Socket } from '../modules/Socket';
 
 const reconnectErrors = [
   'jwt: exp claim is invalid',
   'jwt: created too far in past (denylist)'
 ];
-
-global.WebSocket = require('ws');
-
-// Code mostly from pterodactyl websocket implementation
 
 export class WebsocketClient extends EventEmitter {
   constructor(
@@ -59,7 +55,7 @@ export class WebsocketClient extends EventEmitter {
   private backoff = 5000;
 
   // The socket instance being tracked.
-  private socket: Sockette | null = null;
+  private socket: Socket | null = null;
 
   // The URL being connected to for the socket.
   private url: string | null = null;
@@ -75,10 +71,10 @@ export class WebsocketClient extends EventEmitter {
   private connect(url: string): this {
     this.url = url;
 
-    this.socket = new Sockette(this.url, {
+    this.socket = new Socket(this.url, {
       onmessage: (e) => {
         try {
-          const { event, args } = JSON.parse(e.data);
+          const { event, args } = JSON.parse(e.data.toString());
           args ? this.emit(event, ...args) : this.emit(event);
         } catch (ex) {
           console.warn('Failed to parse incoming websocket message.', ex);
@@ -97,13 +93,16 @@ export class WebsocketClient extends EventEmitter {
         this.authenticate();
       },
       onclose: () => this.emit('SOCKET_CLOSE'),
-      onerror: (event: Event) => {
+      onerror: (event) => {
         if (
-          (event as ErrorEvent).message ===
+          event.message ===
           'WebSocket was closed before the connection was established'
         )
           return;
-        throw new Error((event as ErrorEvent).message);
+        throw new Error(event.message);
+      },
+      onmaximum: () => {
+        return;
       }
     });
 
