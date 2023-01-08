@@ -65,7 +65,7 @@ export class Socket {
     this.ws.send(JSON.stringify(x));
   };
 
-  public send = (x: unknown) => {
+  public send = (x: string) => {
     this.ws.send(x);
   };
 
