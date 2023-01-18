@@ -1,15 +1,19 @@
 # JSPteroAPI
 
-[![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://npmjs.com/package/jspteroapi)
-
 [![GitHub](https://img.shields.io/github/license/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/blob/main/LICENSE)
-[![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/linux123123/jspteroapi/undici)](https://www.npmjs.com/package/undici)
 ![Node.js Package](https://github.com/Linux123123/JSPteroAPI/workflows/Node.js%20Package/badge.svg)
 [![GitHub issues](https://img.shields.io/github/issues/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/linux123123/jspteroapi)](https://github.com/Linux123123/JSPteroAPI/pulls)
 
-<h3>A simple Pterodactyl API library using undici</h3>
-<span>(written in typescript)</span>
+[![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://npmjs.com/package/jspteroapi)
+
+<h3>A simple Pterodactyl API library using undici <sub><i>(written in typescript)</i></sub></h3>
+
+Uses only 2 dependencies: 
+<ul>
+<li><img src="https://img.shields.io/github/package-json/dependency-version/linux123123/jspteroapi/undici"/></li>
+<li><img src="https://img.shields.io/github/package-json/dependency-version/linux123123/jspteroapi/ws"/></li>
+</ul>
     
 # To install:
 
