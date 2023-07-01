@@ -40,5 +40,5 @@ export interface ServerFileAttributes {
 
 export interface ServerFile {
   object: string;
-  atributes: ServerFileAttributes;
+  attributes: ServerFileAttributes;
 }
