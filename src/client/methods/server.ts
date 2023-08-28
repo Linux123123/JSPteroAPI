@@ -8,6 +8,7 @@ import {
   Servers
 } from '../interfaces/Server';
 import { ServerResources } from '../interfaces/ServerResources';
+import { WebsocketAuthData } from '../interfaces/WebsocketAuthData';
 
 export class serverMethods {
   constructor(private readonly client: Client) {}
@@ -140,6 +141,28 @@ export class serverMethods {
       { signal: action },
       'Successfuly set power state!',
       `/api/client/servers/${serverId}/power`
+    );
+  };
+  /**
+   * @param serverId - ID of the server to get a websocket url for
+   * @returns Websocket url and token for the server
+   * @example
+   * ```ts
+   * const res = await client.getWebsocketUrl('c2f5a3b6') // res = wss://panel.example.xyz/api/client/servers/c2f5a3b6/ws
+   * ```
+   * @example
+   * ```ts
+   * client.getWebsocketUrl('c2f5a3b6').then((res) => console.log(res)) // res = wss://panel.example.xyz/api/client/servers/c2f5a3b6/ws
+   * ```
+   */
+  public getWebsocketUrl = async (
+    serverId: string
+  ): Promise<WebsocketAuthData> => {
+    return this.client.request(
+      'GET',
+      null,
+      '',
+      `/api/client/servers/${serverId}/websocket`
     );
   };
 }

@@ -37,6 +37,7 @@ class Client {
     this.getServerResources = servermethods.getServerResources;
     this.sendCommand = servermethods.sendCommand;
     this.setPowerState = servermethods.setPowerState;
+    this.getWebsocketUrl = servermethods.getWebsocketUrl;
     // Console
     const consolemethods = new consoleMethods(this, this.errorHandler);
     this.startConsoleConnection = consolemethods.startConsoleConnection;
@@ -154,6 +155,7 @@ class Client {
   public getAllBackups;
   public getBackupInfo;
   public getBackupDownloadLink;
+  public getWebsocketUrl;
   // POST
   public sendCommand;
   public setPowerState;
