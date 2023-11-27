@@ -46,6 +46,31 @@ export class WebsocketClient extends EventEmitter {
     }).bind(undefined, this.getToken, this);
 
     this.setToken(auth.token).connect(auth.socket);
+
+    // Set listerners
+    this.on('daemon error', (message) => {
+      console.error(message);
+    });
+
+    this.on('token expiring', () => this.updateToken());
+    this.on('token expired', () => this.updateToken());
+    this.on('jwt error', (error: string) => {
+      if (reconnectErrors.find((v) => error.toLowerCase().indexOf(v) >= 0)) {
+        this.updateToken();
+      } else {
+        throw new Error(error);
+      }
+    });
+    this.on('transfer status', (status: string) => {
+      if (status === 'starting' || status === 'success') {
+        return;
+      }
+
+      // This code forces a reconnection to the websocket which will connect us to the target node instead of the source node
+      // in order to be able to receive transfer logs from the target node.
+      this.close();
+      this.open();
+    });
   }
 
   private isUpdating = false;
@@ -73,9 +98,11 @@ export class WebsocketClient extends EventEmitter {
   private connect(url: string): this {
     this.url = url;
 
+    this.timer && clearTimeout(this.timer);
+
     // Close socket if needed
     if (this.socket?.ws.OPEN) {
-      this.socket.close();
+      this.close();
     }
 
     this.socket = new Socket(this.url, {
@@ -111,30 +138,6 @@ export class WebsocketClient extends EventEmitter {
       onmaximum: () => {
         return;
       }
-    });
-
-    this.on('daemon error', (message) => {
-      console.error(message);
-    });
-
-    this.on('token expiring', () => this.updateToken());
-    this.on('token expired', () => this.updateToken());
-    this.on('jwt error', (error: string) => {
-      if (reconnectErrors.find((v) => error.toLowerCase().indexOf(v) >= 0)) {
-        this.updateToken();
-      } else {
-        throw new Error(error);
-      }
-    });
-    this.on('transfer status', (status: string) => {
-      if (status === 'starting' || status === 'success') {
-        return;
-      }
-
-      // This code forces a reconnection to the websocket which will connect us to the target node instead of the source node
-      // in order to be able to receive transfer logs from the target node.
-      this.close();
-      this.open();
     });
 
     this.timer = setTimeout(() => {
