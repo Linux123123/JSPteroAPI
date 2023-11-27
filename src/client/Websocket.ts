@@ -17,6 +17,8 @@ export class WebsocketClient extends EventEmitter {
     private getToken: () => Promise<WebsocketAuthData>
   ) {
     super();
+    // Allow 100 listeners for this instance
+    this.setMaxListeners(100);
     this.updateToken = ((
       getToken: () => Promise<WebsocketAuthData>,
       socket: WebsocketClient
@@ -70,6 +72,11 @@ export class WebsocketClient extends EventEmitter {
   // Connects to the websocket instance and sets the token for the initial request.
   private connect(url: string): this {
     this.url = url;
+
+    // Close socket if needed
+    if (this.socket?.ws.OPEN) {
+      this.socket.close();
+    }
 
     this.socket = new Socket(this.url, {
       onmessage: (e) => {
