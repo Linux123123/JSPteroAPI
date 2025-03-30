@@ -1,6 +1,6 @@
 {
   "name": "jspteroapi",
-  "version": "1.11.3",
+  "version": "1.11.4",
   "description": "A pterodactyl v1 api using undici",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
