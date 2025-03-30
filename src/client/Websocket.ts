@@ -1,6 +1,6 @@
 /** @module ClientWebsocket */
 
-import { EventEmitter } from 'events';
+import { EventEmitter } from 'node:events';
 import { WebsocketAuthData } from './interfaces/WebsocketAuthData';
 import { JSPteroAPIError } from '../modules/Error';
 import { Socket } from '../modules/Socket';
