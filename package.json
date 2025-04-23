@@ -12,7 +12,7 @@
     "dev": "tsc-watch --onCompilationComplete \"node --use-openssl-ca dist/test.js\"",
     "build": "rimraf dist/* && tsc",
     "lint": "eslint \"src/**\"",
-    "docs:build": "typedoc --categorizeByGroup --defaultCategory Types --excludeInternal --name JSPteroAPI",
+    "docs:build": "typedoc --categorizeByGroup --defaultCategory Types --excludeInternal --name JSPteroAPI && echo 'User-agent: *\nDisallow: /' > docs/robots.txt",
     "release": "yarn build && np"
   },
   "repository": {
